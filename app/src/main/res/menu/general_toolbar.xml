@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/backwards"
+        android:icon="@drawable/share"
+        android:title="退出"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/scan"
+        android:icon="@drawable/scan2"
+        android:title="扫一扫"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/more"
+        android:icon="@drawable/more"
+        android:title="更多"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/about_us"
+        android:icon="@drawable/info"
+        android:title="关于我们"
+        app:showAsAction="never"/>
+</menu>

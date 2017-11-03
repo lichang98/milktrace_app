@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_call"
+            android:icon="@drawable/phone_call"
+            android:title="电话"/>
+        <item
+            android:id="@+id/nav_mail"
+            android:icon="@drawable/mail"
+            android:title="邮件" />
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/text_message"
+            android:title="短信"/>
+
+    </group>
+
+</menu>

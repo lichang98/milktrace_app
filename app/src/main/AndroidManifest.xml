@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.milktracesystem">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-sdk android:minSdkVersion="15"/>
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="hMY7t1RdnkaGWxtOUbGEWCqzcgP4cLO8"/>
+        <activity android:name=".MainInterface.Activity_Launch"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainInterface.Login"
+            android:label="用户登录"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".MainInterface.GeneralActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".Factory_Acticity.FactoryActivity"
+            android:label="产品可追溯链"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".Factory_Acticity.Material_Factory.MaterialFactoryActivity"
+            android:label="原料供应商"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Factory_Acticity.Product_Factory.ProductFactory_Activity"
+            android:label="乳制品生产企业"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Search_Activity.SearchActivity"
+            android:label="产品查询"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Factory_Acticity.Transport_Factory.TransportFactory_Activity"
+            android:label="物流运输企业"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Factory_Acticity.Sales_Factory.SalesFactoryActivity"
+            android:label="销售企业"
+            android:screenOrientation="portrait"/>
+        <!--android:clearTaskOnLaunch="true"-->
+        <!--android:stateNotNeeded="true"-->
+        <activity android:name=".Camera.CaptureActivity"
+            android:screenOrientation="portrait"
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:replace="screenOrientation"
+            android:theme="@style/zxing_CaptureTheme" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".News_Activity.NewsActivity"
+            android:label="热点新闻"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Feedback_Activity.FeedBackActivity"
+            android:label="产品投诉"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".Factory_Acticity.Factory_USER.InfoInput"
+            android:label="产品信息录入"
+            android:screenOrientation="portrait"></activity>
+        <service android:name="com.baidu.location.f" android:enabled="true"
+            android:process=":remote"/>
+    </application>
+
+</manifest>

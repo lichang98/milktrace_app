@@ -1,0 +1,60 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <declare-styleable name="zxing_view">
+        <attr name="zxing_scanner_layout" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="zxing_camera_preview">
+        <attr name="zxing_framing_rect_width" format="dimension" />
+        <attr name="zxing_framing_rect_height" format="dimension" />
+        <attr name="zxing_use_texture_view" format="boolean" />
+        <attr name="zxing_preview_scaling_strategy" format="enum">
+            <enum name="centerCrop" value="1" />
+            <enum name="fitCenter" value="2" />
+            <enum name="fitXY" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="zxing_finder">
+        <attr name="zxing_possible_result_points" format="color"/>
+        <attr name="zxing_result_view" format="color"/>
+        <attr name="zxing_viewfinder_laser" format="color"/>
+        <attr name="zxing_viewfinder_mask" format="color"/>
+    </declare-styleable>
+
+    <color name="zxing_possible_result_points">#c0ffbd21</color> <!-- Android standard ICS color -->
+    <color name="zxing_result_view">#b0000000</color>
+    <color name="zxing_status_text">#ffffffff</color>
+    <color name="zxing_transparent">#00000000</color>
+    <color name="zxing_viewfinder_laser">#ffcc0000</color> <!-- Android standard ICS color -->
+    <color name="zxing_viewfinder_mask">#60000000</color>
+
+    <color name="zxing_custom_possible_result_points">#903A89CF</color>
+    <color name="zxing_custom_result_view">#b0000000</color>
+    <color name="zxing_custom_viewfinder_laser">#1976D2</color>
+    <color name="zxing_custom_viewfinder_mask">#60000000</color>
+    <item type="id" name="zxing_decode"/>
+    <item type="id" name="zxing_preview_failed"/>
+    <item type="id" name="zxing_decode_failed"/>
+    <item type="id" name="zxing_decode_succeeded"/>
+    <item type="id" name="zxing_possible_result_points"/>
+    <item type="id" name="zxing_back_button"/>
+    <item type="id" name="zxing_prewiew_size_ready"/>
+    <item type="id" name="zxing_camera_error"/>
+    <item type="id" name="zxing_camera_closed"/>
+
+    <style name="zxing_CaptureTheme" parent="android:Theme.Black.NoTitleBar.Fullscreen">
+    </style>
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+</resources>

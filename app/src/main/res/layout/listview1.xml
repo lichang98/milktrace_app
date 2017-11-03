@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.7dip"
+        android:background="@drawable/ic_shelf_category_divider" />
+    <TextView
+        android:id="@+id/ic_tag"
+        android:layout_width="60dp"
+        android:layout_height="17dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="0dip"
+        android:gravity="center"
+        android:background="#727272"
+        android:text="乳制品安全"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="10sp"
+         />
+
+    <TextView
+        android:id="@+id/lv1_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="TextView"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/lv1_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="TextView"
+        android:textColor="#9E9E9E"
+        android:textSize="14sp" />
+   <View
+        android:layout_width="wrap_content"
+        android:layout_height="2.0dip"
+        android:layout_marginTop="10dp"
+        />
+
+
+</LinearLayout>

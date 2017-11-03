@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/info_presentation"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="信息查询展示"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/user_info"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="用户信息" />
+
+    </LinearLayout>
+</RelativeLayout>
