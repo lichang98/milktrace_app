@@ -189,6 +189,16 @@ public class SearchActivity extends AppCompatActivity  {
             }
         });*/
 
+   //测试打开webview
+        Button startWebView = (Button)findViewById(R.id.start_webview);
+        startWebView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchActivity.this,WebShow.class);
+                startActivity(intent);
+            }
+        });
+
     }//onCreate
 
     /**

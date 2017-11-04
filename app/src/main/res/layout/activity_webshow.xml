@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--顶部toolbar-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_webshow"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <org.apache.cordova.engine.SystemWebView
+        android:id="@+id/cordova_webview"
+        android:layout_below="@+id/toolbar_webshow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </org.apache.cordova.engine.SystemWebView>
+
+</RelativeLayout>

@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_action_bar_item_background_material.xml",
+        "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\notification_action_background.xml",
+        "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\6a9f30c68fd635542e6e0a8ffd0eeadc\\res\\drawable-v21\\notification_action_background.xml"
+    },
+    {
+        "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_edit_text_material.xml",
+        "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable-v21\\abc_edit_text_material.xml"
+    },
+    {
+        "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21\\abc_btn_colored_material.xml",
+        "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable-v21\\abc_btn_colored_material.xml"
+    }
+]
