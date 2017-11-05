@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.milktracesystem.Camera.SmallCaptureActivity;
 import com.example.milktracesystem.News_Activity.OnWheelChangedListener;
 import com.example.milktracesystem.R;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -55,6 +57,10 @@ public class SearchActivity extends AppCompatActivity  {
             }else{
                 Toast.makeText(this, "扫描结果："+result.getContents(), Toast.LENGTH_LONG).show();
                 barcodeinfo.setText(result.getContents());
+                //通过获取的网页的网址，通过intent发送的WebShow 活动，并在WebShow活动中显示
+                Intent intent = new Intent(SearchActivity.this,WebShow.class);
+                intent.putExtra("webUrl",result.getContents());     //将网址放在intent中传递
+                startActivity(intent);
             }
         }else{
             super.onActivityResult(requestCode,resultCode,data);
@@ -73,7 +79,10 @@ public class SearchActivity extends AppCompatActivity  {
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new IntentIntegrator(SearchActivity.this).initiateScan();
+                IntentIntegrator integrator = new IntentIntegrator(SearchActivity.this);
+                integrator.setOrientationLocked(false);         //根据sensor调整方向
+                integrator.setCaptureActivity(SmallCaptureActivity.class);  //使用带边框的扫描框
+                integrator.initiateScan();
             }
         });
 
@@ -189,15 +198,15 @@ public class SearchActivity extends AppCompatActivity  {
             }
         });*/
 
-   //测试打开webview
-        Button startWebView = (Button)findViewById(R.id.start_webview);
-        startWebView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SearchActivity.this,WebShow.class);
-                startActivity(intent);
-            }
-        });
+//   //测试打开webview
+//        Button startWebView = (Button)findViewById(R.id.start_webview);
+//        startWebView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(SearchActivity.this,WebShow.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }//onCreate
 

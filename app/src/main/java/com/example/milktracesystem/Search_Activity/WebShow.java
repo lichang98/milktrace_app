@@ -6,8 +6,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -20,6 +24,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CordovaWebViewImpl;
 import org.apache.cordova.engine.SystemWebView;
+import org.apache.cordova.engine.SystemWebViewClient;
 import org.apache.cordova.engine.SystemWebViewEngine;
 
 import java.lang.reflect.Method;
@@ -33,6 +38,7 @@ import java.util.concurrent.ExecutorService;
  * 使用Cordova框架，使用网页assets/www/index.html
  */
 public class WebShow extends CordovaActivity{
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -46,8 +52,12 @@ public class WebShow extends CordovaActivity{
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.backup);
         }
+        //使用getIntent获取SearchActivity传递的网址url
+        Intent intent = getIntent();
+        launchUrl = intent.getStringExtra("webUrl");
         loadUrl(launchUrl);     //启动页面 www/index.html
     }
+
 
     @Override
     protected CordovaWebView makeWebView(){

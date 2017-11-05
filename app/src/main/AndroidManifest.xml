@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-feature android:name="android.hardware.Camera"/>
     <uses-sdk android:minSdkVersion="15"/>
 
 
@@ -64,10 +65,16 @@
         <!--android:clearTaskOnLaunch="true"-->
         <!--android:stateNotNeeded="true"-->
         <activity android:name=".Camera.CaptureActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             xmlns:tools="http://schemas.android.com/tools"
             tools:replace="screenOrientation"
             android:theme="@style/zxing_CaptureTheme" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <!--缩小的带边框的扫描-->
+        <activity android:name=".Camera.SmallCaptureActivity"
+            android:screenOrientation="fullSensor"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".News_Activity.NewsActivity"
             android:label="热点新闻"
             android:screenOrientation="portrait"/>
@@ -77,7 +84,7 @@
         </activity>
         <activity android:name=".Factory_Acticity.Factory_USER.InfoInput"
             android:label="产品信息录入"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity android:name=".Search_Activity.WebShow"  android:hardwareAccelerated="true"
             android:label="网页展示"
             android:screenOrientation="portrait"/>

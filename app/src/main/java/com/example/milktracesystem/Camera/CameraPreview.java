@@ -525,7 +525,7 @@ public class CameraPreview extends ViewGroup {
             if (surfaceRect == null) {
                 // Match the container, to reduce the risk of issues. The preview should never be drawn
                 // while the surface has this size.
-                surfaceView.layout(0, 0, getWidth(), getHeight());
+                surfaceView.layout(0 , 0, getWidth(), getHeight());
             } else {
                 surfaceView.layout(surfaceRect.left, surfaceRect.top, surfaceRect.right, surfaceRect.bottom);
             }

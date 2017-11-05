@@ -41,10 +41,5 @@
         android:hint="点击上方扫码按钮，获取条码信息"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/start_webview"
-        android:text="打开webview"
-        android:textAllCaps="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 </LinearLayout>

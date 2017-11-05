@@ -24,7 +24,6 @@ import java.util.Locale;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.annotation.SuppressLint;
@@ -76,7 +75,7 @@ import android.widget.FrameLayout;
  * deprecated in favor of the config.xml file.
  *
  */
-public class CordovaActivity extends AppCompatActivity{
+public class CordovaActivity extends AppCompatActivity {
     public static String TAG = "CordovaActivity";
 
     // The webview for our app

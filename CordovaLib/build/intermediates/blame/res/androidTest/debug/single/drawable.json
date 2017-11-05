@@ -16,12 +16,12 @@
         "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
     },
     {
-        "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\tooltip_frame_light.xml",
-        "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable\\tooltip_frame_light.xml"
-    },
-    {
         "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_ic_menu_overflow_material.xml",
         "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable\\abc_ic_menu_overflow_material.xml"
+    },
+    {
+        "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\tooltip_frame_light.xml",
+        "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable\\tooltip_frame_light.xml"
     },
     {
         "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_dialog_material_background.xml",
@@ -48,16 +48,16 @@
         "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable\\abc_btn_borderless_material.xml"
     },
     {
+        "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_cab_background_top_material.xml",
+        "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable\\abc_cab_background_top_material.xml"
+    },
+    {
         "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_edit_text_material.xml",
         "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable\\abc_edit_text_material.xml"
     },
     {
         "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_list_selector_holo_light.xml",
         "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable\\abc_list_selector_holo_light.xml"
-    },
-    {
-        "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_cab_background_top_material.xml",
-        "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable\\abc_cab_background_top_material.xml"
     },
     {
         "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_btn_check_material.xml",
@@ -84,12 +84,12 @@
         "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable\\tooltip_frame_dark.xml"
     },
     {
-        "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\notification_bg.xml",
-        "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\6a9f30c68fd635542e6e0a8ffd0eeadc\\res\\drawable\\notification_bg.xml"
-    },
-    {
         "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_textfield_search_material.xml",
         "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\drawable\\abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\notification_bg.xml",
+        "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\6a9f30c68fd635542e6e0a8ffd0eeadc\\res\\drawable\\notification_bg.xml"
     },
     {
         "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_ic_voice_search_api_material.xml",
