@@ -6,11 +6,20 @@
     <TableRow>
         <TextView
             android:id="@+id/goods_time"
-            android:text="产品生产时间："
+            android:text="原料生产时间："
             android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark"/>
         <EditText
             android:id="@+id/goods_time_edit"
             />
-    </TableRow>>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/goods_cars_num"
+            android:text="原料名称："
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimary"/>
+        <EditText
+            android:id="@+id/goods_cars_num_edit"/>
+    </TableRow>
 </TableLayout>

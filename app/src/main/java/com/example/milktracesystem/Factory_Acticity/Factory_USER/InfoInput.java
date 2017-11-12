@@ -130,12 +130,21 @@ public class InfoInput extends AppCompatActivity {
                 //  获取填写表单的Table 布局
                 TableLayout tableLayout = (TableLayout)findViewById(R.id.company_fill_table);
                 ViewParent parentView = tableLayout.getParent();        //总布局
+                boolean[] isHasAdded = new boolean[4];      //用于标记spinner的选择是否已选择过，方式重复加载
+                View[] tableRows = new View[4];     //用于存放不同的选择动态加载的不同的布局
+                View curr_add_table_row = null;        //当前动态加载的布局
+                //需要根据不同种类的厂商显示不同的输入字段值
                 switch(position){
                     case 0: //原料厂商
                         //TODO 测试成功，但是需要放置重复加载
                         LayoutInflater layoutInflater = LayoutInflater.from(InfoInput.this);
-                        View tableRow = layoutInflater.inflate(R.layout.info_input_material_table,null);
-                        tableLayout.addView(tableRow);
+                        if(!isHasAdded[0]){         //如果不是重复点击此项，先将之前动态加载的布局删除，之后再加载新的
+                            if(curr_add_table_row != null){         //如果之前已经加载过了
+
+                            }
+                        }
+//                        View tableRow = layoutInflater.inflate(R.layout.info_input_material_table,null);
+//                        tableLayout.addView(tableRow);
                         break;
                     case 1: //乳制品生产商
 
@@ -156,5 +165,35 @@ public class InfoInput extends AppCompatActivity {
 
             }
         });
+    }
+
+    /**
+     * 用于控制根据spinner选择的不同动态加载布局的方法
+     * @param position  选择的位置
+     * @param currView 当前加载的布局，首次调用时为null
+     * @param currViewId 当前加载的布局的编号，首次调用时为-1
+     * @param tableRows 用于存储动态加载的布局
+     */
+
+    public void dynamicAddViewControl(int position,View currView,int currViewId,View[] tableRows){
+        //初始化动态加载的资源
+        if(tableRows[0] == null){       //表示所有的动态加载的资源还未加载
+            tableRows[0] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_material_table,null);
+            tableRows[1] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_product_table,null);
+            tableRows[2] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_transport_table,null);
+            tableRows[3] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_sale_table,null);
+        }
+        TableLayout tableLayout = (TableLayout)findViewById(R.id.company_fill_table);   //上级布局
+        if(currView == null){       //如果是首次加载
+            currView = tableRows[position];     //动态加载子布局
+            currViewId = position;              //标记当前的选择
+            tableLayout.addView(currView);      //添加
+        }else{
+            //非首次加载
+            //先删除子布局
+            //只有
+            //TODO 
+        }
+
     }
 }
