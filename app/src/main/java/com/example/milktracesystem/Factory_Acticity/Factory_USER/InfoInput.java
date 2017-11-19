@@ -1,6 +1,7 @@
 package com.example.milktracesystem.Factory_Acticity.Factory_USER;
 
 import android.app.Activity;
+import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,9 @@ import java.util.ArrayList;
  */
 public class InfoInput extends AppCompatActivity {
     private Spinner company_type_select;    //表单填写企业类别选择
+    private View currAddedView;     //当前动态加载的布局
+    private View[] tableViews;      //备选布局
+    private int currPosition = -1;  //当前加载的布局
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_input);
@@ -53,6 +57,12 @@ public class InfoInput extends AppCompatActivity {
         }
         InitSpinnerCompanyType();   //初始化Spinner，厂商类别选择
         setSpinnerOnItemClickListener();        //设置spinner项目点击的监听器，用于动态改变布局
+        //初始化备选的添加TableView
+        tableViews = new TableLayout[4];
+        tableViews[0] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_material_table,null);
+        tableViews[1] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_product_table,null);
+        tableViews[2] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_transport_table,null);
+        tableViews[3] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_sale_table,null);
     }
 
     //在OptionMenu中显示图片
@@ -127,37 +137,35 @@ public class InfoInput extends AppCompatActivity {
         this.company_type_select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //  获取填写表单的Table 布局
-                TableLayout tableLayout = (TableLayout)findViewById(R.id.company_fill_table);
-                ViewParent parentView = tableLayout.getParent();        //总布局
-                boolean[] isHasAdded = new boolean[4];      //用于标记spinner的选择是否已选择过，方式重复加载
-                View[] tableRows = new View[4];     //用于存放不同的选择动态加载的不同的布局
-                View curr_add_table_row = null;        //当前动态加载的布局
-                //需要根据不同种类的厂商显示不同的输入字段值
-                switch(position){
-                    case 0: //原料厂商
-                        //TODO 测试成功，但是需要放置重复加载
-                        LayoutInflater layoutInflater = LayoutInflater.from(InfoInput.this);
-                        if(!isHasAdded[0]){         //如果不是重复点击此项，先将之前动态加载的布局删除，之后再加载新的
-                            if(curr_add_table_row != null){         //如果之前已经加载过了
-
-                            }
-                        }
-//                        View tableRow = layoutInflater.inflate(R.layout.info_input_material_table,null);
-//                        tableLayout.addView(tableRow);
-                        break;
-                    case 1: //乳制品生产商
-
-                        break;
-                    case 2: //物流运输商
-
-                        break;
-                    case 3: //零售批发商
-
-                        break;
-                    default:
-                        break;
+                //position 从0开始
+                TableLayout rootView = (TableLayout)findViewById(R.id.company_fill_table);    //TableLayout
+                if(currPosition != -1){     //当前有已加载的布局，删除
+                    rootView.removeView(currAddedView);
                 }
+                switch(position){
+                    case 0:
+                        currPosition=0;
+                        rootView.addView(tableViews[0]);
+                        currAddedView = tableViews[0];
+                        break;
+                    case 1:
+                        currPosition=1;
+                        rootView.addView(tableViews[1]);
+                        currAddedView = tableViews[1];
+                        break;
+                    case 2:
+                        currPosition=2;
+                        rootView.addView(tableViews[2]);
+                        currAddedView = tableViews[2];
+                        break;
+                    case 3:
+                        currPosition=3;
+                        rootView.addView(tableViews[3]);
+                        currAddedView = tableViews[3];
+                        break;
+
+                }
+
             }
 
             @Override
@@ -165,35 +173,10 @@ public class InfoInput extends AppCompatActivity {
 
             }
         });
-    }
-
-    /**
-     * 用于控制根据spinner选择的不同动态加载布局的方法
-     * @param position  选择的位置
-     * @param currView 当前加载的布局，首次调用时为null
-     * @param currViewId 当前加载的布局的编号，首次调用时为-1
-     * @param tableRows 用于存储动态加载的布局
-     */
-
-    public void dynamicAddViewControl(int position,View currView,int currViewId,View[] tableRows){
-        //初始化动态加载的资源
-        if(tableRows[0] == null){       //表示所有的动态加载的资源还未加载
-            tableRows[0] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_material_table,null);
-            tableRows[1] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_product_table,null);
-            tableRows[2] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_transport_table,null);
-            tableRows[3] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_sale_table,null);
-        }
-        TableLayout tableLayout = (TableLayout)findViewById(R.id.company_fill_table);   //上级布局
-        if(currView == null){       //如果是首次加载
-            currView = tableRows[position];     //动态加载子布局
-            currViewId = position;              //标记当前的选择
-            tableLayout.addView(currView);      //添加
-        }else{
-            //非首次加载
-            //先删除子布局
-            //只有
-            //TODO 
-        }
 
     }
+
+
+
+
 }

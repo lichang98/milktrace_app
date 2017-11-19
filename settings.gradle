@@ -1,1 +1,1 @@
-include ':app', ':CordovaLib'
+include ':app', ':CordovaLib', ':lib'
