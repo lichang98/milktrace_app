@@ -50,6 +50,12 @@ public class NewsActivity extends AppCompatActivity{
         GridLayoutManager layoutManager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(layoutManager);
         newsNormalAdapter = new NewsNormalAdapter(newsNormalItemList);
+        newsNormalAdapter.setOnItemClickListener(new MyNewsItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(NewsActivity.this, "position:"+position, Toast.LENGTH_SHORT).show();
+            }
+        });
         recyclerView.setAdapter(newsNormalAdapter);
  /*       LayoutInflater inflater = getLayoutInflater();
         ViewGroup container = (ViewGroup) getWindow().getDecorView();
@@ -120,35 +126,6 @@ public class NewsActivity extends AppCompatActivity{
             newsNormalItemList.add(newsNormalItems[index]);
         }
     }
-
-    /**
-     * 初始化新闻列表
-     */
-  /*  private void InitNewsList(){
-        newsNormalItemList.clear();
-        for(int i=0;i<5;i++){
-            NewsNormalItem news1 = new NewsNormalItem("NEWS FIRST",R.drawable.news_pic1);
-            NewsNormalItem news2 = new NewsNormalItem("NEWS SECOND",R.drawable.news_pic2);
-            NewsNormalItem news3 = new NewsNormalItem("NEWS THIRD",R.drawable.news_pic3);
-            newsNormalItemList.add(news1);
-            newsNormalItemList.add(news2);
-            newsNormalItemList.add(news3);
-        }
-    }*/
-
-    /**
-     * 新闻表项点击事件
-     */
-  /*  private class ListItemOnClickListener implements  AdapterView.OnItemClickListener{
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            NewsNormalAdapter newsNormalAdapter = new NewsNormalAdapter(view.getContext(),R.layout.news_normal_item,
-                    newsNormalItemList);
-            //获取新闻标题
-            String news_title = newsNormalItemList.get(position).getNews_content();
-            Toast.makeText(NewsActivity.this, "点击新闻"+news_title, Toast.LENGTH_SHORT).show();
-        }
-    }*/
 
 
 }
