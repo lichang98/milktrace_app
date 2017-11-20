@@ -2,6 +2,7 @@ package com.example.milktracesystem.News_Activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,7 +44,11 @@ public class NewsActivity extends AppCompatActivity{
         //顶部工具栏
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){              //设置返回按键
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.backup);
+        }
         InitNews();
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycle_view);
         //第二个参数表示显示的列数
