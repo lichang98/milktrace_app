@@ -63,20 +63,26 @@ public class NewsNormalAdapter extends RecyclerView.Adapter<NewsNormalAdapter.Vi
         NewsNormalItem newsNormalItem = newsNormalItemList.get(position);
         holder.newsTitle.setText(newsNormalItem.getNews_content());
         Glide.with(context).load(newsNormalItem.getNews_img_id()).into(holder.newsPic);
-        //为viewHolder中的图片添加监听器
-        holder.newsPic.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context, "position:"+position, Toast.LENGTH_SHORT).show();
             }
         });
-        //为ViewHolder中的文字标题添加监听器
-        holder.newsTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "position:"+position, Toast.LENGTH_SHORT).show();
-            }
-        });
+//        //为viewHolder中的图片添加监听器
+//        holder.newsPic.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(context, "position:"+position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        //为ViewHolder中的文字标题添加监听器
+//        holder.newsTitle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(context, "position:"+position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 
