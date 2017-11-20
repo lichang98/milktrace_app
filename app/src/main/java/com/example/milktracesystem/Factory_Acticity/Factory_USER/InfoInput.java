@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.milktracesystem.Factory_Acticity.FactoryActivity;
 import com.example.milktracesystem.R;
+import com.example.milktracesystem.MaterialDesignComps.materialedittext.MaterialEditText;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -43,11 +44,13 @@ public class InfoInput extends AppCompatActivity {
     private View currAddedView;     //当前动态加载的布局
     private View[] tableViews;      //备选布局
     private int currPosition = -1;  //当前加载的布局
+    private MaterialEditText companyName;   //厂商名称填写字段
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_input);
 
-
+        companyName = (MaterialEditText)findViewById(R.id.company_name_edit);
+        companyName.setShowClearButton(true);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_inputinfo);  //标题栏
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();

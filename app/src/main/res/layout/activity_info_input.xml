@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Factory_Acticity.Factory_USER.InfoInput">
     <!--企业用户信息录入界面-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_inputinfo"
@@ -22,8 +25,10 @@
                 android:text="厂商名称："
                 android:textSize="20sp"
                 android:textColor="@color/colorPrimaryDark"/>
-            <EditText
+            <com.example.milktracesystem.MaterialDesignComps.materialedittext.MaterialEditText
                 android:id="@+id/company_name_edit"
+                android:hint="填写信息"
+                app:met_clearButton="true"
                 />
         </TableRow>
         <TableRow>
