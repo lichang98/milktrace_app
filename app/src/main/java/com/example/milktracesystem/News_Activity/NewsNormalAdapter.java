@@ -1,6 +1,7 @@
 package com.example.milktracesystem.News_Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -66,7 +67,9 @@ public class NewsNormalAdapter extends RecyclerView.Adapter<NewsNormalAdapter.Vi
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "position:"+position, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(context, "position:"+position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(),NewsContent.class);
+                view.getContext().startActivity(intent);    //点击后跳转至NewsContent
             }
         });
 //        //为viewHolder中的图片添加监听器
