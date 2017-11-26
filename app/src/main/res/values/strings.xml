@@ -34,4 +34,7 @@
         <item>运输物流</item>
         <item>零售批发商</item>
     </string-array>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>

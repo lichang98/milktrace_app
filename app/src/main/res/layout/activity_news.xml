@@ -34,14 +34,22 @@
          android:id="@+id/recycle_view"
          app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-     <android.support.design.widget.FloatingActionButton
-         android:id="@+id/fab"
-         android:layout_height="wrap_content"
-         android:layout_width="wrap_content"
-         android:layout_gravity="bottom|end"
-         android:layout_margin="16dp"
-         android:src="@drawable/float_bt"
-         app:elevation="8dp"/>
+     <!--<android.support.design.widget.FloatingActionButton-->
+         <!--android:id="@+id/fab"-->
+         <!--android:layout_height="wrap_content"-->
+         <!--android:layout_width="wrap_content"-->
+         <!--android:layout_gravity="bottom|end"-->
+         <!--android:layout_margin="16dp"-->
+         <!--android:src="@drawable/float_bt"-->
+         <!--app:elevation="8dp"/>-->
+     <FrameLayout
+         android:id="@+id/floating_button_frame"
+         android:layout_width="80dp"
+         android:layout_height="400dp"
+         android:layout_marginBottom="10dp"
+         android:layout_marginEnd="10dp"
+         app:layout_anchor="@+id/recycle_view"
+         app:layout_anchorGravity="right|bottom"></FrameLayout>
  </android.support.design.widget.CoordinatorLayout>
 
 </android.support.v4.widget.DrawerLayout>
