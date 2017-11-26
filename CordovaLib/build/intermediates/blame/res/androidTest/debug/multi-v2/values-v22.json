@@ -4,7 +4,7 @@
             "outputFile": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v22\\values-v22.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\values-v22\\values-v22.xml",
+                    "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e7d184a1447cc12d92acf961426a45bd\\res\\values-v22\\values-v22.xml",
                     "from": {
                         "startLines": "2,3,4,9",
                         "startColumns": "4,4,4,4",
@@ -20,7 +20,7 @@
             "outputFile": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-v22\\values-v22.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\fbb469c921d143d37a22354bb0030288\\res\\values-v22\\values-v22.xml",
+                    "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e7d184a1447cc12d92acf961426a45bd\\res\\values-v22\\values-v22.xml",
                     "from": {
                         "startLines": "2,3,4,9",
                         "startColumns": "4,4,4,4",
