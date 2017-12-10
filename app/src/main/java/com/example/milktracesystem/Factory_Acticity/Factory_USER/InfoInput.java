@@ -1,30 +1,20 @@
 package com.example.milktracesystem.Factory_Acticity.Factory_USER;
 
-import android.app.Activity;
-import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.milktracesystem.Factory_Acticity.FactoryActivity;
 import com.example.milktracesystem.R;
-import com.example.milktracesystem.MaterialDesignComps.materialedittext.MaterialEditText;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -44,13 +34,10 @@ public class InfoInput extends AppCompatActivity {
     private View currAddedView;     //当前动态加载的布局
     private View[] tableViews;      //备选布局
     private int currPosition = -1;  //当前加载的布局
-    private MaterialEditText companyName;   //厂商名称填写字段
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_input);
 
-        companyName = (MaterialEditText)findViewById(R.id.company_name_edit);
-        companyName.setShowClearButton(true);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_inputinfo);  //标题栏
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();

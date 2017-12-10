@@ -25,9 +25,12 @@
                 android:text="厂商名称："
                 android:textSize="20sp"
                 android:textColor="@color/colorPrimaryDark"/>
-            <EditText
+            <!--<EditText-->
+                <!--android:id="@+id/company_name_edit"-->
+                <!--android:hint="填写信息" />-->
+            <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/company_name_edit"
-                android:hint="填写信息" />
+                android:hint="请选择" />
         </TableRow>
         <TableRow>
             <TextView

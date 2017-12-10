@@ -2,15 +2,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!--Material Edit Text-->
-    <dimen name="default_padding_top">8dp</dimen>
-    <dimen name="default_padding_bottom">8dp</dimen>
-    <dimen name="inner_padding_left">0dp</dimen>
-    <dimen name="inner_padding_right">0dp</dimen>
-    <dimen name="floating_label_text_size">12sp</dimen>
-    <dimen name="bottom_text_size">12sp</dimen>
-    <dimen name="inner_components_spacing">8dp</dimen>
-    <dimen name="bottom_ellipsis_height">4dp</dimen>
+
+    <!--Floating Action Bar-->
     <dimen name="dim56dp">56dp</dimen>
     <dimen name="dim78dp">78dp</dimen>
 </resources>
