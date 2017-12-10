@@ -1,25 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:stretchColumns="1">
     <!--用于在InfoInput Activity中动态加载此布局-->
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/goods_time"-->
+            <!--android:text="原料生产时间："-->
+            <!--android:textSize="20sp"-->
+            <!--android:textColor="@color/colorPrimaryDark"/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/goods_time_edit"-->
+            <!--/>-->
+    <!--</TableRow>-->
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/goods_cars_num"-->
+            <!--android:text="原料名称："-->
+            <!--android:textSize="20sp"-->
+            <!--android:textColor="@color/colorPrimary"/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/goods_cars_num_edit"/>-->
+    <!--</TableRow>-->
     <TableRow>
         <TextView
-            android:id="@+id/goods_time"
-            android:text="原料生产时间："
+            android:id="@+id/material_id"
+            android:text="原料标识ID："
             android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark"/>
-        <EditText
-            android:id="@+id/goods_time_edit"
-            />
+        <com.rey.material.widget.Spinner
+            android:id="@+id/material_id_select"
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:layout_gravity="center"
+            app:spn_label="Test Spinner"
+            app:v_styleId="@array/spinner"/>
     </TableRow>
+<!--上下两个表格项应该保持一致-->
     <TableRow>
         <TextView
-            android:id="@+id/goods_cars_num"
+            android:id="@+id/material_name"
             android:text="原料名称："
             android:textSize="20sp"
-            android:textColor="@color/colorPrimary"/>
-        <EditText
-            android:id="@+id/goods_cars_num_edit"/>
+            android:textColor="@color/colorPrimaryDark"/>
+        <com.rey.material.widget.Spinner
+            android:id="@+id/material_name_select"
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:layout_gravity="center"
+            app:spn_label="Test Spinner"
+            app:v_styleId="@array/spinner"/>
     </TableRow>
 </TableLayout>
