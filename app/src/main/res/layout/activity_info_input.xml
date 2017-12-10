@@ -25,11 +25,9 @@
                 android:text="厂商名称："
                 android:textSize="20sp"
                 android:textColor="@color/colorPrimaryDark"/>
-            <com.example.milktracesystem.MaterialDesignComps.materialedittext.MaterialEditText
+            <EditText
                 android:id="@+id/company_name_edit"
-                android:hint="填写信息"
-                app:met_clearButton="true"
-                />
+                android:hint="填写信息" />
         </TableRow>
         <TableRow>
             <TextView

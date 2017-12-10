@@ -1,1 +1,3 @@
-include ':app', ':CordovaLib'
+include ':app', ':CordovaLib', ':sample', ':library'
+project(':sample').projectDir = new File('MaterialEditText-master/sample')
+project(':library').projectDir = new File('MaterialEditText-master/library')

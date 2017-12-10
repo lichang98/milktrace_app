@@ -60,12 +60,12 @@
         "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e7d184a1447cc12d92acf961426a45bd\\res\\drawable-hdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
-        "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
-        "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e7d184a1447cc12d92acf961426a45bd\\res\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
-    },
-    {
         "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\notification_bg_normal_pressed.9.png",
         "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\ad0484105845bee972e22d87d3bd6894\\res\\drawable-hdpi-v4\\notification_bg_normal_pressed.9.png"
+    },
+    {
+        "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
+        "source": "C:\\Users\\李畅\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e7d184a1447cc12d92acf961426a45bd\\res\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
         "merged": "D:\\AndriodWork\\MilkTraceSystemnew2.2bar\\CordovaLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\abc_list_pressed_holo_light.9.png",
