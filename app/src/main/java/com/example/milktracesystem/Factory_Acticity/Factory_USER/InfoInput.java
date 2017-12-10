@@ -53,6 +53,24 @@ public class InfoInput extends AppCompatActivity {
         tableViews[1] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_product_table,null);
         tableViews[2] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_transport_table,null);
         tableViews[3] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_sale_table,null);
+        //
+        testMaterialSpinner();
+    }
+
+    /**
+     * 测试Material Spinner
+     */
+    public void testMaterialSpinner(){
+
+        String[] items = new String[5];
+        for(int i=0;i<5;++i){
+            items[i] = "Item " + String.valueOf(i);
+        }
+
+        com.rey.material.widget.Spinner materialSpinner = (com.rey.material.widget.Spinner) findViewById(R.id.spinner_material);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,R.layout.row_spn,items);
+        arrayAdapter.setDropDownViewResource(R.layout.row_spn_dropdown);
+        materialSpinner.setAdapter(arrayAdapter);
     }
 
     //在OptionMenu中显示图片

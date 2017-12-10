@@ -6,4 +6,11 @@
     <color name="indigo_500">#3f51b5</color>
     <color name="indigo_700">#303f9f</color>
     <color name="cyan_500">#00bcd4</color>
+
+    <color name="colorAccentHalf">#9000E5FF</color>
+    <color name="colorPrimaryHalf">#9003A9F4</color>
+    <color name="colorControlNormalHalf">#9078909C</color>
+    <color name="colorControlNormal">#FF78909C</color>
+    <color name="colorControlActivated">#FF03A9F4</color>
+    <color name="colorSwitchThumbNormal">#FF78909C</color>
 </resources>
