@@ -17,6 +17,7 @@ import com.example.milktracesystem.R;
 
 public class Login extends AppCompatActivity {
     private Button button1;
+    private Button buttonRegister;      //注册按钮
     @Override
     protected void onCreate(Bundle savedInstanceStatue){
         super.onCreate(savedInstanceStatue);
@@ -36,6 +37,16 @@ public class Login extends AppCompatActivity {
                 else{
                     Toast.makeText(Login.this,"用户名或密码错误！",Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        buttonRegister = (Button)findViewById(R.id.register);
+        //注册按钮点击
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this,Register.class);
+                startActivity(intent);
             }
         });
 
