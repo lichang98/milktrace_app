@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.milktracesystem.R;
+import com.rey.material.app.Dialog;
 
 /**
  * Created by 李畅 on 2017/9/16.
@@ -52,3 +53,18 @@ public class Login extends AppCompatActivity {
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
