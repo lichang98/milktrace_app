@@ -97,8 +97,12 @@ public class GeneralActivity extends AppCompatActivity {
         imageButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // 修改后的，通过该入口仅进入企业数据采集入口
+                Intent intent = new Intent(GeneralActivity.this,InfoInput.class);
+                startActivity(intent);
+
                // Intent intent = new Intent(GeneralActivity.this, FactoryActivity.class);
-                showSingleChoiceDialog();       //弹出对话框，选择进入哪个Activity,1普通消费者入口，0企业用户
+//                showSingleChoiceDialog();       //弹出对话框，选择进入哪个Activity,1普通消费者入口，0企业用户
              /*   if(choice == 1){
                     startActivity(intent);
                 }else{
@@ -163,11 +167,13 @@ public class GeneralActivity extends AppCompatActivity {
     }
 
     /**
+     *
      * 在主界面的信息采集(第一个)点击后弹出对话框，选择进入哪类界面
      * 提供企业以及消费者用户的入口
      * @return 返回值为0 表示企业用户，为1 表示普通用户
      */
     private int choice;
+    @Deprecated
     private void showSingleChoiceDialog(){
         final String[] types = {"企业入口","消费者入口"};
         choice = -1;
@@ -185,7 +191,7 @@ public class GeneralActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 if(choice != -1){
                     Toast.makeText(GeneralActivity.this, "你选择了"+choice, Toast.LENGTH_SHORT).show();
-                    if(choice == 1){
+                    if(choice == 1){            //进入消费者入口
                         Intent intent = new Intent(GeneralActivity.this,FactoryActivity.class);
                         startActivity(intent);
                     }

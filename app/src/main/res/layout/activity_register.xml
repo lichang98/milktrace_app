@@ -237,6 +237,13 @@
                     android:layout_height="200sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/button5"/>
+                <!--注册用户提交按钮-->
+                <Button
+                    android:id="@+id/button_register_submit"
+                    android:text="提交"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/register_uploadimg" />
 
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>

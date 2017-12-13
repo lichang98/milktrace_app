@@ -56,6 +56,9 @@ public class Register extends AppCompatActivity implements DialogForChooseImgMet
     private Button buttonUploadImg;         //企业注册用户上传资质照片的点击按钮
     private ImageView imgUpload;
     private Uri imgUri;
+    private Button buttonRegisterSubmit;    //TODO 注册用户信息提交按钮,处理提交
+
+    private static UserType USERTYPE;       //通过用户的注册选择不同的用户类型
 
     private static final int TAKEPHOTO = 1;
     private static final int CHOOSE_PHOTO=2;
@@ -221,10 +224,28 @@ public class Register extends AppCompatActivity implements DialogForChooseImgMet
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 Toast.makeText(Register.this, "you have click " + i, Toast.LENGTH_SHORT).show();
-                if(i == R.id.radioButton){
-                    CustomerDialog customerDialog = new CustomerDialog();
-                    customerDialog.show(getFragmentManager(),"customer register");
+                //如果选择的是消费者类型，弹出简单注册对话框
+                switch(i){
+                    case R.id.radioButton:
+                        CustomerDialog customerDialog = new CustomerDialog();
+                        customerDialog.show(getFragmentManager(),"customer register");
+                        USERTYPE = UserType.CUSTOMER;
+                        break;
+                    case R.id.radioButton3:
+
+                        USERTYPE = UserType.MATERIALFAC;
+                        break;
+                    case R.id.radioButton4:
+                        USERTYPE = UserType.PRODUCTFAC;
+                        break;
+                    case R.id.radioButton5:
+                        USERTYPE = UserType.TRANSPORTFAC;
+                        break;
+                    case R.id.radioButton6:
+                        USERTYPE = UserType.SALEFAC;
+                        break;
                 }
+
 
             }
         });
@@ -269,5 +290,12 @@ public class Register extends AppCompatActivity implements DialogForChooseImgMet
     }
 
 
+    /**
+     * 用户类型
+     */
+    enum UserType{
+
+        CUSTOMER,MATERIALFAC,PRODUCTFAC,TRANSPORTFAC,SALEFAC    //不同的用户类型
+    }
 
 }
