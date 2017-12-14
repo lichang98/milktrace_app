@@ -13,58 +13,61 @@
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-    <!--企业填写的表单-->
-    <TableLayout
-        android:id="@+id/company_fill_table"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stretchColumns="1">
-        <TableRow>
-            <TextView
-                android:id="@+id/company_name"
-                android:text="厂商名称："
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"/>
-            <!--<EditText-->
+        android:layout_height="wrap_content">
+        <!--企业填写的表单-->
+        <TableLayout
+            android:id="@+id/company_fill_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
+            <TableRow>
+                <TextView
+                    android:id="@+id/company_name"
+                    android:text="厂商名称："
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryDark"/>
+                <!--<EditText-->
                 <!--android:id="@+id/company_name_edit"-->
                 <!--android:hint="填写信息" />-->
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/company_name_edit"
-                android:hint="请选择" />
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/company_addr"
-                android:text="厂商地址："
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"/>
-            <EditText
-                android:id="@+id/company_addr_edit"
-                />
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/company_type"
-                android:text="厂商类别："
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"/>
-            <Spinner
-                android:id="@+id/company_type_edit"
-                android:layout_height="20sp"/>
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/company_name_edit"
+                    android:hint="请选择" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/company_addr"
+                    android:text="厂商地址："
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryDark"/>
+                <EditText
+                    android:id="@+id/company_addr_edit"  />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/company_type"
+                    android:text="厂商类别："
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryDark"/>
+                <Spinner
+                    android:id="@+id/company_type_edit"
+                    android:layout_height="20sp"/>
 
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/goods_batch_id"
-                android:text="产品批次码："
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"/>
-            <EditText
-                android:id="@+id/goods_batch_id_edit"
-                />
-        </TableRow>
-        <!--测试使用NFC获取数据-->
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/goods_batch_id"
+                    android:text="产品批次码："
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryDark"/>
+                <EditText
+                    android:id="@+id/goods_batch_id_edit"
+                    />
+            </TableRow>
+            <!--测试使用NFC获取数据-->
 
-    </TableLayout>
+        </TableLayout>
 
+    </ScrollView>
 </LinearLayout>

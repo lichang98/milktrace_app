@@ -2,7 +2,6 @@ package com.example.milktracesystem.Factory_Acticity.Factory_USER;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.DialogFragment;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,6 +26,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -35,11 +35,16 @@ import android.widget.Toast;
 import com.example.milktracesystem.MainInterface.DialogForChooseImgMethod;
 import com.example.milktracesystem.MainInterface.Register;
 import com.example.milktracesystem.R;
+import com.rey.material.app.DatePickerDialog;
+import com.rey.material.app.Dialog;
+import com.rey.material.app.DialogFragment;
+import com.rey.material.widget.DatePicker;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -93,12 +98,12 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
 
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
+    public void onDialogPositiveClick(android.app.DialogFragment dialog) {
         takePhoto();
     }
 
     @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
+    public void onDialogNegativeClick(android.app.DialogFragment dialog) {
 
         choosePhoto();
     }
@@ -191,6 +196,7 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                         currPosition=1;
                         rootView.addView(tableViews[1]);
                         currAddedView = tableViews[1];
+                        productFacSolve();      //开始对乳制品生产企业的操作的处理
                         break;
                     case 2:             //加载物流运输企业的布局
                         currPosition=2;
@@ -229,6 +235,72 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
             }
         });
         //TODO
+
+    }
+
+    /**
+     * 针对乳制品生产企业所涉及的字段的操作的处理
+     */
+    public void productFacSolve(){
+
+        ImageButton imageButtonDateSelect = (ImageButton)findViewById(R.id.date_select_bt);     //生产日期选择按钮
+        ImageButton imageButtonOutFacDateSelect = (ImageButton)findViewById(R.id.prod_outfac_checktime_select); //出厂检验时间选择
+        imageButtonDateSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog.Builder builder = new DatePickerDialog.Builder(R.style.Material_App_Dialog_DatePicker_Light){
+                    @Override
+                    public void onPositiveActionClicked(DialogFragment fragment){
+
+                        DatePickerDialog datePickerDialog = (DatePickerDialog)fragment.getDialog();
+                        String date = datePickerDialog.getFormattedDate(SimpleDateFormat.getDateInstance());
+                        Toast.makeText(InfoInput.this, "Date is " + date, Toast.LENGTH_SHORT).show();
+                        super.onPositiveActionClicked(fragment);
+                    }
+
+                    @Override
+                    public void onNegativeActionClicked(DialogFragment fragment){
+                        Toast.makeText(InfoInput.this, "取消", Toast.LENGTH_SHORT).show();
+                        super.onNegativeActionClicked(fragment);
+                    }
+                };
+
+                builder.positiveAction("确定")
+                        .negativeAction("取消");
+                DialogFragment dialogFragmentMaterial = DialogFragment.newInstance(builder);
+                dialogFragmentMaterial.show(getSupportFragmentManager(),null);
+            }
+        });
+
+        //出厂检验时间选择
+        imageButtonOutFacDateSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Dialog.Builder builder = new DatePickerDialog.Builder(R.style.Material_App_Dialog_DatePicker_Light){
+                    @Override
+                    public void onPositiveActionClicked(DialogFragment fragment){
+
+                        DatePickerDialog datePickerDialog = (DatePickerDialog)fragment.getDialog();
+                        String date = datePickerDialog.getFormattedDate(SimpleDateFormat.getDateInstance());
+                        Toast.makeText(InfoInput.this, "Date is " + date, Toast.LENGTH_SHORT).show();
+                        super.onPositiveActionClicked(fragment);
+                    }
+
+                    @Override
+                    public void onNegativeActionClicked(DialogFragment fragment){
+                        Toast.makeText(InfoInput.this, "取消", Toast.LENGTH_SHORT).show();
+                        super.onNegativeActionClicked(fragment);
+                    }
+                };
+
+                builder.positiveAction("确定")
+                        .negativeAction("取消");
+                DialogFragment dialogFragmentMaterial = DialogFragment.newInstance(builder);
+                dialogFragmentMaterial.show(getSupportFragmentManager(),null);
+
+            }
+        });
 
     }
 

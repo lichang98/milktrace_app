@@ -1,12 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-    <TableRow>
-        <TextView
-            android:id="@+id/transport_car_num"
-            android:text="运输车辆编号"/>
-        <EditText
-            android:id="@+id/transport_car_num_edit"/>
-    </TableRow>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+            <TableRow>
+                <TextView
+                    android:id="@+id/transport_fac_code"
+                    android:text="物流运输企业代码:"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"/>
+                <EditText
+                    android:id="@+id/transport_fac_code_edit"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/transport_car_num"
+                    android:text="运输车辆编号:"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"/>
+                <EditText
+                    android:id="@+id/transport_car_num_edit"
+                    android:inputType="number"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/transport_batchid"
+                    android:text="运输产品的批次:"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"/>
+                <EditText
+                    android:id="@+id/transport_batchid_edit"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/transport_trans_id"
+                    android:text="运输车辆准运号:"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"/>
+                <EditText
+                    android:id="@+id/transport_trans_id_edit"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/transport_goods_name"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:text="运输产品名称:"/>
+                <EditText
+                    android:id="@+id/transport_goods_name_edit" />
+            </TableRow>
+        </TableLayout>
+
+        <!--1.	运输单位代码			orga_code			varchar()	10	主键-->
+        <!--2.	运输车辆牌照			car_num			varchar()	12	主键-->
+        <!--3.	运输产品批次			batc_id			varhcar()	20 主键、外键-->
+        <!--4.	运输车辆准运号		car_trans_id		varchar()	15-->
+        <!--5.	运输乳制品名称		prod_name			varchar()	20	外键-->
+        <!--6.	乳制品所属类型		milk_type			varchar()	10		外键-->
+        <!--7.	运输数量				trans_amou			real-->
+        <!--8.	运输数量单位			trans_unit			varchar()	10-->
+        <!--9.	运输司机姓名			driv_name			varchar()	10-->
+        <!--10.	运输司机电话			phon_num			varchar()	20-->
+        <!--11.	产品来源（生产厂商代码）material_orga_code		varchar()	10	外键-->
+
+
+
+
+
+
+
+
+
+    </ScrollView>
 
 </TableLayout>
