@@ -59,27 +59,67 @@
                 <EditText
                     android:id="@+id/transport_goods_name_edit" />
             </TableRow>
+
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/milk_type"
+                    android:text="乳制品类型"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"/>
+                <Spinner
+                    android:id="@+id/Prod_milk_type_select">
+                </Spinner>
+
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/trans_amount"
+                    android:text="运输数量"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"/>
+                <EditText
+                    android:id="@+id/trans_amount_edit"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/trans_amount_unit"
+                    android:text="运输数量单位："
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"/>
+                <Spinner
+                    android:id="@+id/trans_amount_unit_select">
+
+                </Spinner>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/driver_name"
+                    android:text="司机姓名："
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
+                    android:hint="多人使用分号隔开"/>
+                <EditText
+                    android:id="@+id/driver_name_edit"
+                    android:inputType="text"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/driver_phone_num"
+                    android:text="司机电话："
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"/>
+                <EditText
+                    android:id="@+id/driver_phone_num_edit"
+                    android:inputType="phone"/>
+            </TableRow>
+
         </TableLayout>
-
-        <!--1.	运输单位代码			orga_code			varchar()	10	主键-->
-        <!--2.	运输车辆牌照			car_num			varchar()	12	主键-->
-        <!--3.	运输产品批次			batc_id			varhcar()	20 主键、外键-->
-        <!--4.	运输车辆准运号		car_trans_id		varchar()	15-->
-        <!--5.	运输乳制品名称		prod_name			varchar()	20	外键-->
-        <!--6.	乳制品所属类型		milk_type			varchar()	10		外键-->
-        <!--7.	运输数量				trans_amou			real-->
-        <!--8.	运输数量单位			trans_unit			varchar()	10-->
-        <!--9.	运输司机姓名			driv_name			varchar()	10-->
-        <!--10.	运输司机电话			phon_num			varchar()	20-->
-        <!--11.	产品来源（生产厂商代码）material_orga_code		varchar()	10	外键-->
-
-
-
-
-
-
-
-
 
     </ScrollView>
 

@@ -1,13 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-    <TableRow>
-        <TextView
-            android:id="@+id/sale_retailer_name"
-            android:text="零售商名称"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"/>
 
-    </TableRow>
+    <TableLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:stretchColumns="1">
+        <TableRow>
+            <TextView
+                android:id="@+id/sale_retalier_name"
+                android:text="零售商名称:"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"/>
+
+            <EditText
+                android:id="@+id/sale_retalier_name_edit" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/sale_batchid"
+                android:text="产品批次:"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"/>
+
+            <EditText
+                android:id="@+id/sale_batchid_edit"
+                android:inputType="text"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/sale_date"
+                android:text="销售日期"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"/>
+
+            <EditText
+                android:id="@+id/sale_date_edit" />
+            <ImageButton
+                android:id="@+id/sale_date_select"
+                android:src="@drawable/date_select"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/sale_prod_name"
+                android:text="产品名称:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/sale_prod_name_edit"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/sale_amount"
+                android:text="销售数量:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/sale_amount_edit"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/sale_amount_unit"
+                android:text="销售数量单位:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/sale_amount_unit_edit"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/sale_dealer_name"
+                android:text="经销商名称:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/sale_dealer_name_edit"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/sale_dealer_addr"
+                android:text="经销商地址:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/sale_dealer_addr_edit"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/sale_connector"
+                android:text="经销商联系人:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/sale_connector_edit"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/sale_connector_tel"
+                android:text="联系人电话:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/sale_connector_tel_edit"
+                android:inputType="phone"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/sale_addr"
+                android:text="出货地点:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/sale_addr_edit"
+                android:inputType="phone"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/sale_billcode"
+                android:text="销售单号:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/sale_billcode_edit"
+                android:inputType="phone"/>
+        </TableRow>
+    </TableLayout>
 
 </TableLayout>

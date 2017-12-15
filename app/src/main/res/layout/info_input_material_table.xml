@@ -35,6 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="20sp" />
     </TableRow>
+    <Space
+        android:layout_height="15sp"/>
     <TableRow>
         <TextView
             android:id="@+id/material_id"
@@ -46,6 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="20sp" />
     </TableRow>
+    <Space
+        android:layout_height="15sp"/>
 <!--上下两个表格项应该保持一致-->
     <TableRow>
         <TextView
@@ -58,6 +62,8 @@
             android:layout_width="match_parent"
             android:layout_height="20sp" />
     </TableRow>
+    <Space
+        android:layout_height="15sp"/>
     <TableRow>
         <TextView
             android:id="@+id/material_batchid"
@@ -72,6 +78,8 @@
 
     </TableRow>
 
+    <Space
+        android:layout_height="15sp"/>
     <TableRow>
         <TextView
             android:id="@+id/material_shelflife"
@@ -86,6 +94,8 @@
 
     </TableRow>
 
+    <Space
+        android:layout_height="15sp"/>
     <TableRow>
         <TextView
             android:id="@+id/material_shelflife_unit"
@@ -100,6 +110,8 @@
 
     </TableRow>
 
+    <Space
+        android:layout_height="15sp"/>
     <TableRow>
         <TextView
             android:id="@+id/material_carnum"
@@ -128,6 +140,9 @@
 
     </TableRow>
 
+    <Space
+        android:layout_height="15sp"/>
+
     <TableRow>
         <TextView
             android:id="@+id/material_certificatecode"
@@ -142,6 +157,8 @@
 
     </TableRow>
 
+    <Space
+        android:layout_height="15sp"/>
     <TableRow>
         <TextView
             android:id="@+id/material_warehouse"
@@ -156,6 +173,8 @@
 
     </TableRow>
 
+    <Space
+        android:layout_height="15sp"/>
     <TableRow>
         <TextView
             android:id="@+id/material_infac_time"
@@ -170,6 +189,8 @@
 
     </TableRow>
 
+    <Space
+        android:layout_height="15sp"/>
     <TableRow>
         <TextView
             android:id="@+id/material_contract_person"
@@ -184,6 +205,8 @@
 
     </TableRow>
 
+    <Space
+        android:layout_height="15sp"/>
     <TableRow>
         <TextView
             android:id="@+id/material_contract_phone"
@@ -199,6 +222,8 @@
 
     </TableRow>
 
+    <Space
+        android:layout_height="15sp"/>
     <TableRow>
         <Button
             android:id="@+id/material_infoInput_imgupload"
