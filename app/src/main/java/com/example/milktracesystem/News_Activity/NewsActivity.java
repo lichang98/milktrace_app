@@ -89,6 +89,8 @@ public class NewsActivity extends AppCompatActivity{
 //                Toast.makeText(NewsActivity.this, "FINDING MORE", Toast.LENGTH_SHORT).show();
 //            }
 //        });
+
+        //显示悬浮按钮
         FrameLayout frameLayout = (FrameLayout)findViewById(R.id.floating_button_frame);//用于存储悬浮按钮的frame
         PromotedActionsLibrary promotedActionsLibrary = new PromotedActionsLibrary();   //使用库
         promotedActionsLibrary.setup(getApplicationContext(),frameLayout);

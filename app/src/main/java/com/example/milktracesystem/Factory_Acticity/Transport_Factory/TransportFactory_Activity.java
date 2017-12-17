@@ -10,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 
+import com.example.milktracesystem.MaterialDesignComps.materialedittext.floatbutton.PromotedActionsLibrary;
 import com.example.milktracesystem.R;
 
 import java.lang.reflect.Method;
@@ -126,8 +129,28 @@ public class TransportFactory_Activity extends AppCompatActivity {
 
 
 
+        //显示悬浮按钮
+        FrameLayout frameLayout = (FrameLayout)findViewById(R.id.floating_button_frame);//用于存储悬浮按钮的frame
+        PromotedActionsLibrary promotedActionsLibrary = new PromotedActionsLibrary();   //使用库
+        promotedActionsLibrary.setup(getApplicationContext(),frameLayout);
+        //定义悬浮按钮显示的图标以及点击事件
+        promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.edit),setFloatingButtonListener(0));
+        promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.send),setFloatingButtonListener(1));
+        promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.update),setFloatingButtonListener(2));
+        //主按钮
+        promotedActionsLibrary.addMainItem(getResources().getDrawable(R.drawable.open));
 
     }
+
+    /**
+     * 设置悬浮按钮的点击事件
+     * @param id  点击按钮的位置
+     */
+    public View.OnClickListener setFloatingButtonListener(int id){
+        //TODO
+        return null;
+    }
+
     //在OptionMenu中显示图片
     private void setIconVisible(Menu menu, boolean flag){
         if(menu != null){
