@@ -263,9 +263,15 @@ public class MaterialFactoryActivity extends AppCompatActivity {
      * 设置悬浮按钮的点击事件
      * @param id  点击按钮的位置
      */
-    public View.OnClickListener setFloatingButtonListener(int id){
-        //TODO
-        return null;
+    public View.OnClickListener setFloatingButtonListener(final int id){
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MaterialFactoryActivity.this, "你点击的悬浮按钮的id 为： " + id, Toast.LENGTH_SHORT).show();
+                //TODO
+            }
+        };
+        return onClickListener;
     }
 
     private void navigateTo(BDLocation location){

@@ -31,6 +31,7 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 
+import com.example.milktracesystem.Factory_Acticity.Material_Factory.MaterialFactoryActivity;
 import com.example.milktracesystem.MaterialDesignComps.materialedittext.floatbutton.PromotedActionsLibrary;
 import com.example.milktracesystem.R;
 
@@ -149,9 +150,15 @@ public class SalesFactoryActivity extends AppCompatActivity {
      * 设置悬浮按钮的点击事件
      * @param id  点击按钮的位置
      */
-    public View.OnClickListener setFloatingButtonListener(int id){
-        //TODO
-        return null;
+    public View.OnClickListener setFloatingButtonListener(final int id){
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(SalesFactoryActivity.this, "你点击的悬浮按钮的id 为： " + id, Toast.LENGTH_SHORT).show();
+                //TODO
+            }
+        };
+        return onClickListener;
     }
 
     //在OptionMenu中显示图片
