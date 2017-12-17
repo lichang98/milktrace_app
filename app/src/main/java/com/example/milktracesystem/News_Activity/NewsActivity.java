@@ -51,6 +51,13 @@ public class NewsActivity extends AppCompatActivity{
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.backup);
         }
+        //返回点击事件
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         InitNews();
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycle_view);
         //第二个参数表示显示的列数

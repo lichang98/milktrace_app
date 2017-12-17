@@ -1,6 +1,7 @@
 package com.example.milktracesystem.Feedback_Activity;
 
 import android.annotation.TargetApi;
+import android.app.DialogFragment;
 import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -35,7 +37,9 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.example.milktracesystem.Camera.BarcodeEncoder;
+import com.example.milktracesystem.Factory_Acticity.Factory_USER.InfoInput;
 import com.example.milktracesystem.HttpUtil.HttpUtil;
+import com.example.milktracesystem.MainInterface.DialogForChooseImgMethod;
 import com.example.milktracesystem.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -50,13 +54,14 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
  * Created by 李畅 on 2017/9/16.
  */
 
-public class FeedBackActivity extends AppCompatActivity {
+public class FeedBackActivity extends AppCompatActivity implements DialogForChooseImgMethod.NoticeDialogListener{
     public static final int TAKE_PHOTO=1;
     public static final int CROP_PHOTO=2;
     public static final int CHOOSE_PHOTO=3;
@@ -66,6 +71,8 @@ public class FeedBackActivity extends AppCompatActivity {
     private EditText content_code;
     private ImageView picture;          //显示拍照后的照片
     private Uri imageUri;
+    private Uri imgTakePhotoUri;        //拍照时存储图片的uri
+    private String imgTakePhotoPath;    //拍照时存储图片的路径
     //private Button chooseFromAlbum;
     private EditText feedback;      //反馈文本输入框
     private byte[] bytearray;
@@ -81,50 +88,50 @@ public class FeedBackActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
-        takePhoto = (Button)findViewById(R.id.takephotos);  //拍照按钮
-        picture = (ImageView)findViewById(R.id.picture);        //显示拍照后的照片
+//        takePhoto = (Button)findViewById(R.id.takephotos);  //拍照按钮
+//        picture = (ImageView)findViewById(R.id.picture);        //显示拍照后的照片
         bUpload = (Button)findViewById(R.id.button3);       //上传按钮
         //     chooseFromAlbum = (Button)findViewById(R.id.choose_from_album);
-        takePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //创建File对象，用于存储拍照后的照片
-                File outputImage = new File (Environment.getExternalStorageDirectory(),"output_image.jpg");
-                Toast.makeText(FeedBackActivity.this, "照片将自动存储在手机中", Toast.LENGTH_SHORT).show();
-                try{
-                    if(outputImage.exists()){
-                        outputImage.delete();
-                    }
-                    outputImage.createNewFile();
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-                imageUri = Uri.fromFile(outputImage);
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-                startActivityForResult(intent,TAKE_PHOTO);
-            }
-        });
+//        takePhoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //创建File对象，用于存储拍照后的照片
+//                File outputImage = new File (Environment.getExternalStorageDirectory(),"output_image.jpg");
+//                Toast.makeText(FeedBackActivity.this, "照片将自动存储在手机中", Toast.LENGTH_SHORT).show();
+//                try{
+//                    if(outputImage.exists()){
+//                        outputImage.delete();
+//                    }
+//                    outputImage.createNewFile();
+//                }catch (IOException e){
+//                    e.printStackTrace();
+//                }
+//                imageUri = Uri.fromFile(outputImage);
+//                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+//                startActivityForResult(intent,TAKE_PHOTO);
+//            }
+//        });
         //生成二维码
-        content_code = (EditText)findViewById(R.id.content_code);
-        generate_code_map = (Button)findViewById(R.id.generate_codemap);
-        generate_code_map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String content = content_code.getText().toString(); //获取输入的信息，产生二维码
-                if(null == content || content.equals(""))
-                    Toast.makeText(FeedBackActivity.this, "请输入信息", Toast.LENGTH_SHORT).show();
-                else{
-                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-                    try{
-                        Bitmap bitmap = barcodeEncoder.encodeBitmap(content, BarcodeFormat.QR_CODE,200,200);
-                        picture.setImageBitmap(bitmap);
-                    }catch (WriterException e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
+//        content_code = (EditText)findViewById(R.id.content_code);
+//        generate_code_map = (Button)findViewById(R.id.generate_codemap);
+//        generate_code_map.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String content = content_code.getText().toString(); //获取输入的信息，产生二维码
+//                if(null == content || content.equals(""))
+//                    Toast.makeText(FeedBackActivity.this, "请输入信息", Toast.LENGTH_SHORT).show();
+//                else{
+//                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+//                    try{
+//                        Bitmap bitmap = barcodeEncoder.encodeBitmap(content, BarcodeFormat.QR_CODE,200,200);
+//                        picture.setImageBitmap(bitmap);
+//                    }catch (WriterException e){
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
    /*     chooseFromAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -167,10 +174,15 @@ public class FeedBackActivity extends AppCompatActivity {
                     Toast.makeText(FeedBackActivity.this,"图片数量已满",Toast.LENGTH_LONG).show();
                 }
                 else if(position == 0){
+
+                    //弹出选择图片方式的对话框
+                    DialogForChooseImgMethod dialogForChooseImgMethod = new DialogForChooseImgMethod();
+                    dialogForChooseImgMethod.show(getFragmentManager(),"选择照片的方式");
+
                     Toast.makeText(FeedBackActivity.this,"添加图片",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore
-                            .Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent,IMAGE_OPEN);
+//                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore
+//                            .Images.Media.EXTERNAL_CONTENT_URI);
+//                    startActivityForResult(intent,IMAGE_OPEN);
                 }
                 else{
                     dialog(position);
@@ -226,23 +238,71 @@ public class FeedBackActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    /**
+     * 用于选择照片方式的对话框的接口方法
+     * @param dialog
+     */
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+
+        Date date = new Date();
+        String time = date.getMonth()+"_"+date.getDay()+"_"+date.getHours();
+
+        imgTakePhotoPath = new String(getExternalCacheDir()+"/"+"material_check_upload"+time+".jpg");
+        File outputImage = new File(getExternalCacheDir(),"material_check_upload"+time+".jpg");
+        try{
+            if(outputImage.exists()){
+                outputImage.delete();
+            }
+            outputImage.createNewFile();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        if(Build.VERSION.SDK_INT >= 24){
+            imgTakePhotoUri = FileProvider.getUriForFile(FeedBackActivity.this,"com.example.milktracesystem.fileprovider",outputImage);
+        }else{
+            imgTakePhotoUri = Uri.fromFile(outputImage);
+        }
+        //启动相机
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,imgTakePhotoUri);
+        startActivityForResult(intent,TAKE_PHOTO);
+    }
+
+    /**
+     * 打开相册选择图片
+     * @param dialog
+     */
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+        Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent,IMAGE_OPEN);
+    }
+
+
+
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
         switch(requestCode){
             case TAKE_PHOTO:
                 if(resultCode == RESULT_OK){
                     Intent intent = new Intent("com.android.camera.action.CROP");
-                    intent.setDataAndType(imageUri,"image/*");
+                    intent.setDataAndType(imgTakePhotoUri,"image/*");
                     intent.putExtra("scale",true);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT,imgTakePhotoUri);
                     startActivityForResult(intent,CROP_PHOTO);      //照片裁剪
                 }
                 break;
             case CROP_PHOTO:
                 if(resultCode == RESULT_OK){
                     try{
-                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
-                        picture.setImageBitmap(bitmap);     //将照片放在picture ImageView中
+                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imgTakePhotoUri));
+                        pathImage = imgTakePhotoPath;       //拍照后图片存放的路径
+//                        picture.setImageBitmap(bitmap);     //将照片放在picture ImageView中
 
 
                     }catch(FileNotFoundException e){
