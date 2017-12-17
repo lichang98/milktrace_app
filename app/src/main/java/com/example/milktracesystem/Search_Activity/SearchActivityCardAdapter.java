@@ -2,6 +2,7 @@ package com.example.milktracesystem.Search_Activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.milktracesystem.Camera.SmallCaptureActivity;
+import com.example.milktracesystem.Factory_Acticity.FactoryActivity;
 import com.example.milktracesystem.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 
@@ -88,8 +90,10 @@ public class SearchActivityCardAdapter extends RecyclerView.Adapter<SearchActivi
                         integrator.initiateScan();
                         break;
                     case 1:
-
                         Toast.makeText(context, "点击搜索", Toast.LENGTH_SHORT).show();
+                        //跳转至FactoryActivity ，浏览企业信息
+                        Intent intent = new Intent((Activity)context, FactoryActivity.class);
+                        ((Activity)context).startActivity(intent);
                         break;
                     default:
                         break;
