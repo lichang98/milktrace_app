@@ -40,6 +40,7 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 import com.bumptech.glide.Glide;
+import com.example.milktracesystem.Factory_Acticity.Factory_Consumer_Comment.ConsumerComment;
 import com.example.milktracesystem.HttpUtil.HttpUtil;
 import com.example.milktracesystem.MaterialDesignComps.materialedittext.floatbutton.PromotedActionsLibrary;
 import com.example.milktracesystem.R;
@@ -268,7 +269,15 @@ public class MaterialFactoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MaterialFactoryActivity.this, "你点击的悬浮按钮的id 为： " + id, Toast.LENGTH_SHORT).show();
-                //TODO
+                //TODO 跳转至用户评论界面
+                switch(id){
+                    case 0:
+                        Intent intent = new Intent(MaterialFactoryActivity.this,ConsumerComment.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
+                }
             }
         };
         return onClickListener;

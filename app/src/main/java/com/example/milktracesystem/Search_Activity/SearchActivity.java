@@ -69,11 +69,11 @@ public class SearchActivity extends AppCompatActivity  {
                 Toast.makeText(this,"取消",Toast.LENGTH_LONG).show();
             }else{
                 Toast.makeText(this, "扫描结果："+result.getContents(), Toast.LENGTH_LONG).show();
-                barcodeinfo.setText(result.getContents());
+//                barcodeinfo.setText(result.getContents());
                 //通过获取的网页的网址，通过intent发送的WebShow 活动，并在WebShow活动中显示
-                Intent intent = new Intent(SearchActivity.this,WebShow.class);
-                intent.putExtra("webUrl",result.getContents());     //将网址放在intent中传递
-                startActivity(intent);
+//                Intent intent = new Intent(SearchActivity.this,WebShow.class);
+//                intent.putExtra("webUrl",result.getContents());     //将网址放在intent中传递
+//                startActivity(intent);
             }
         }else{
             super.onActivityResult(requestCode,resultCode,data);

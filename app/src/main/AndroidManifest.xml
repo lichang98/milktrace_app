@@ -94,7 +94,8 @@
             android:label="用户注册"
             android:screenOrientation="portrait"/>
         <activity android:name=".Factory_Acticity.Factory_Consumer_Comment.ConsumerComment"
-            android:label="用户评论界面"/>
+            android:label="用户评论界面"
+            android:screenOrientation="portrait"/>
         <service android:name="com.baidu.location.f" android:enabled="true"
             android:process=":remote"/>
     </application>
