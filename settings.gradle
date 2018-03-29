@@ -1,3 +1,6 @@
-include ':app', ':CordovaLib', ':library', ':material'
+include ':app', ':CordovaLib', ':library', ':material', ':materialdrawer', ':welcome_android', ':materialwelcome'
 project(':library').projectDir = new File('MaterialEditText-master/library')
 project(':material').projectDir = new File('material-master/material')
+project(':materialdrawer').projectDir = new File('MaterialDrawer-develop/app')
+project(':welcome_android').projectDir = new File('welcome_material')
+project(':materialwelcome').projectDir = new File('welcome_material')

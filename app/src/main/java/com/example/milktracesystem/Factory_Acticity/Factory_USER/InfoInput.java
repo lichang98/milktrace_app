@@ -67,7 +67,7 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     private int currPosition = -1;  //当前加载的布局
 
 
-    private ImageView materialUploadImg;    //原料生产企业上传检验照片
+    private ImageView materialUploadImg = null;    //原料生产企业上传检验照片
     private Uri materialUploadImgUri;       //原料企业上传照片保存的路径
 
     private static final int TAKEPHOTO = 1;
@@ -309,10 +309,7 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
      * 启动相机拍照
      */
     public void takePhoto(){
-        Date date = new Date();
-        String time = date.getMonth()+"_"+date.getDay()+"_"+date.getHours();
-
-        File outputImage = new File(getExternalCacheDir(),"material_check_upload"+time+".jpg");
+        File outputImage = new File(getExternalCacheDir(),"material_check_upload.jpg");
         try{
             if(outputImage.exists()){
                 outputImage.delete();
@@ -322,11 +319,12 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
             e.printStackTrace();
         }
 
-        if(Build.VERSION.SDK_INT >= 24){
-            materialUploadImgUri = FileProvider.getUriForFile(InfoInput.this,"com.example.milktracesystem.fileprovider",outputImage);
-        }else{
-            materialUploadImgUri = Uri.fromFile(outputImage);
-        }
+//        if(Build.VERSION.SDK_INT >= 24){
+//            materialUploadImgUri = FileProvider.getUriForFile(InfoInput.this,"com.example.milktracesystem.fileprovider",outputImage);
+//        }else{
+//            materialUploadImgUri = Uri.fromFile(outputImage);
+//        }
+        materialUploadImgUri = Uri.fromFile(outputImage);
         //启动相机
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         intent.putExtra(MediaStore.EXTRA_OUTPUT,materialUploadImgUri);
@@ -336,12 +334,21 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
 
+        if(materialUploadImg == null)
+            materialUploadImg = (ImageView)findViewById(R.id.material_upload_img);
         switch(requestCode){
             case TAKEPHOTO:
                 if(resultCode == RESULT_OK){
                     try{
+                        Toast.makeText(this, "获取到图片的路径：" + materialUploadImgUri, Toast.LENGTH_SHORT).show();
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(materialUploadImgUri));
+                        //测试
+                        com.rengwuxian.materialedittext.MaterialEditText dirresult =
+                                (com.rengwuxian.materialedittext.MaterialEditText)findViewById(R.id.company_name_edit);
+                        dirresult.setText(materialUploadImgUri.toString());
+
                         materialUploadImg.setImageBitmap(bitmap);
+
                     }catch (FileNotFoundException e){
                         e.printStackTrace();
                     }

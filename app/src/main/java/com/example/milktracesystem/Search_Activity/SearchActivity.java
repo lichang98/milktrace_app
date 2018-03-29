@@ -68,7 +68,12 @@ public class SearchActivity extends AppCompatActivity  {
             if(result.getContents() == null){
                 Toast.makeText(this,"取消",Toast.LENGTH_LONG).show();
             }else{
-                Toast.makeText(this, "扫描结果："+result.getContents(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, "扫描结果："+result.getContents(), Toast.LENGTH_LONG).show();
+                if(result.getContents().equals("milk_trace")){
+                    //产品信息在webshow 中显示
+                    Intent intent = new Intent(SearchActivity.this,WebShow.class);
+                    startActivity(intent);
+                }
 //                barcodeinfo.setText(result.getContents());
                 //通过获取的网页的网址，通过intent发送的WebShow 活动，并在WebShow活动中显示
 //                Intent intent = new Intent(SearchActivity.this,WebShow.class);
@@ -111,6 +116,7 @@ public class SearchActivity extends AppCompatActivity  {
         cardItemList = new ArrayList<>();
         cardItemList.add(new SearchActivityCardItem("扫描产品二维码",R.drawable.scan2));
         cardItemList.add(new SearchActivityCardItem("浏览企业信息",R.drawable.view_facs));
+        cardItemList.add(new SearchActivityCardItem("连接RFID",R.drawable.rfid_find));    //连接蓝牙BLE模块
 
         recyclerView = (RecyclerView)findViewById(R.id.search_card_list);
         cardAdapter = new SearchActivityCardAdapter(cardItemList,this);

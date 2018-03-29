@@ -53,8 +53,9 @@ public class WebShow extends CordovaActivity{
             actionBar.setHomeAsUpIndicator(R.drawable.backup);
         }
         //使用getIntent获取SearchActivity传递的网址url
-        Intent intent = getIntent();
-        launchUrl = intent.getStringExtra("webUrl");
+//        Intent intent = getIntent();
+//        launchUrl = intent.getStringExtra("webUrl");
+        launchUrl = "file:///android_asset/www/material_show.jsp";
         loadUrl(launchUrl);     //启动页面 www/index.html
     }
 

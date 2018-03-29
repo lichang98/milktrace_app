@@ -95,6 +95,11 @@ public class SearchActivityCardAdapter extends RecyclerView.Adapter<SearchActivi
                         Intent intent = new Intent((Activity)context, FactoryActivity.class);
                         ((Activity)context).startActivity(intent);
                         break;
+                    case 2:     //连接蓝牙BLE 模块获取数据
+                        Toast.makeText(context, "点击连接BLE 蓝牙模块", Toast.LENGTH_SHORT).show();
+                        Intent intent1 = new Intent((Activity)context,BleModuleLink.class);
+                        ((Activity)context).startActivity(intent1);
+                        break;
                     default:
                         break;
                 }

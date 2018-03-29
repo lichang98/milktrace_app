@@ -34,6 +34,16 @@ import com.example.milktracesystem.R;
 import com.example.milktracesystem.Search_Activity.SearchActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
@@ -135,20 +145,44 @@ public class GeneralActivity extends AppCompatActivity {
         });
         //DrawerLayout
         drawerLayout = (DrawerLayout)findViewById(R.id.drawable_layout);
-        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);    //侧边滑出栏
+        //使用第三方库添加侧边划出栏
+        AccountHeader headerResult = new AccountHeaderBuilder().withActivity(GeneralActivity.this)
+                .withHeaderBackground(R.drawable.header)
+                .addProfiles(new ProfileDrawerItem().withName("用户")
+                .withEmail("user@gmail.com").withIcon(R.drawable.profile3))
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
+                        return false;
+                    }
+                }).build();
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1)
+                .withName("我的反馈记录").withIcon(R.drawable.history);
+        Drawer drawerResult = new DrawerBuilder().withActivity(GeneralActivity.this)
+                .withAccountHeader(headerResult)
+                .addDrawerItems(item1, new DividerDrawerItem())
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        return false;
+                    }
+                })
+                .withToolbar(toolbar)
+                .build();
+//        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);    //侧边滑出栏
         ActionBar actionbar= getSupportActionBar();
-        if(actionbar != null){
-            actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        }
-        navigationView.setCheckedItem(R.id.nav_mail);       //添加navigationView子项
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                drawerLayout.closeDrawers();//关闭drawerlayout
-                return true;
-            }
-        });
+//        if(actionbar != null){
+//            actionbar.setDisplayHomeAsUpEnabled(true);
+//            actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+//        }
+//        navigationView.setCheckedItem(R.id.nav_mail);       //添加navigationView子项
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                drawerLayout.closeDrawers();//关闭drawerlayout
+//                return true;
+//            }
+//        });
 
         //连接数据库测试
       /*  try{

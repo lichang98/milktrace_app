@@ -32,11 +32,12 @@ public class Activity_Launch extends AppCompatActivity {
         bingPicImg = (ImageView)findViewById(R.id.bing_pic);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String bingPic = preferences.getString("bing_pic",null);
-        if(bingPic != null){
-            Glide.with(this).load(bingPic).into(bingPicImg);
-        }else{
-            loadBingPic();
-        }
+//        if(bingPic != null){
+//            Glide.with(this).load(bingPic).into(bingPicImg);
+//        }else{
+//            loadBingPic();
+//        }
+        Glide.with(this).load(R.drawable.software_logo).into(bingPicImg);
         Integer time= 2000;
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

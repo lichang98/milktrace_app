@@ -69,6 +69,17 @@
                     <TextView
                         android:text="点击下方的加号，上传图片"/>
                 </TableRow>
+                <!--<TableRow>-->
+                    <!--<Button-->
+                        <!--android:id="@+id/produce_barcode_bt"-->
+                        <!--android:text="点击生成二维码" />-->
+                <!--</TableRow>-->
+                <!--<TableRow>-->
+                    <!--<ImageView-->
+                        <!--android:id="@+id/img_generated_barcode"-->
+                        <!--android:layout_span="3"-->
+                        <!--android:layout_height="200sp" />-->
+                <!--</TableRow>-->
             </TableLayout>
 
             <!--<LinearLayout-->

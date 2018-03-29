@@ -113,6 +113,20 @@ public class FeedBackActivity extends AppCompatActivity implements DialogForChoo
 //            }
 //        });
         //生成二维码
+//        Button btGenerateBarCode = (Button)findViewById(R.id.produce_barcode_bt);   //点击生成二维码的按钮
+//        final ImageView imgBarCode = (ImageView)findViewById(R.id.img_generated_barcode);
+//        btGenerateBarCode.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+//                try{
+//                    Bitmap bitmap = barcodeEncoder.encodeBitmap("milk_trace",BarcodeFormat.QR_CODE,100,100);
+//                    imgBarCode.setImageBitmap(bitmap);
+//                }catch (WriterException e){
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 //        content_code = (EditText)findViewById(R.id.content_code);
 //        generate_code_map = (Button)findViewById(R.id.generate_codemap);
 //        generate_code_map.setOnClickListener(new View.OnClickListener() {
