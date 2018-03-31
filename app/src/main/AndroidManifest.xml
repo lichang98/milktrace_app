@@ -22,24 +22,24 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/software_logo"
-        android:label="乳品溯源"
+        android:label="乳品追溯"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="hMY7t1RdnkaGWxtOUbGEWCqzcgP4cLO8"/>
-        <activity android:name=".MainInterface.Activity_Launch"
-            android:screenOrientation="portrait">
+        <activity android:name=".MainInterface.Login"
+            android:screenOrientation="portrait"
+            android:label="用户登录">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainInterface.Login"
-            android:label="用户登录"
-            android:screenOrientation="portrait">
-        </activity>
+        <activity android:name=".MainInterface.Activity_Launch"
+            android:theme="@style/WelcomeScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity android:name=".MainInterface.GeneralActivity"
             android:screenOrientation="portrait">
         </activity>

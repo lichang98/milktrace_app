@@ -42,7 +42,7 @@ public class SalesFragment extends android.support.v4.app.Fragment{
         sales_fac_list.add(yili);
         Sales_FacItem monmilk = new Sales_FacItem("Lotus",R.drawable.common_google_signin_btn_icon_dark_focused);
         sales_fac_list.add(monmilk);
-        Sales_FacItem weigang = new Sales_FacItem("carryfour",R.drawable.common_google_signin_btn_icon_light_disabled);
+        Sales_FacItem weigang = new Sales_FacItem("carryfour",R.drawable.common_google_signin_btn_icon_dark_focused);
         sales_fac_list.add(weigang);
     }
     /**

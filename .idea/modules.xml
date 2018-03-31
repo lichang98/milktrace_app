@@ -6,9 +6,10 @@
       <module fileurl="file://$PROJECT_DIR$/MilkTraceSystemnew2.2bar.iml" filepath="$PROJECT_DIR$/MilkTraceSystemnew2.2bar.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/MaterialEditText-master/library/library.iml" filepath="$PROJECT_DIR$/MaterialEditText-master/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loginDemo/loginDemo.iml" filepath="$PROJECT_DIR$/loginDemo/loginDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/material-master/material/material.iml" filepath="$PROJECT_DIR$/material-master/material/material.iml" />
       <module fileurl="file://$PROJECT_DIR$/MaterialDrawer-develop/app/materialdrawer.iml" filepath="$PROJECT_DIR$/MaterialDrawer-develop/app/materialdrawer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/welcome_material/materialwelcome.iml" filepath="$PROJECT_DIR$/welcome_material/materialwelcome.iml" />
+      <module fileurl="file://$PROJECT_DIR$/materialwelcome/materialwelcome.iml" filepath="$PROJECT_DIR$/materialwelcome/materialwelcome.iml" />
       <module fileurl="file://$PROJECT_DIR$/welcome_material/welcome_android.iml" filepath="$PROJECT_DIR$/welcome_material/welcome_android.iml" />
     </modules>
   </component>

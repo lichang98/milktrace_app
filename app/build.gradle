@@ -13,12 +13,16 @@ android {
        // multiDexEnabled true
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        innerTest{
+        local{
             matchingFallbacks=['debug','release']
         }
     }
@@ -50,4 +54,5 @@ dependencies {
     compile project(':material')
     implementation files('libs/dk-ble-nfc-sdk-v1.4.1 20161220.jar')
     implementation 'com.mikepenz:materialdrawer:6.0.6'
+    compile 'com.stephentuso:welcome:1.4.1'
 }

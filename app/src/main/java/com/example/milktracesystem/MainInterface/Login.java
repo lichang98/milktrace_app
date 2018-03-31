@@ -11,18 +11,23 @@ import android.widget.Toast;
 
 import com.example.milktracesystem.R;
 import com.rey.material.app.Dialog;
+import com.stephentuso.welcome.WelcomeHelper;
 
 /**
  * Created by 李畅 on 2017/9/16.
  */
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity{
     private Button button1;
     private Button buttonRegister;      //注册按钮
+    private WelcomeHelper welcomeHelper;    //欢迎界面
     @Override
     protected void onCreate(Bundle savedInstanceStatue){
         super.onCreate(savedInstanceStatue);
         setContentView(R.layout.login_layout);
+        //欢迎界面
+        welcomeHelper = new WelcomeHelper(Login.this,Activity_Launch.class);
+        welcomeHelper.show(savedInstanceStatue);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_login);
         setSupportActionBar(toolbar);
         button1 = (Button)findViewById(R.id.login);
@@ -51,6 +56,12 @@ public class Login extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        welcomeHelper.onSaveInstanceState(outState);
     }
 }
 

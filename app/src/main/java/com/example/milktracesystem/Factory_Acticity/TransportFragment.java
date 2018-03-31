@@ -42,7 +42,7 @@ public class TransportFragment extends android.support.v4.app.Fragment{
         transport_fac_list.add(yili);
         Transport_FacItem monmilk = new Transport_FacItem("FED_EX",R.drawable.common_google_signin_btn_icon_dark_focused);
         transport_fac_list.add(monmilk);
-        Transport_FacItem weigang = new Transport_FacItem("STO",R.drawable.common_google_signin_btn_icon_light_disabled);
+        Transport_FacItem weigang = new Transport_FacItem("STO",R.drawable.common_google_signin_btn_icon_dark);
         transport_fac_list.add(weigang);
     }
     /**

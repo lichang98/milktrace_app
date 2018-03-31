@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- PUBLIC STYLES -->
+
+    <style name="WelcomeScreenTheme" parent="Wel_WelcomeScreenBaseTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="welcomeLayoutFitsSystemWindows">true</item>
+        <item name="android:textColorPrimary">@color/wel_text_primary_theme_dark</item>
+        <item name="android:textColorSecondary">@color/wel_text_primary_theme_dark</item>
+
+        <item name="welcomeButtonBackground">@drawable/wel_button_borderless_background</item>
+        <item name="welcomeButtonSkipStyle">@style/WelcomeScreenButton.Skip</item>
+        <item name="welcomeButtonNextStyle">@style/WelcomeScreenButton.Next</item>
+        <item name="welcomeButtonPrevStyle">@style/WelcomeScreenButton.Prev</item>
+        <item name="welcomeButtonDoneStyle">@style/WelcomeScreenButton.Done</item>
+        <item name="welcomeButtonDoneText">@string/wel_done</item>
+        <item name="welcomeButtonSkipText">@string/wel_skip</item>
+        <item name="welcomeButtonBarFirstStyle">@style/WelcomeScreenButton.LogIn</item>
+        <item name="welcomeButtonBarSecondStyle">@style/WelcomeScreenButton.SignUp</item>
+
+        <item name="welcomeButtonBarBackground">@color/wel_button_bar_background_dark</item>
+
+        <item name="welcomeDividerStyle">@style/WelcomeScreenDivider</item>
+        <item name="welcomeIndicatorStyle">@style/WelcomeScreenPageIndicator</item>
+
+        <item name="welcomeNormalTextStyle">@style/WelcomeScreenText</item>
+        <item name="welcomeLargeTextStyle">@style/WelcomeScreenText.Large</item>
+        <item name="welcomeTitleTextStyle">@style/WelcomeScreenText.Title.Centered</item>
+
+        <item name="windowActionBarOverlay">true</item>
+        <item name="actionBarStyle">@style/Wel_TransparentActionBar</item>
+
+        <!-- Make the background transparent, so swipeToDismiss will fade to the activity beneath -->
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:background">@color/wel_transparent</item>
+        <item name="background">@color/wel_transparent</item>
+        <item name="android:windowBackground">@color/wel_transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="WelcomeScreenTheme.Light">
+        <item name="android:textColorPrimary">@color/wel_text_primary_theme_light</item>
+        <item name="android:textColorSecondary">@color/wel_text_primary_theme_light</item>
+        <item name="welcomeIndicatorStyle">@style/WelcomeScreenPageIndicator.Light</item>
+        <item name="welcomeButtonBackground">@drawable/wel_button_borderless_background_theme_light</item>
+        <item name="welcomeButtonDoneStyle">@style/WelcomeScreenButton.Done.Light</item>
+        <item name="welcomeButtonBarBackground">@color/wel_button_bar_background_light</item>
+    </style>
+
+    <style name="WelcomeScreenTheme.SolidNavigation">
+        <!-- See values-v19 -->
+    </style>
+
+    <style name="WelcomeScreenTheme.Light.SolidNavigation">
+        <!-- See values-v19 -->
+    </style>
+
+    <style name="WelcomeScreenTheme.SolidNavigation.UnderStatusBar">
+        <!-- See values-v19 -->
+    </style>
+
+    <style name="WelcomeScreenTheme.Light.SolidNavigation.UnderStatusBar">
+        <!-- See values-v19 -->
+    </style>
+
+    <style name="WelcomeScreenText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:layout_marginRight">@dimen/wel_text_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/wel_text_horizontal_margin</item>
+        <item name="android:layout_marginBottom">16dp</item>
+    </style>
+
+    <style name="WelcomeScreenText.Large">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:layout_marginBottom">@dimen/wel_title_bottom_margin</item>
+    </style>
+
+    <style name="WelcomeScreenText.Title" parent="WelcomeScreenText.Large">
+        <item name="android:textSize">@dimen/wel_title_text_size</item>
+    </style>
+
+    <style name="WelcomeScreenText.Centered">
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="WelcomeScreenText.Large.Centered">
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="WelcomeScreenText.Title.Centered">
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="WelcomeScreenButton" parent="Widget.AppCompat.Button">
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_marginLeft">@dimen/wel_flat_button_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/wel_flat_button_vertical_margin</item>
+        <item name="android:layout_marginRight">@dimen/wel_flat_button_horizontal_margin</item>
+        <item name="android:layout_marginBottom">@dimen/wel_flat_button_vertical_margin</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:background">?attr/welcomeButtonBackground</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="WelcomeScreenButton.Borderless" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:background">?attr/welcomeButtonBackground</item>
+    </style>
+
+    <style name="WelcomeScreenButton.Skip">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="WelcomeScreenButton.Done">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:tint">?android:attr/textColorPrimary</item>
+        <item name="android:src">@drawable/wel_ic_done_white</item>
+    </style>
+
+    <style name="WelcomeScreenButton.Done.Light">
+        <item name="android:src">@drawable/wel_ic_done_black</item>
+    </style>
+
+    <style name="WelcomeScreenButton.Next">
+        <item name="android:src">@drawable/wel_ic_chevron_right_white_24dp</item>
+        <item name="android:tint">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="WelcomeScreenButton.Prev">
+        <item name="android:src">@drawable/wel_ic_chevron_left_white_24dp</item>
+        <item name="android:tint">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="WelcomeScreenButton.LogIn" parent="WelcomeScreenButton.Borderless">
+        <item name="android:text">@string/wel_log_in</item>
+    </style>
+    |
+    <style name="WelcomeScreenButton.SignUp" parent="WelcomeScreenButton.Borderless">
+        <item name="android:text">@string/wel_sign_up</item>
+    </style>
+
+    <style name="WelcomeScreenPageIndicator">
+        <item name="indicatorColor">@color/wel_indicator_color_secondary_theme_dark</item>
+        <item name="currentPageColor">@color/wel_indicator_color_primary_theme_dark</item>
+        <item name="animation">fade</item>
+    </style>
+
+    <style name="WelcomeScreenPageIndicator.Light">
+        <item name="indicatorColor">@color/wel_indicator_color_secondary_theme_light</item>
+        <item name="currentPageColor">@color/wel_indicator_color_primary_theme_light</item>
+    </style>
+
+    <style name="WelcomeScreenDivider">
+        <item name="android:background">#00000000</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+    <style name="WelcomeScreenDivider.Light">
+        <item name="android:background">@color/wel_divider_color_theme_light</item>
+    </style>
+
+    <style name="WelcomeScreenDivider.Dark">
+        <item name="android:background">@color/wel_divider_color_theme_dark</item>
+    </style>
+
+</resources>
