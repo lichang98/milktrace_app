@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.rey.material.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:stretchColumns="1">
@@ -10,40 +10,95 @@
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-    <TableRow>
-        <TextView
-            android:id="@+id/username"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="用户名：" />
-        <EditText
-            android:id="@+id/account"
-            android:layout_height="wrap_content"
-            android:hint=""/>
-    </TableRow>
-    <TableRow>
-    <TextView
+        <ImageView
+            android:src="@drawable/software_logo"
+            android:layout_width="200sp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"/>
+    <com.rey.material.widget.TextView
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="密码：" />
-        <EditText
-            android:id="@+id/password"
-            android:layout_height="wrap_content"
-            android:hint=""
-            android:inputType="textPassword" />
-    </TableRow>
-    <TableRow>
-        <Button
-            android:id="@+id/login"
-            android:layout_height="wrap_content"
-            android:text="登录"
-            android:layout_span="2"/>
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:text="乳品追溯"
+        android:fontFamily="楷体"
+        android:textSize="20sp"/>
 
-        <!--注册按钮-->
-        <Button
-            android:id="@+id/register"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="用户名"/>
+    </android.support.design.widget.TextInputLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20sp" />
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="注册" />
-    </TableRow>
+            android:hint="密码"/>
+    </android.support.design.widget.TextInputLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20sp" />
+    <com.rey.material.widget.Button
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="登录"
+        android:background="@color/common_google_signin_btn_text_light_default"/>
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="20sp"/>
 
-</TableLayout>
+    <com.rey.material.widget.TextView
+        android:id="@+id/login_create_account"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="还没有账户？ 创建一个"
+        android:textColor="@color/colorPrimaryHalf"
+        android:gravity="center_horizontal"
+        android:textColorHighlight="@color/cardview_shadow_end_color"/>
+    <!--</TableRow>-->
+    <!--&lt;!&ndash;<TableRow>&ndash;&gt;-->
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/username"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="20dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="用户名：" />&ndash;&gt;-->
+        <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/account"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:hint=""/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</TableRow>&ndash;&gt;-->
+    <!--<TableRow>-->
+    <!--<TextView-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="20dp"-->
+        <!--android:text="密码：" />-->
+        <!--<EditText-->
+            <!--android:id="@+id/password"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint=""-->
+            <!--android:inputType="textPassword" />-->
+    <!--</TableRow>-->
+    <!--<TableRow>-->
+        <!--<Button-->
+            <!--android:id="@+id/login"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="登录"-->
+            <!--android:layout_span="2"/>-->
+
+        <!--&lt;!&ndash;注册按钮&ndash;&gt;-->
+        <!--<Button-->
+            <!--android:id="@+id/register"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="注册" />-->
+    <!--</TableRow>-->
+
+</com.rey.material.widget.LinearLayout>

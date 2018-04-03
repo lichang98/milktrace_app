@@ -13,6 +13,18 @@
         据本次活动的有关人士介绍，为了向中国市场的广大消费者提供健康安全牛奶及乳制品，为中国消费者提供试饮，
         由牛奶生产商奶牛农家与六大乳制品加工企业(建国牛奶、南阳乳业、每日乳业、宾格瑞、首尔牛奶、延世牛奶)联合举办本次活动。
     </string>
+    <string-array name="login_addr_province">
+        <item>江苏省</item>
+        <item>上海市</item>
+        <item>浙江省</item>
+        <item>山东省</item>
+    </string-array>
+    <string-array name="login_addr_city">
+        <item>南京市</item>
+        <item>上海市</item>
+        <item>杭州市</item>
+        <item>济南市</item>
+    </string-array>
     <string-array name="Month">
         <item>Jan</item>
         <item>Feb</item>

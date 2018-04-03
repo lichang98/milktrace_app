@@ -97,146 +97,254 @@
 
                 </RadioGroup>
 
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="82dp"
-                    android:layout_height="41dp"
-                    android:layout_marginStart="8dp"
-                    android:text="企业名称:"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/register_radiogroup" />
+                <!--<TextView-->
+                    <!--android:id="@+id/textView9"-->
+                    <!--android:layout_width="82dp"-->
+                    <!--android:layout_height="41dp"-->
+                    <!--android:layout_marginStart="8dp"-->
+                    <!--android:text="企业名称:"-->
+                    <!--app:layout_constraintStart_toStartOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/register_radiogroup" />-->
 
-                <EditText
-                    android:id="@+id/editText8"
-                    android:layout_width="208dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="44dp"
-                    android:layout_marginTop="12dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    app:layout_constraintStart_toEndOf="@+id/textView9"
-                    app:layout_constraintTop_toBottomOf="@id/register_radiogroup" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="96dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:text="企业信用码："
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-                <EditText
-                    android:id="@+id/editText17"
-                    android:layout_width="wrap_content"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/register_corp_name"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="12dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    app:layout_constraintStart_toEndOf="@+id/textView8"
-                    app:layout_constraintTop_toBottomOf="@+id/editText8" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="85dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="企业法人："
+                    android:layout_width="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    app:layout_constraintTop_toBottomOf="@id/register_radiogroup">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editText8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="28dp"
+                        android:ems="10"
+                        android:hint="企业名称"
+                        android:inputType="textPersonName" />
+                </android.support.design.widget.TextInputLayout>
+                <Space
+                    android:id="@+id/space1_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="10sp"
+                    app:layout_constraintTop_toBottomOf="@id/register_corp_name" />
 
-                <EditText
-                    android:id="@+id/editText18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="47dp"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    app:layout_constraintStart_toEndOf="@+id/textView10"
-                    app:layout_constraintTop_toBottomOf="@+id/editText17" />
 
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="75dp"
-                    android:layout_height="38dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="企业地址："
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-                <EditText
-                    android:id="@+id/editText19"
-                    android:layout_width="wrap_content"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/register_corp_credit_input"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="52dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    app:layout_constraintStart_toEndOf="@+id/textView11"
-                    app:layout_constraintTop_toBottomOf="@+id/editText18" />
-
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="81dp"
-                    android:layout_height="38dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:text="联系电话："
+                    app:layout_constraintTop_toBottomOf="@+id/space1_login"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                    app:layout_constraintEnd_toEndOf="parent">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/register_corp_creditid"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:hint="企业信用码"/>
+                </android.support.design.widget.TextInputLayout>
+                <android.support.v4.widget.Space
+                    android:id="@+id/space2_login"
+                    app:layout_constraintTop_toBottomOf="@id/register_corp_credit_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="10sp" />
 
-                <EditText
-                    android:id="@+id/editText32"
-                    android:layout_width="wrap_content"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/register_headperson_input"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="44dp"
-                    android:ems="10"
-                    android:inputType="phone"
-                    app:layout_constraintStart_toEndOf="@+id/textView12"
-                    app:layout_constraintTop_toBottomOf="@+id/editText19" />
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="88dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="电子邮箱："
+                    app:layout_constraintTop_toBottomOf="@id/space2_login"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                    app:layout_constraintEnd_toEndOf="parent">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/register_corp_headperson"
+                        android:hint="企业法人"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent" />
 
-                <EditText
-                    android:id="@+id/editText33"
-                    android:layout_width="wrap_content"
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.v4.widget.Space
+                    android:id="@+id/space3_login"
+                    android:layout_width="match_parent"
+                    app:layout_constraintTop_toBottomOf="@id/register_headperson_input"
+                    android:layout_height="10sp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="12dp"
-                    android:ems="10"
-                    android:inputType="textEmailAddress"
-                    app:layout_constraintStart_toEndOf="@+id/textView13"
-                    app:layout_constraintTop_toBottomOf="@+id/editText32" />
+                    android:id="@+id/textinput_address"
+                    app:layout_constraintTop_toBottomOf="@id/space3_login">
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
+                       <com.rey.material.widget.TextView
+                           android:text="省份:"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="15sp"/>
+                       <android.support.v7.widget.AppCompatSpinner
+                           android:id="@+id/address_province"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:entries="@array/login_addr_province"/>
+                       <com.rey.material.widget.TextView
+                           android:text="市："
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="15sp"/>
+                       <android.support.v7.widget.AppCompatSpinner
+                           android:id="@+id/address_city"
+                           android:layout_height="wrap_content"
+                           android:layout_width="wrap_content"
+                           android:entries="@array/login_addr_city"/>
+                   </LinearLayout>
 
-                <Button
+                </android.support.design.widget.TextInputLayout>
+                <android.support.v4.widget.Space
+                    android:id="@+id/space4_login"
+                    app:layout_constraintTop_toBottomOf="@+id/textinput_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="10sp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/register_corp_tel_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/space4_login">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/login_corp_tel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="联系电话"
+                        android:inputType="phone"/>
+
+                </android.support.design.widget.TextInputLayout>
+                <!--<TextView-->
+                    <!--android:id="@+id/textView8"-->
+                    <!--android:layout_width="96dp"-->
+                    <!--android:layout_height="35dp"-->
+                    <!--android:layout_marginStart="8dp"-->
+                    <!--android:layout_marginTop="12dp"-->
+                    <!--android:text="企业信用码："-->
+                    <!--app:layout_constraintStart_toStartOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/textView9" />-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/editText17"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginStart="24dp"-->
+                    <!--android:layout_marginTop="12dp"-->
+                    <!--android:ems="10"-->
+                    <!--android:inputType="textPersonName"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/editText8" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/textView10"-->
+                    <!--android:layout_width="85dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_marginStart="16dp"-->
+                    <!--android:layout_marginTop="16dp"-->
+                    <!--android:text="企业法人："-->
+                    <!--app:layout_constraintStart_toStartOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/textView8" />-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/editText18"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="47dp"-->
+                    <!--android:layout_marginStart="36dp"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:ems="10"-->
+                    <!--android:inputType="textPersonName"-->
+                    <!--app:layout_constraintStart_toEndOf="@+id/textView10"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/editText17" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/textView11"-->
+                    <!--android:layout_width="75dp"-->
+                    <!--android:layout_height="38dp"-->
+                    <!--android:layout_marginStart="16dp"-->
+                    <!--android:layout_marginTop="4dp"-->
+                    <!--android:text="企业地址："-->
+                    <!--app:layout_constraintStart_toStartOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/textView10" />-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/editText19"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginStart="52dp"-->
+                    <!--android:ems="10"-->
+                    <!--android:inputType="textPersonName"-->
+                    <!--app:layout_constraintStart_toEndOf="@+id/textView11"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/editText18" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/textView12"-->
+                    <!--android:layout_width="81dp"-->
+                    <!--android:layout_height="38dp"-->
+                    <!--android:layout_marginStart="16dp"-->
+                    <!--android:layout_marginTop="24dp"-->
+                    <!--android:text="联系电话："-->
+                    <!--app:layout_constraintStart_toStartOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/textView11" />-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/editText32"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginStart="44dp"-->
+                    <!--android:ems="10"-->
+                    <!--android:inputType="phone"-->
+                    <!--app:layout_constraintStart_toEndOf="@+id/textView12"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/editText19" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/textView13"-->
+                    <!--android:layout_width="88dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_marginStart="16dp"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:text="电子邮箱："-->
+                    <!--app:layout_constraintStart_toStartOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/textView12" />-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/editText33"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginStart="36dp"-->
+                    <!--android:layout_marginTop="12dp"-->
+                    <!--android:ems="10"-->
+                    <!--android:inputType="textEmailAddress"-->
+                    <!--app:layout_constraintStart_toEndOf="@+id/textView13"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/editText32" />-->
+
+                <com.rey.material.widget.Button
                     android:id="@+id/button5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="20dp"
-                    android:text="上传企业资质证件照："
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="64dp"
+                    android:background="@color/cardview_shadow_start_color"
+                    android:text="上传企业资质证件照"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintTop_toBottomOf="@+id/register_corp_tel_input" />
 
 
                 <ImageView
                     android:id="@+id/register_uploadimg"
                     android:layout_width="match_parent"
-                    android:layout_height="200sp"
+                    android:layout_height="292dp"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button5"/>
+                    app:layout_constraintTop_toBottomOf="@+id/button5" />
                 <!--注册用户提交按钮-->
                 <Button
                     android:id="@+id/button_register_submit"

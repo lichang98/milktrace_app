@@ -38,20 +38,25 @@
                     android:layout_marginTop="19dp"
                     android:layout_weight="1">
 
-                    <android.support.v4.view.ViewPager
-                        android:id="@+id/show_pages"
+                    <com.tmall.ultraviewpager.UltraViewPager
+                        android:id="@+id/main_viewpager"
+                        android:layout_height="150sp"
                         android:layout_width="match_parent"
-                        android:layout_height="24dp"
-                        android:layout_above="@+id/imageButton"
-                        android:layout_alignParentTop="true">
+                        android:layout_centerHorizontal="true"/>
+                    <!--<android.support.v4.view.ViewPager-->
+                        <!--android:id="@+id/show_pages"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="24dp"-->
+                        <!--android:layout_above="@+id/imageButton"-->
+                        <!--android:layout_alignParentTop="true">-->
 
-                        <RadioGroup
-                            android:id="@+id/radio_group"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                        <!--<RadioGroup-->
+                            <!--android:id="@+id/radio_group"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent">-->
 
-                        </RadioGroup>
-                    </android.support.v4.view.ViewPager>
+                        <!--</RadioGroup>-->
+                    <!--</android.support.v4.view.ViewPager>-->
 
                     <ImageButton
                         android:id="@+id/imageButton"
@@ -94,10 +99,10 @@
                     <ImageButton
                         android:id="@+id/imageButton4"
                         android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_height="113dp"
                         android:layout_alignParentEnd="true"
-                        android:layout_below="@+id/show_pages"
-                        android:layout_marginEnd="21dp"
+                        android:layout_alignTop="@+id/imageButton"
+                        android:layout_marginEnd="25dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/search2"
                         tools:ignore="ContentDescription" />
