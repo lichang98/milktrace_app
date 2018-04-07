@@ -165,10 +165,11 @@ public class GeneralActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //FIXME jumo to reference project module
         imageButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GeneralActivity.this,NewsActivity.class);
+                Intent intent = new Intent(GeneralActivity.this,com.hhxplaying.neteasedemo.netease.activity.MainActivity.class);
                 startActivity(intent);
             }
         });

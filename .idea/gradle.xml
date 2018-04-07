@@ -3,9 +3,8 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="D:\Program Files (x86)\Android Studio\gradle\gradle-2.14.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -15,7 +14,9 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/material-master/material" />
             <option value="$PROJECT_DIR$/materialwelcome" />
+            <option value="$PROJECT_DIR$/netease" />
             <option value="$PROJECT_DIR$/welcome_material" />
+            <option value="$PROJECT_DIR$/wkvideoplayer" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

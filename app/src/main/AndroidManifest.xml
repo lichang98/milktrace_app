@@ -21,7 +21,7 @@
 
 
     <application
-        tools:replace="android:label"
+        tools:replace="android:icon,android:label"
         android:allowBackup="true"
         android:icon="@mipmap/software_logo"
         android:label="乳品追溯"
