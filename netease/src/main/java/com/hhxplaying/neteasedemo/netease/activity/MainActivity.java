@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -47,11 +48,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.index_name);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         invalidateOptionsMenu();
 
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -83,13 +87,16 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if(item.getItemId() == android.R.id.home){
+            MainActivity.this.finish();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
     private class MyAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter {
-        private String[] tabNames = {"新闻", "阅读", "视听", "发现", "我"};
-        private int[] tabIcons = {R.drawable.maintab_1_selector, R.drawable.maintab_2_selector, R.drawable.maintab_3_selector,
-                R.drawable.maintab_4_selector, R.drawable.maintab_5_selector};
+        private String[] tabNames = {"新闻"};
+        private int[] tabIcons = {R.drawable.maintab_1_selector};
         private LayoutInflater inflater;
 
         public MyAdapter(FragmentManager fragmentManager) {
@@ -107,11 +114,11 @@ public class MainActivity extends AppCompatActivity {
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.tab_main, container, false);
             }
-            TextView textView = (TextView) convertView.findViewById(R.id.tv_tab_content);
-            textView.setText(tabNames[position]);
-
-            ImageView image = (ImageView) convertView.findViewById(R.id.iv_tab_img);
-            image.setImageResource(tabIcons[position]);
+//            TextView textView = (TextView) convertView.findViewById(R.id.tv_tab_content);
+//            textView.setText(tabNames[position]);
+//
+//            ImageView image = (ImageView) convertView.findViewById(R.id.iv_tab_img);
+//            image.setImageResource(tabIcons[position]);
             return convertView;
         }
 

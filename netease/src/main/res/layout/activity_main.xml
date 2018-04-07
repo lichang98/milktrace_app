@@ -22,7 +22,7 @@
     <com.shizhefei.view.indicator.FixedIndicatorView
         android:id="@+id/tabmain_indicator"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="0dp"
         android:background="@color/tab_background" />
 
 </LinearLayout>
