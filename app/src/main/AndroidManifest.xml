@@ -21,10 +21,10 @@
 
 
     <application
+        android:label="@string/app_name"
         tools:replace="android:icon,android:label"
         android:allowBackup="true"
         android:icon="@mipmap/software_logo"
-        android:label="乳品追溯"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
@@ -32,7 +32,7 @@
             android:value="hMY7t1RdnkaGWxtOUbGEWCqzcgP4cLO8"/>
         <activity android:name=".MainInterface.Login"
             android:screenOrientation="portrait"
-            android:label="用户登录">
+            android:label="乳品追溯">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,6 +43,7 @@
             android:theme="@style/WelcomeScreenTheme"
             android:screenOrientation="portrait"/>
         <activity android:name=".MainInterface.GeneralActivity"
+            android:label="乳品追溯"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".Factory_Acticity.FactoryActivity"

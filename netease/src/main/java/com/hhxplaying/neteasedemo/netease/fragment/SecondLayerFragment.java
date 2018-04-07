@@ -60,23 +60,31 @@ public class SecondLayerFragment extends LazyFragment {
 	}
 
 
-	private void getIndexNews() {
-        MySingleton.getInstance(getActivity().getApplicationContext()).getRequestQueue().add(
-                RequestSingletonFactory.getInstance().getGETStringRequest(getActivity(), URLs.getUrl(tabName), new Response.Listener() {
-                    @Override
-                    public void onResponse(Object response) {
-                        JSONObject obj;
-                        try {
-                            mOneNewsItemList.clear();
-                            obj = new JSONObject(response.toString());
-                            JSONArray itemArray = obj.getJSONArray(URLs.getUrlTag(tabName));
-                            ArrayList<OneNewsItemBean> newsList = new Gson().fromJson(itemArray.toString(), Global.NewsItemType);
-                            mOneNewsItemList.addAll(newsList);
-							normalRecyclerViewAdapter.notifyDataSetChanged();
-						} catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }));
+//	private void getIndexNews() {
+//        MySingleton.getInstance(getActivity().getApplicationContext()).getRequestQueue().add(
+//                RequestSingletonFactory.getInstance().getGETStringRequest(getActivity(), URLs.getUrl(tabName), new Response.Listener() {
+//                    @Override
+//                    public void onResponse(Object response) {
+//                        JSONObject obj;
+//                        try {
+//                            mOneNewsItemList.clear();
+//                            obj = new JSONObject(response.toString());
+//                            JSONArray itemArray = obj.getJSONArray(URLs.getUrlTag(tabName));
+//                            ArrayList<OneNewsItemBean> newsList = new Gson().fromJson(itemArray.toString(), Global.NewsItemType);
+//                            mOneNewsItemList.addAll(newsList);
+//							normalRecyclerViewAdapter.notifyDataSetChanged();
+//						} catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }));
+//	}
+
+	//FIXME
+	private void getIndexNews(){
+		mOneNewsItemList.clear();
+		ArrayList<OneNewsItemBean> newsList = new ArrayList<>();
+		mOneNewsItemList.addAll(newsList);
 	}
+
 }
