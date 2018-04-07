@@ -3,6 +3,7 @@ package com.hhxplaying.neteasedemo.netease.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -19,7 +20,12 @@ import com.shizhefei.fragment.LazyFragment;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SecondLayerFragment extends LazyFragment {
@@ -80,11 +86,49 @@ public class SecondLayerFragment extends LazyFragment {
 //                }));
 //	}
 
+    private ArrayList<OneNewsItemBean> newsList  = new ArrayList<>();
 	//FIXME
 	private void getIndexNews(){
-		mOneNewsItemList.clear();
-		ArrayList<OneNewsItemBean> newsList = new ArrayList<>();
-		mOneNewsItemList.addAll(newsList);
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					newsList = getDataFromWebSite();
+					mOneNewsItemList.clear();
+					mOneNewsItemList.addAll(newsList);
+					getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            normalRecyclerViewAdapter.notifyDataSetChanged();
+                        }
+                    });
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+
+	}
+
+	//FIXME
+	private ArrayList<OneNewsItemBean> getDataFromWebSite() throws IOException {
+	    ArrayList<OneNewsItemBean> newsList = new ArrayList<>();
+	    OneNewsItemBean itemBean = null;
+
+		Document document = Jsoup.connect("http://www.chinadairy.net/").get();
+		Elements elements = document.getElementsByClass("pic");
+		for(Element ele : elements.get(0).children().select("a")){
+		    itemBean = new OneNewsItemBean();
+			Log.i("my_get_message:",ele.attr("title"));
+			Log.i("my_get_imgsrc:",ele.select("img").attr("src"));
+            itemBean.setHasImg(1);
+            itemBean.setTitle(ele.attr("title"));
+            itemBean.setImgsrc(ele.select("img").attr("src"));
+            newsList.add(itemBean);
+		}
+
+		return newsList;
 	}
 
 }

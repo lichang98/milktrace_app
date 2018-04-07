@@ -62,5 +62,4 @@ dependencies {
         transitive = true
     }
     compile project(':netease')
-    implementation files('libs/jsoup-1.11.2.jar')
 }
