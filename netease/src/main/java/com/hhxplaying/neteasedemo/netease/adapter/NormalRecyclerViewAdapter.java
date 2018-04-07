@@ -255,15 +255,20 @@ public class NormalRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         }
         @Override
         public void onClick(View v) {
-            Log.d("RVA", "TextViewHolderListener :" + listItem.get(position) + "");
-            String jsonLink = NeteaseURLParse.webURLToMobileJSONLink2(listItem.get(position).getPostid());
-            if (TextUtils.isEmpty(jsonLink))
-                jsonLink = NeteaseURLParse.webURLToMobileJSONLink(listItem.get(position).getUrl());
-            Log.i("RVA", jsonLink);
-
-            Intent i = new Intent(mContext, NewsDisplayActivity.class);
-            i.putExtra("NEWS_LINK", jsonLink);
-            mContext.startActivity(i);
+//            Log.d("RVA", "TextViewHolderListener :" + listItem.get(position) + "");
+////            String jsonLink = NeteaseURLParse.webURLToMobileJSONLink2(listItem.get(position).getPostid());
+////            if (TextUtils.isEmpty(jsonLink))
+////                jsonLink = NeteaseURLParse.webURLToMobileJSONLink(listItem.get(position).getUrl());
+////            Log.i("RVA", jsonLink);
+////
+////            Intent i = new Intent(mContext, NewsDisplayActivity.class);
+////            i.putExtra("NEWS_LINK", jsonLink);
+////            mContext.startActivity(i);
+            //FIXME 通过url 使用webview 显示对应的新闻的内容
+            String newsContentUrl = listItem.get(position).getUrl();
+            Intent intent = new Intent(mContext,NewsDisplayActivity.class);
+            intent.putExtra("NEWS_CONTENT_URL",newsContentUrl);
+            mContext.startActivity(intent);
 
 //            //直接打开系统浏览器，来查看点击的新闻
 //            Uri uri = Uri.parse(JsonLink);

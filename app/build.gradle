@@ -47,7 +47,6 @@ dependencies {
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/annotation-4.0.0-RC1-javadoc.jar')
-    compile files('libs/glide-3.7.0.jar')
     compile files('libs/mysql-connector-java-5.0.8-bin.jar')
     compile files('libs/okhttp-3.2.0.jar')
     compile files('libs/okio-1.6.0.jar')

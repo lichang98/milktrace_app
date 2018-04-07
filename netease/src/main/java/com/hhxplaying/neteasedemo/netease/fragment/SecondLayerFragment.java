@@ -10,6 +10,8 @@ import com.android.volley.Response;
 import com.google.gson.Gson;
 import com.hhxplaying.neteasedemo.netease.R;
 import com.hhxplaying.neteasedemo.netease.adapter.NormalRecyclerViewAdapter;
+import com.hhxplaying.neteasedemo.netease.bean.Ads;
+import com.hhxplaying.neteasedemo.netease.bean.Imgextra;
 import com.hhxplaying.neteasedemo.netease.bean.OneNewsItemBean;
 import com.hhxplaying.neteasedemo.netease.config.Global;
 import com.hhxplaying.neteasedemo.netease.config.URLs;
@@ -27,6 +29,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SecondLayerFragment extends LazyFragment {
 	public static final String INTENT_STRING_TABNAME = "intent_String_tabName";
@@ -113,21 +116,26 @@ public class SecondLayerFragment extends LazyFragment {
 
 	//FIXME
 	private ArrayList<OneNewsItemBean> getDataFromWebSite() throws IOException {
+		//FIXME 根据tabname 选择载入不同的新闻
 	    ArrayList<OneNewsItemBean> newsList = new ArrayList<>();
 	    OneNewsItemBean itemBean = null;
 
 		Document document = Jsoup.connect("http://www.chinadairy.net/").get();
 		Elements elements = document.getElementsByClass("pic");
+
+		int i=0;
 		for(Element ele : elements.get(0).children().select("a")){
-		    itemBean = new OneNewsItemBean();
 			Log.i("my_get_message:",ele.attr("title"));
 			Log.i("my_get_imgsrc:",ele.select("img").attr("src"));
-            itemBean.setHasImg(1);
-            itemBean.setTitle(ele.attr("title"));
-            itemBean.setImgsrc(ele.select("img").attr("src"));
-            newsList.add(itemBean);
+			Log.i("my_get_subtitle:",ele.select("img").attr("text"));
+			itemBean = new OneNewsItemBean();
+			itemBean.setUrl(ele.attr("href"));	//超链接的地址，链接新闻详情界面
+			itemBean.setTitle(ele.attr("title"));
+			itemBean.setDigest(ele.select("img").attr("text"));
+			itemBean.setImgsrc(ele.select("img").attr("src"));
+			itemBean.setOrder(++i);
+			newsList.add(itemBean);
 		}
-
 		return newsList;
 	}
 

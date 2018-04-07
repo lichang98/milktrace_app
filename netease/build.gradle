@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
 //        applicationId "com.hhxplaying.neteasedemo.netease"
-        minSdkVersion 14
+        minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -31,4 +31,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.4'
     compile project(':wkvideoplayer')
     implementation files('libs/jsoup-1.11.2.jar')
+    implementation files('libs/glide-3.7.0.jar')
 }

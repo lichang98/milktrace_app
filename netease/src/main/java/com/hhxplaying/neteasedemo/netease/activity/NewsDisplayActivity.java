@@ -2,20 +2,31 @@ package com.hhxplaying.neteasedemo.netease.activity;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.Layout;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.hhxplaying.neteasedemo.netease.R;
@@ -31,6 +42,12 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 
 
 /**
@@ -44,6 +61,10 @@ public class NewsDisplayActivity extends AppCompatActivity {
     private TextView authorAndTime;
     private String link;
     private final String template = "<p><img src='LINK'/></p>";
+
+    private Document document;  //获取的网页数据
+    private boolean hasLoaded = false;  //网页数据是否获取完成
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,21 +97,120 @@ public class NewsDisplayActivity extends AppCompatActivity {
         String body = htmlTest.replace("<!--IMG#0-->", template.replace("LINK", "http://img1.cache.netease.com/catchpic/5/59/59F9EB30B047D22DAD5F12B14DB4682E.jpg"));
 
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    getWebNewsContent();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+//        WebView webView = (WebView)findViewById(R.id.news_content_wv);
+//        webView.loadUrl(newsContentUrl);
+//        content = (TextView)findViewById(R.id.tv_content);
+//        title = (TextView)findViewById(R.id.tv_newstitle);
+//        authorAndTime = (TextView)findViewById(R.id.tv_author_time);
+//
+////        URLImageParser p = new URLImageParser(content, this);
+////        Spanned htmlSpan = Html.fromHtml(body, p, null);
+////        content.setText(htmlSpan);
+//
+//        Bundle extras = getIntent().getExtras();
+//        if (extras != null) {
+//           link = extras.getString("NEWS_LINK");
+//        }
+//        getNews(link);
 
-        content = (TextView)findViewById(R.id.tv_content);
-        title = (TextView)findViewById(R.id.tv_newstitle);
-        authorAndTime = (TextView)findViewById(R.id.tv_author_time);
+    }
 
-//        URLImageParser p = new URLImageParser(content, this);
-//        Spanned htmlSpan = Html.fromHtml(body, p, null);
-//        content.setText(htmlSpan);
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-           link = extras.getString("NEWS_LINK");
-        }
-        getNews(link);
+    private ScrollView scrollView;  //界面的scrollview组件
+    public void getWebNewsContent() throws IOException {
+        //FIXME 获取新闻的具体内容的URL 地址，显示新闻内容,使用JAVA 根据内容动态编写界面
+        Intent intent = getIntent();
+        final String newsContentUrl = intent.getStringExtra("NEWS_CONTENT_URL");      //需要打开的新闻界面
+        scrollView = (ScrollView)findViewById(R.id.news_content_root_scv);   //新闻界面scrollview作为rootparent
+        final LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        scrollView.addView(linearLayout);
+        document = Jsoup.connect(newsContentUrl).get();
+        Elements mainContentsEles = document.getElementsByClass("articlecontent");  //div标签，网页中主要的新闻内容
+        final Elements title = mainContentsEles.select("h3");     //标题
+        Log.i("新闻标题",title.text());
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView textView = new TextView(NewsDisplayActivity.this);
+                textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                textView.setTextSize(30);
+                textView.setTextColor(Color.BLACK);
+                textView.setTextAlignment(ViewGroup.TEXT_ALIGNMENT_CENTER);
+                linearLayout.addView(textView);
+                textView.setText(title.text());
+            }
+        });
 
+        //依次添加所有可能的text与img
+        final Elements content = document.getElementsByAttributeValue("id","MyContent");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("主要内容",content.html());
+                Log.i("content size =","----------------"+content.size());
+
+                for(Element ele : content.select("div")){
+                    Log.i("标签",ele.tagName());
+                    Log.i("标签内容",ele.html());
+                    if(ele.html().contains("<img")){
+                        ImageView imageView = new ImageView(NewsDisplayActivity.this);
+                        imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT));
+                        String imgpath = ele.select("img").attr("src");
+                        Glide.with(NewsDisplayActivity.this).load(imgpath).into(imageView);
+                        linearLayout.addView(imageView);
+                    }else{
+                        TextView textView = new TextView(NewsDisplayActivity.this);
+                        textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT));
+                        textView.setTextSize(14);
+                        textView.setTextColor(Color.BLACK);
+                        linearLayout.addView(textView);
+                        textView.setText(ele.text()+"\n");
+                        Log.i("获取到的网页文本：",textView.getText().toString());
+                    }
+//                    if(ele.is("div") && ele.attr("style") != null){
+//                        //添加textView
+//                        TextView textView = new TextView(NewsDisplayActivity.this);
+//                        textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                                ViewGroup.LayoutParams.WRAP_CONTENT));
+//                        textView.setTextSize(30);
+//                        textView.setTextColor(Color.BLACK);
+//                        scrollView.addView(textView);
+//                        textView.setText(ele.text().replaceAll("&nbsp;","")
+//                                .replaceAll("&rdquo;","")
+//                                .replaceAll("&mdash;","")
+//                                .replaceAll("&ldquo;",""));
+//                        Log.i("获取到的网页文本：",textView.getText().toString());
+//                    }else{
+//                        ImageView imageView = new ImageView(NewsDisplayActivity.this);
+//                        imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                                ViewGroup.LayoutParams.WRAP_CONTENT));
+//                        String imgpath = ele.select("img").attr("src");
+//                        Glide.with(NewsDisplayActivity.this).load(imgpath).into(imageView);
+//                        scrollView.addView(imageView);
+//                    }
+                }
+            }
+        });
     }
 
     private void getNews(final String link) {
