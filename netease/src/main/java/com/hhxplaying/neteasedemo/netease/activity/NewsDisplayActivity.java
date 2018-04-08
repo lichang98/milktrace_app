@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.TintManager;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Layout;
@@ -42,6 +43,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -141,9 +143,13 @@ public class NewsDisplayActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         scrollView.addView(linearLayout);
-        document = Jsoup.connect(newsContentUrl).get();
+        Connection connection = Jsoup.connect(newsContentUrl);
+        connection.header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:32.0) Gecko/    20100101 Firefox/32.0");
+        document = connection.get();
+//        document = Jsoup.connect(newsContentUrl).get();
         Elements mainContentsEles = document.getElementsByClass("articlecontent");  //div标签，网页中主要的新闻内容
         final Elements title = mainContentsEles.select("h3");     //标题
+        final Elements articleInfo = document.getElementsByClass("info");
         Log.i("新闻标题",title.text());
         runOnUiThread(new Runnable() {
             @Override
@@ -156,6 +162,25 @@ public class NewsDisplayActivity extends AppCompatActivity {
                 textView.setTextAlignment(ViewGroup.TEXT_ALIGNMENT_CENTER);
                 linearLayout.addView(textView);
                 textView.setText(title.text());
+                //新闻时间与消息来源
+                android.support.v7.widget.AppCompatTextView textViewInfo = new
+                        android.support.v7.widget.AppCompatTextView(NewsDisplayActivity.this);
+                textViewInfo.setTextSize(14);
+                textViewInfo.setTextColor(Color.BLACK);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                textViewInfo.setBackgroundDrawable(NewsDisplayActivity.this.getResources().getDrawable(R.drawable.actionbar_item));
+                String newsInfo = articleInfo.get(0).text();
+                int indexEnd = newsInfo.indexOf("【");
+                newsInfo = newsInfo.substring(0,indexEnd);
+                textViewInfo.setText(newsInfo);
+
+                Log.i("新闻消息来源与时间：",articleInfo.get(0).text());
+                linearLayout.addView(textViewInfo);
+                //添加space分隔
+                android.support.v4.widget.Space space = new android.support.v4.widget.Space(NewsDisplayActivity.this);
+                space.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
+                                ,20));
+                linearLayout.addView(space);
             }
         });
 
@@ -164,13 +189,21 @@ public class NewsDisplayActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.i("主要内容",content.html());
-                Log.i("content size =","----------------"+content.size());
+//                Log.i("主要内容",content.html());
+//                Log.i("content size =","----------------"+content.size());
 
+                int i=0;
                 for(Element ele : content.select("div")){
-                    Log.i("标签",ele.tagName());
-                    Log.i("标签内容",ele.html());
-                    if(ele.html().contains("<img")){
+//                    Log.i("标签",ele.tagName());
+//                    Log.i("标签内容",ele.html());
+                    if(ele.html().contains("<img src=")){
+                        i++;
+                        if(i == 1){
+                            continue;
+                        }
+                        Log.i("图片链接所在的html",ele.html());
+                        Log.i("图片链接","---------------" +
+                                ""+ele.select("img").attr("src"));
                         ImageView imageView = new ImageView(NewsDisplayActivity.this);
                         imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -181,11 +214,11 @@ public class NewsDisplayActivity extends AppCompatActivity {
                         TextView textView = new TextView(NewsDisplayActivity.this);
                         textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT));
-                        textView.setTextSize(14);
+                        textView.setTextSize(18);
                         textView.setTextColor(Color.BLACK);
                         linearLayout.addView(textView);
                         textView.setText(ele.text()+"\n");
-                        Log.i("获取到的网页文本：",textView.getText().toString());
+//                        Log.i("获取到的网页文本：",textView.getText().toString());
                     }
 //                    if(ele.is("div") && ele.attr("style") != null){
 //                        //添加textView

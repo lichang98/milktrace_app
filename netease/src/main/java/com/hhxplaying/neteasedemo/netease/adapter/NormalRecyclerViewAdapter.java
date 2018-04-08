@@ -83,6 +83,9 @@ public class NormalRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
             View hold = mLayoutInflater.inflate(R.layout.item_text, parent, false);
             return new TextViewHolder(hold);
         } else {
+            //FIXME 添加banner 的点击响应事件
+            View bannerHold = mLayoutInflater.inflate(R.layout.item_banner,parent,false);
+            bannerHold.setOnClickListener(new TextViewHolderListener(0));
             return new BannerViewHold(mLayoutInflater.inflate(R.layout.item_banner, parent, false));
         }
     }

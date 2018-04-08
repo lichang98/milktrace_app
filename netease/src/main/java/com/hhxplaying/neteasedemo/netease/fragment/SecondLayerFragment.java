@@ -22,6 +22,7 @@ import com.shizhefei.fragment.LazyFragment;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -97,7 +98,17 @@ public class SecondLayerFragment extends LazyFragment {
 			@Override
 			public void run() {
 				try {
-					newsList = getDataFromWebSite();
+					switch(tabName){
+						case "头条":
+							newsList = getDataFromWebSite();
+							break;
+						case "科技":
+							newsList = getMainNewsFromWeb();
+							break;
+						default:
+							break;
+					}
+//					newsList = getDataFromWebSite();
 					mOneNewsItemList.clear();
 					mOneNewsItemList.addAll(newsList);
 					getActivity().runOnUiThread(new Runnable() {
@@ -115,12 +126,16 @@ public class SecondLayerFragment extends LazyFragment {
 	}
 
 	//FIXME
+	//乳制品新闻头条
 	private ArrayList<OneNewsItemBean> getDataFromWebSite() throws IOException {
 		//FIXME 根据tabname 选择载入不同的新闻
 	    ArrayList<OneNewsItemBean> newsList = new ArrayList<>();
 	    OneNewsItemBean itemBean = null;
 
-		Document document = Jsoup.connect("http://www.chinadairy.net/").get();
+	    Connection connection = Jsoup.connect("http://www.chinadairy.net/");
+	    connection.header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:32.0) Gecko/    20100101 Firefox/32.0");
+	    Document document = connection.get();
+//		Document document = Jsoup.connect("http://www.chinadairy.net/").get();
 		Elements elements = document.getElementsByClass("pic");
 
 		int i=0;
@@ -136,6 +151,44 @@ public class SecondLayerFragment extends LazyFragment {
 			itemBean.setOrder(++i);
 			newsList.add(itemBean);
 		}
+		return newsList;
+	}
+
+	/**
+	 * 每日要闻
+	 */
+	private ArrayList<OneNewsItemBean> getMainNewsFromWeb() throws IOException {
+		ArrayList<OneNewsItemBean> newsList = new ArrayList<>();
+		OneNewsItemBean itemBean = null;
+
+		Connection connection = Jsoup.connect("http://www.chinadairy.net/Item/list.asp?id=690");
+		connection.header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:32.0) Gecko/    20100101 Firefox/32.0");
+		Document document = connection.get();
+//		Document document = Jsoup.connect("http://www.chinadairy.net/Item/list.asp?id=690").get();
+
+		Elements elements = document.getElementsByClass("nl_con1 clearfix");
+		int i=0;
+
+		for(Element ele : elements){
+			Element content = ele.getElementsByTag("a").get(0);	//标题与链接在该标签中
+			String title = content.attr("title");
+			String url = content.attr("href");
+			Log.i("获取到的新闻标题：",title);
+			Log.i("获取到的新闻具体内容URL：",url);
+			itemBean = new OneNewsItemBean();
+			itemBean.setTitle(title);
+			itemBean.setUrl(url);
+			//提前获取主要内容中的一张图片用于显示在列表中
+			Document documentInner = Jsoup.connect(url).get();
+			Elements innerContent = documentInner.getElementsByAttributeValue("id","MyContent")
+					.select("img");
+			itemBean.setImgsrc(innerContent.attr("src"));
+			Log.i("预加载的图片的URL ：",innerContent.attr("src"));
+			itemBean.setOrder(2);
+
+			newsList.add(itemBean);
+		}
+
 		return newsList;
 	}
 
