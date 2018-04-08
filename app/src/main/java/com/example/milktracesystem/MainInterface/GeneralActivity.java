@@ -96,7 +96,10 @@ public class GeneralActivity extends AppCompatActivity {
 //            super.handleMessage(msg);
 //        }
     }
-
+    private android.support.v7.widget.CardView cardViewDataAccu;
+    private android.support.v7.widget.CardView cardViewProductSearch;
+    private android.support.v7.widget.CardView cardViewFeedback;
+    private android.support.v7.widget.CardView cardViewNewsPolicy;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -122,6 +125,50 @@ public class GeneralActivity extends AppCompatActivity {
         ultraViewPager.setAutoScroll(2000);
 
 
+        cardViewDataAccu = (android.support.v7.widget.CardView)findViewById(R.id.cardview_general_data_accu);
+        cardViewDataAccu.setCardBackgroundColor(getResources().getColor(R.color.colorSwitchThumbNormal));
+        cardViewDataAccu.setCardElevation(30);
+        cardViewDataAccu.setRadius(10);
+        cardViewFeedback = (android.support.v7.widget.CardView)findViewById(R.id.cardview_general_feedback);
+        cardViewFeedback.setCardBackgroundColor(getResources().getColor(R.color.colorSwitchThumbNormal));
+        cardViewFeedback.setCardElevation(30);
+        cardViewFeedback.setRadius(10);
+        cardViewProductSearch = (android.support.v7.widget.CardView)findViewById(R.id.cardview_general_productsearch);
+        cardViewProductSearch.setBackgroundColor(getResources().getColor(R.color.colorSwitchThumbNormal));
+        cardViewProductSearch.setCardElevation(30);
+        cardViewProductSearch.setRadius(10);
+        cardViewNewsPolicy = (android.support.v7.widget.CardView)findViewById(R.id.cardview_general_newspolicy);
+        cardViewNewsPolicy.setBackgroundColor(getResources().getColor(R.color.colorSwitchThumbNormal));
+        cardViewNewsPolicy.setCardElevation(30);
+        cardViewNewsPolicy.setRadius(10);
+        //数据采集
+        cardViewDataAccu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GeneralActivity.this,InfoInput.class));
+            }
+        });
+        //产品查询
+        cardViewProductSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GeneralActivity.this,SearchActivity.class));
+            }
+        });
+        //问题产品投诉
+        cardViewFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GeneralActivity.this,FeedBackActivity.class));
+            }
+        });
+        //新闻政策
+        cardViewNewsPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GeneralActivity.this,com.hhxplaying.neteasedemo.netease.activity.MainActivity.class));
+            }
+        });
 
 //        initView();
 //        initData();
@@ -129,50 +176,50 @@ public class GeneralActivity extends AppCompatActivity {
 //        initRadioButton(imageIds.length);
 //        startSwitch();
         //fragment 企业信息展示，查询碎片界面点击事件
-        ImageButton imageButton1 = (ImageButton)findViewById(R.id.imageButton);     //厂商产品链信息
-        ImageButton imageButton2 = (ImageButton)findViewById(R.id.imageButton4);       //产品信息查询
-        ImageButton imageButton3 = (ImageButton)findViewById(R.id.imageButton3);        //投诉建议
-        ImageButton imageButton4 = (ImageButton)findViewById(R.id.imageButton2);       //新闻政策类界面
-        imageButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 修改后的，通过该入口仅进入企业数据采集入口
-                Intent intent = new Intent(GeneralActivity.this,InfoInput.class);
-                startActivity(intent);
-
-               // Intent intent = new Intent(GeneralActivity.this, FactoryActivity.class);
-//                showSingleChoiceDialog();       //弹出对话框，选择进入哪个Activity,1普通消费者入口，0企业用户
-             /*   if(choice == 1){
-                    startActivity(intent);
-                }else{
-                    intent = null;
-                    intent = new Intent(GeneralActivity.this, InfoInput.class);
-                    startActivity(intent);
-                }*/
-            }
-        });
-        imageButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GeneralActivity.this,SearchActivity.class);
-                startActivity(intent);
-            }
-        });
-        imageButton3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent= new Intent(GeneralActivity.this, FeedBackActivity.class);
-                startActivity(intent);
-            }
-        });
-        //FIXME jumo to reference project module
-        imageButton4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GeneralActivity.this,com.hhxplaying.neteasedemo.netease.activity.MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        ImageButton imageButton1 = (ImageButton)findViewById(R.id.imageButton);     //厂商产品链信息
+//        ImageButton imageButton2 = (ImageButton)findViewById(R.id.imageButton4);       //产品信息查询
+//        ImageButton imageButton3 = (ImageButton)findViewById(R.id.imageButton3);        //投诉建议
+//        ImageButton imageButton4 = (ImageButton)findViewById(R.id.imageButton2);       //新闻政策类界面
+//        imageButton1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // 修改后的，通过该入口仅进入企业数据采集入口
+//                Intent intent = new Intent(GeneralActivity.this,InfoInput.class);
+//                startActivity(intent);
+//
+//               // Intent intent = new Intent(GeneralActivity.this, FactoryActivity.class);
+////                showSingleChoiceDialog();       //弹出对话框，选择进入哪个Activity,1普通消费者入口，0企业用户
+//             /*   if(choice == 1){
+//                    startActivity(intent);
+//                }else{
+//                    intent = null;
+//                    intent = new Intent(GeneralActivity.this, InfoInput.class);
+//                    startActivity(intent);
+//                }*/
+//            }
+//        });
+//        imageButton2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(GeneralActivity.this,SearchActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        imageButton3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent= new Intent(GeneralActivity.this, FeedBackActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        //FIXME jumo to reference project module
+//        imageButton4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(GeneralActivity.this,com.hhxplaying.neteasedemo.netease.activity.MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         //DrawerLayout
         drawerLayout = (DrawerLayout)findViewById(R.id.drawable_layout);
         //使用第三方库添加侧边划出栏

@@ -43,6 +43,122 @@
                         android:layout_height="150sp"
                         android:layout_width="match_parent"
                         android:layout_centerHorizontal="true"/>
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/main_viewpager">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <android.support.v7.widget.CardView
+                                android:id="@+id/cardview_general_data_accu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginStart="20dp"
+                                android:foreground="?android:attr/selectableItemBackground">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <ImageView
+                                        android:layout_width="140dp"
+                                        android:layout_height="140dp"
+                                        android:src="@drawable/data_accumulate"/>
+                                    <android.support.v7.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="数据采集"
+                                        android:textSize="20sp"
+                                        android:textAlignment="center"/>
+                                </LinearLayout>
+
+                            </android.support.v7.widget.CardView>
+
+                            <android.support.v7.widget.CardView
+                                android:id="@+id/cardview_general_productsearch"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:layout_toEndOf="@+id/cardview_general_data_accu"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_marginStart="30dp"
+                                android:foreground="?android:attr/selectableItemBackground">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <android.support.v7.widget.AppCompatImageView
+                                        android:layout_width="140dp"
+                                        android:layout_height="140dp"
+                                        android:src="@drawable/product_search" />
+                                    <android.support.v7.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="产品查询"
+                                        android:textAlignment="center"
+                                        android:textSize="20dp"/>
+                                </LinearLayout>
+                            </android.support.v7.widget.CardView>
+
+                            <android.support.v7.widget.CardView
+                                android:id="@+id/cardview_general_feedback"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/cardview_general_data_accu"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                android:layout_marginTop="10sp"
+                                android:layout_marginStart="20dp">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <android.support.v7.widget.AppCompatImageView
+                                        android:layout_width="140dp"
+                                        android:layout_height="140dp"
+                                        android:src="@drawable/feedback"/>
+                                    <android.support.v7.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="投诉建议"
+                                        android:textSize="20dp"
+                                        android:textAlignment="center"/>
+                                </LinearLayout>
+
+                            </android.support.v7.widget.CardView>
+
+                            <android.support.v7.widget.CardView
+                                android:id="@+id/cardview_general_newspolicy"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                android:layout_below="@+id/cardview_general_productsearch"
+                                android:layout_toRightOf="@+id/cardview_general_feedback"
+                                android:layout_marginStart="30dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <android.support.v7.widget.AppCompatImageView
+                                        android:layout_width="140dp"
+                                        android:layout_height="140dp"
+                                        android:src="@drawable/news_policy"/>
+                                    <android.support.v7.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="新闻政策"
+                                        android:textSize="20dp"
+                                        android:textAlignment="center"/>
+                                </LinearLayout>
+                            </android.support.v7.widget.CardView>
+
+                        </RelativeLayout>
+                    </ScrollView>
                     <!--<android.support.v4.view.ViewPager-->
                         <!--android:id="@+id/show_pages"-->
                         <!--android:layout_width="match_parent"-->
@@ -58,67 +174,67 @@
                         <!--</RadioGroup>-->
                     <!--</android.support.v4.view.ViewPager>-->
 
-                    <ImageButton
-                        android:id="@+id/imageButton"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_marginBottom="9dp"
-                        android:layout_marginLeft="45dp"
-                        android:layout_marginStart="45dp"
-                        android:contentDescription=""
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/transport2"
-                        tools:ignore="ContentDescription"
-                        android:layout_above="@+id/imageButton3"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true" />
+                    <!--<ImageButton-->
+                        <!--android:id="@+id/imageButton"-->
+                        <!--android:layout_width="120dp"-->
+                        <!--android:layout_height="120dp"-->
+                        <!--android:layout_marginBottom="9dp"-->
+                        <!--android:layout_marginLeft="45dp"-->
+                        <!--android:layout_marginStart="45dp"-->
+                        <!--android:contentDescription=""-->
+                        <!--android:scaleType="centerCrop"-->
+                        <!--app:srcCompat="@drawable/transport2"-->
+                        <!--tools:ignore="ContentDescription"-->
+                        <!--android:layout_above="@+id/imageButton3"-->
+                        <!--android:layout_alignParentLeft="true"-->
+                        <!--android:layout_alignParentStart="true" />-->
 
-                    <ImageButton
-                        android:id="@+id/imageButton2"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_alignStart="@+id/imageButton4"
-                        android:layout_below="@+id/imageButton"
-                        android:contentDescription=""
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/news2"
-                        tools:ignore="ContentDescription" />
+                    <!--<ImageButton-->
+                        <!--android:id="@+id/imageButton2"-->
+                        <!--android:layout_width="120dp"-->
+                        <!--android:layout_height="120dp"-->
+                        <!--android:layout_alignStart="@+id/imageButton4"-->
+                        <!--android:layout_below="@+id/imageButton"-->
+                        <!--android:contentDescription=""-->
+                        <!--android:scaleType="centerCrop"-->
+                        <!--app:srcCompat="@drawable/news2"-->
+                        <!--tools:ignore="ContentDescription" />-->
 
-                    <ImageButton
-                        android:id="@+id/imageButton3"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_marginBottom="68dp"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/feedback2"
-                        tools:ignore="ContentDescription"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignRight="@+id/imageButton"
-                        android:layout_alignEnd="@+id/imageButton" />
+                    <!--<ImageButton-->
+                        <!--android:id="@+id/imageButton3"-->
+                        <!--android:layout_width="120dp"-->
+                        <!--android:layout_height="120dp"-->
+                        <!--android:layout_marginBottom="68dp"-->
+                        <!--android:scaleType="centerCrop"-->
+                        <!--app:srcCompat="@drawable/feedback2"-->
+                        <!--tools:ignore="ContentDescription"-->
+                        <!--android:layout_alignParentBottom="true"-->
+                        <!--android:layout_alignRight="@+id/imageButton"-->
+                        <!--android:layout_alignEnd="@+id/imageButton" />-->
 
-                    <ImageButton
-                        android:id="@+id/imageButton4"
-                        android:layout_width="120dp"
-                        android:layout_height="113dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignTop="@+id/imageButton"
-                        android:layout_marginEnd="25dp"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/search2"
-                        tools:ignore="ContentDescription" />
+                    <!--<ImageButton-->
+                        <!--android:id="@+id/imageButton4"-->
+                        <!--android:layout_width="120dp"-->
+                        <!--android:layout_height="113dp"-->
+                        <!--android:layout_alignParentEnd="true"-->
+                        <!--android:layout_alignTop="@+id/imageButton"-->
+                        <!--android:layout_marginEnd="25dp"-->
+                        <!--android:scaleType="centerCrop"-->
+                        <!--app:srcCompat="@drawable/search2"-->
+                        <!--tools:ignore="ContentDescription" />-->
                 </RelativeLayout>
 
-                <TextView
+                <!--<TextView-->
 
-                    android:textAlignment="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <View
-                    android:id="@+id/bottom_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:background="#77A0DD"/>
-                <include layout="@layout/activity_general_line" />
+                    <!--android:textAlignment="center"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
+                <!--<View-->
+                    <!--android:id="@+id/bottom_bar"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="3dp"-->
+                    <!--android:background="#77A0DD"/>-->
+                <!--<include layout="@layout/activity_general_line" />-->
             </LinearLayout>
         </android.support.v7.widget.LinearLayoutCompat>
         <!--<android.support.design.widget.NavigationView-->
