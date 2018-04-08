@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hhxplaying.neteasedemo.netease.R;
@@ -64,6 +65,8 @@ public class FirstLayerFragment extends LazyFragment {
 		indicatorViewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
 
 		Log.d("cccc", "Fragment 将要创建View " + this);
+
+
 	}
 
 	@Override

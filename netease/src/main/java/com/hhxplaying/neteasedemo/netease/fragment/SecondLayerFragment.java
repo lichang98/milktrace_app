@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -55,6 +57,8 @@ public class SecondLayerFragment extends LazyFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//这里用线性显示 类似于listview
 		normalRecyclerViewAdapter = new NormalRecyclerViewAdapter(getActivity(), mOneNewsItemList, mRecyclerView);
         mRecyclerView.setAdapter(normalRecyclerViewAdapter);
+        //进度滚动旋转
+
 	}
 
 
@@ -102,8 +106,17 @@ public class SecondLayerFragment extends LazyFragment {
 						case "头条":
 							newsList = getDataFromWebSite();
 							break;
-						case "科技":
-							newsList = getMainNewsFromWeb();
+						case "要闻":
+							newsList = getMainNewsFromWeb("http://www.chinadairy.net/Item/list.asp?id=690");
+							break;
+						case "市场":
+							newsList = getMainNewsFromWeb("http://www.chinadairy.net/Item/list.asp?id=689");
+							break;
+						case "质量":
+							newsList = getMainNewsFromWeb("http://www.chinadairy.net/Item/list.asp?id=682");
+							break;
+						case "政策":
+							newsList = getMainNewsFromWeb("http://www.chinadairy.net/Item/list.asp?id=680");
 							break;
 						default:
 							break;
@@ -115,6 +128,10 @@ public class SecondLayerFragment extends LazyFragment {
                         @Override
                         public void run() {
                             normalRecyclerViewAdapter.notifyDataSetChanged();
+							fr.castorflex.android.circularprogressbar.CircularProgressBar circularProgressBar
+									= (fr.castorflex.android.circularprogressbar.CircularProgressBar)findViewById(
+									R.id.progressbar_loading);
+							circularProgressBar.setVisibility(View.INVISIBLE);
                         }
                     });
 				} catch (IOException e) {
@@ -156,12 +173,13 @@ public class SecondLayerFragment extends LazyFragment {
 
 	/**
 	 * 每日要闻
+	 * @param newsURL  获取的新闻数据的URL 地址
 	 */
-	private ArrayList<OneNewsItemBean> getMainNewsFromWeb() throws IOException {
+	private ArrayList<OneNewsItemBean> getMainNewsFromWeb(String newsURL) throws IOException {
 		ArrayList<OneNewsItemBean> newsList = new ArrayList<>();
 		OneNewsItemBean itemBean = null;
 
-		Connection connection = Jsoup.connect("http://www.chinadairy.net/Item/list.asp?id=690");
+		Connection connection = Jsoup.connect(newsURL);
 		connection.header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:32.0) Gecko/    20100101 Firefox/32.0");
 		Document document = connection.get();
 //		Document document = Jsoup.connect("http://www.chinadairy.net/Item/list.asp?id=690").get();

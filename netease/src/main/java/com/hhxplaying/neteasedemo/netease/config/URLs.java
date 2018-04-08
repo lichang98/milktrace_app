@@ -23,7 +23,7 @@ public class URLs {
     public static final String PRE_URL = host + "nc/article/headline/";
     public static final String POS_URL = "/0-10.html";
 
-    public static String tabName[] = {"头条", "科技", "体育", "广州", "财经", "足球", "娱乐", "电影", "汽车", "博客", "社会", "旅游"};
+    public static String tabName[] = {"头条", "要闻", "市场", "质量", "政策"};
 
     //广州
     public static final String GuangZhouId = "http://c.m.163.com/nc/article/local/5bm/5bee/0-20.html";

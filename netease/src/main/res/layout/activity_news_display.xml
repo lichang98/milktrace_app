@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -14,47 +15,61 @@
         android:minHeight="36dp"
         />
 
-    <ScrollView
-        android:id="@+id/news_content_root_scv"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="12dp">
+        android:layout_height="match_parent">
+        <!--添加进度旋转组件-->
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+            android:id="@+id/progressbar_loading_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:indeterminate="true"
+            app:cpb_color="#FFee44"
+            app:cpb_colors="@array/gplus_colors" />
+        <ScrollView
+            android:id="@+id/news_content_root_scv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="12dp">
 
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="vertical">-->
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_newstitle"-->
+            <!--<LinearLayout-->
                 <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--tools:text="Title"-->
-                <!--android:textColor="@android:color/black"-->
-                <!--android:textSize="22dp" />-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:orientation="vertical">-->
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_author_time"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="6dp"-->
-                <!--android:textColor="#b2b2b2" />-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_newstitle"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--tools:text="Title"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="22dp" />-->
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_introduce"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_author_time"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="6dp"-->
+                    <!--android:textColor="#b2b2b2" />-->
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_content"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textColor="@android:color/black" />-->
-        <!--</LinearLayout>-->
-    </ScrollView>
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_introduce"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_content"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@android:color/black" />-->
+            <!--</LinearLayout>-->
+        </ScrollView>
+    </FrameLayout>
 </LinearLayout>
 

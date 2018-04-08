@@ -42,7 +42,7 @@ public class NormalRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     private RecyclerView recyclerView;
     private String[] mTitles;
     private ArrayList<OneNewsItemBean> listItem;
-    int defaultImage = R.drawable.load_fail;
+    int defaultImage = R.drawable.news_placeholder;
     int failImage = R.drawable.load_fail;
     private int[] defaultImages = new int[]{defaultImage};
     private PhotoSet photoSet;

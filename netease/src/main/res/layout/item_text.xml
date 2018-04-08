@@ -17,7 +17,7 @@
             android:layout_width="@dimen/list_item_text_image_weight"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/load_fail_small" />
+            android:src="@drawable/news_placeholder" />
 
         <RelativeLayout
             android:layout_width="0dp"

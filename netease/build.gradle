@@ -32,4 +32,6 @@ dependencies {
     compile project(':wkvideoplayer')
     implementation files('libs/jsoup-1.11.2.jar')
     implementation files('libs/glide-3.7.0.jar')
+
+    compile 'com.github.castorflex.smoothprogressbar:library-circular:1.3.0'
 }

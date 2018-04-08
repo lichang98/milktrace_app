@@ -106,6 +106,16 @@ public class NewsDisplayActivity extends AppCompatActivity {
                     getWebNewsContent();
                 } catch (IOException e) {
                     e.printStackTrace();
+                }finally {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            fr.castorflex.android.circularprogressbar.CircularProgressBar circularProgressBar
+                                    = (fr.castorflex.android.circularprogressbar.CircularProgressBar)
+                                    findViewById(R.id.progressbar_loading_content);
+                            circularProgressBar.setVisibility(View.INVISIBLE);
+                        }
+                    });
                 }
             }
         }).start();
@@ -208,7 +218,16 @@ public class NewsDisplayActivity extends AppCompatActivity {
                         imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT));
                         String imgpath = ele.select("img").attr("src");
-                        Glide.with(NewsDisplayActivity.this).load(imgpath).into(imageView);
+                        if(imgpath != ""){
+                            Glide.with(NewsDisplayActivity.this).load(imgpath).
+                                    into(imageView);
+                            Log.i("显示图片，图片的path is :",imgpath);
+                        }
+                        else{
+                            Log.i("显示img path null","没有图片可以显示");
+                            imageView.setImageResource(R.drawable.news_placeholder);
+                        }
+
                         linearLayout.addView(imageView);
                     }else{
                         TextView textView = new TextView(NewsDisplayActivity.this);
