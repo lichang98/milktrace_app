@@ -203,47 +203,47 @@ public class MaterialFactoryActivity extends AppCompatActivity {
         //测试成功
         String requestUrl = "http://192.168.1.111:8080/JsonAndroid/factories/MaterialFacServlet";
         //获取servlet的数据并将数据解析，在UI Thread上将数据写入文本框
-        HttpUtil.sendOkHttpRequest(requestUrl, "json", new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final String json_data = response.body().string();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MaterialFactoryActivity.this, "jsondata :" + json_data, Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-        });
+//        HttpUtil.sendOkHttpRequest(requestUrl, "json", new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                final String json_data = response.body().string();
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(MaterialFactoryActivity.this, "jsondata :" + json_data, Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//            }
+//        });
 
 
         //获取图片
 
-        HttpUtil.sendOkHttpRequest(requestUrl ,"",new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-            //直接使用Glide url方式获取Servlet的数据成功
-            //服务器端使用OutputStream
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final URL url = new URL("http://192.168.1.111:8080/JsonAndroid/factories/MaterialFacServlet");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Glide.with(MaterialFactoryActivity.this)
-                        .load(url)
-                        .into(cow_img);
-                    }
-                });
-            }
-        });
+//        HttpUtil.sendOkHttpRequest(requestUrl ,"",new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                e.printStackTrace();
+//            }
+//            //直接使用Glide url方式获取Servlet的数据成功
+//            //服务器端使用OutputStream
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                final URL url = new URL("http://192.168.1.111:8080/JsonAndroid/factories/MaterialFacServlet");
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Glide.with(MaterialFactoryActivity.this)
+//                        .load(url)
+//                        .into(cow_img);
+//                    }
+//                });
+//            }
+//        });
 
 
 

@@ -61,7 +61,7 @@ import java.util.GregorianCalendar;
  * 之后更新，部分数据使用NFC获取
  */
 public class InfoInput extends AppCompatActivity implements DialogForChooseImgMethod.NoticeDialogListener{
-    private Spinner company_type_select;    //表单填写企业类别选择
+//    private Spinner company_type_select;    //表单填写企业类别选择
     private View currAddedView;     //当前动态加载的布局
     private View[] tableViews;      //备选布局
     private int currPosition = -1;  //当前加载的布局
@@ -85,7 +85,8 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
             actionBar.setHomeAsUpIndicator(R.drawable.backup);
         }
         InitSpinnerCompanyType();   //初始化Spinner，厂商类别选择
-        setSpinnerOnItemClickListener();        //设置spinner项目点击的监听器，用于动态改变布局
+        //FIXME
+//        setSpinnerOnItemClickListener();        //设置spinner项目点击的监听器，用于动态改变布局
         //初始化备选的添加TableView
         tableViews = new TableLayout[4];
         tableViews[0] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_material_table,null);
@@ -158,7 +159,8 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
      */
     private void InitSpinnerCompanyType(){
         //填写表单企业类别的适配器
-        company_type_select = (Spinner)findViewById(R.id.company_type_edit);
+        //FIXME
+//        company_type_select = (Spinner)findViewById(R.id.company_type_edit);
         ArrayList<String> type_list = new ArrayList<>();
         type_list.add("原料厂商");
         type_list.add("乳制品生产商");
@@ -169,57 +171,57 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                 .simple_spinner_dropdown_item,type_list);
         //设置样式
         company_type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        company_type_select.setAdapter(company_type_adapter);
+//        company_type_select.setAdapter(company_type_adapter);
     }
 
     /**
      * 用于设置spinner 选项的监听，根据选择的厂商的类型，动态的改变布局，显示
      * 相应的字段
      */
-    public void setSpinnerOnItemClickListener(){
-        this.company_type_select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //position 从0开始
-                TableLayout rootView = (TableLayout)findViewById(R.id.company_fill_table);    //TableLayout
-                if(currPosition != -1){     //当前有已加载的布局，删除
-                    rootView.removeView(currAddedView);
-                }
-                switch(position){
-                    case 0:             //加载原料厂商的布局
-                        currPosition=0;
-                        rootView.addView(tableViews[0]);
-                        currAddedView = tableViews[0];
-                        materialFacSolve();     //开始对原料企业的操作的处理
-                        break;
-                    case 1:             //加载乳制品生产企业的布局
-                        currPosition=1;
-                        rootView.addView(tableViews[1]);
-                        currAddedView = tableViews[1];
-                        productFacSolve();      //开始对乳制品生产企业的操作的处理
-                        break;
-                    case 2:             //加载物流运输企业的布局
-                        currPosition=2;
-                        rootView.addView(tableViews[2]);
-                        currAddedView = tableViews[2];
-                        break;
-                    case 3:             //加载零售企业的布局
-                        currPosition=3;
-                        rootView.addView(tableViews[3]);
-                        currAddedView = tableViews[3];
-                        break;
-
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-    }
+//    public void setSpinnerOnItemClickListener(){
+//        this.company_type_select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                //position 从0开始
+//                TableLayout rootView = (TableLayout)findViewById(R.id.company_fill_table);    //TableLayout
+//                if(currPosition != -1){     //当前有已加载的布局，删除
+//                    rootView.removeView(currAddedView);
+//                }
+//                switch(position){
+//                    case 0:             //加载原料厂商的布局
+//                        currPosition=0;
+//                        rootView.addView(tableViews[0]);
+//                        currAddedView = tableViews[0];
+//                        materialFacSolve();     //开始对原料企业的操作的处理
+//                        break;
+//                    case 1:             //加载乳制品生产企业的布局
+//                        currPosition=1;
+//                        rootView.addView(tableViews[1]);
+//                        currAddedView = tableViews[1];
+//                        productFacSolve();      //开始对乳制品生产企业的操作的处理
+//                        break;
+//                    case 2:             //加载物流运输企业的布局
+//                        currPosition=2;
+//                        rootView.addView(tableViews[2]);
+//                        currAddedView = tableViews[2];
+//                        break;
+//                    case 3:             //加载零售企业的布局
+//                        currPosition=3;
+//                        rootView.addView(tableViews[3]);
+//                        currAddedView = tableViews[3];
+//                        break;
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+//
+//    }
 
     /**
      * 针对原料企业的所涉及的字段及操作的处理
@@ -343,9 +345,9 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                         Toast.makeText(this, "获取到图片的路径：" + materialUploadImgUri, Toast.LENGTH_SHORT).show();
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(materialUploadImgUri));
                         //测试
-                        com.rengwuxian.materialedittext.MaterialEditText dirresult =
-                                (com.rengwuxian.materialedittext.MaterialEditText)findViewById(R.id.company_name_edit);
-                        dirresult.setText(materialUploadImgUri.toString());
+//                        com.rengwuxian.materialedittext.MaterialEditText dirresult =
+//                                (com.rengwuxian.materialedittext.MaterialEditText)findViewById(R.id.company_name_edit);
+//                        dirresult.setText(materialUploadImgUri.toString());
 
                         materialUploadImg.setImageBitmap(bitmap);
 

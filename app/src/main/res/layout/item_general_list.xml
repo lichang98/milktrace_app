@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--用于主界面显示的item 布局的设计-->
+    <View
+        android:layout_marginTop="5dp"
+        android:id="@+id/view_line"
+        android:layout_width="5dp"
+        android:layout_height="20dp"
+        android:background="#009933" />
+    <TextView
+        android:id="@+id/item_general_text"
+        android:layout_toEndOf="@+id/view_line"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:textSize="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/item_general_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+</RelativeLayout>

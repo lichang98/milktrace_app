@@ -240,14 +240,14 @@ public class FeedBackActivity extends AppCompatActivity implements DialogForChoo
                 }*/
 
                 //在 新线程中上传数据
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        HttpUtil.postByOkHttp(HttpUtil.MEDIA_TYPE_PNG,bytearray,
-                                "http://192.168.1.111:8080/JsonAndroid/factories/MaterialFacServlet"
-                                ,HttpUtil.POST_FEEDBACK_BITMAP);
-                    }
-                }).start();
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        HttpUtil.postByOkHttp(HttpUtil.MEDIA_TYPE_PNG,bytearray,
+//                                "http://192.168.1.111:8080/JsonAndroid/factories/MaterialFacServlet"
+//                                ,HttpUtil.POST_FEEDBACK_BITMAP);
+//                    }
+//                }).start();
                 picture.setDrawingCacheEnabled(false); //关闭drawing cache
             }
         });

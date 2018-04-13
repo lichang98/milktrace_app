@@ -16,58 +16,82 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <!--企业填写的表单-->
-        <TableLayout
-            android:id="@+id/company_fill_table"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1">
-            <TableRow>
-                <TextView
-                    android:id="@+id/company_name"
-                    android:text="厂商名称："
-                    android:textSize="20sp"
-                    android:textColor="@color/colorPrimaryDark"/>
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/textview_company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="企业名称："
+                android:textSize="20dp"
+                android:textColor="@android:color/black" />
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spinner_company_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textview_company_name"
+                android:entries="@array/company_type"/>
+
+        </RelativeLayout>
+        <!--&lt;!&ndash;企业填写的表单&ndash;&gt;-->
+        <!--<TableLayout-->
+            <!--android:id="@+id/company_fill_table"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:stretchColumns="1">-->
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/company_name"-->
+                    <!--android:text="厂商名称："-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:textColor="@color/colorPrimaryDark"/>-->
+                <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/company_name_edit"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:hint="填写信息" />&ndash;&gt;-->
+                <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+                    <!--android:id="@+id/company_name_edit"-->
+                    <!--android:hint="请选择" />-->
+            <!--</TableRow>-->
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/company_addr"-->
+                    <!--android:text="厂商地址："-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:textColor="@color/colorPrimaryDark"/>-->
                 <!--<EditText-->
-                <!--android:id="@+id/company_name_edit"-->
-                <!--android:hint="填写信息" />-->
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/company_name_edit"
-                    android:hint="请选择" />
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:id="@+id/company_addr"
-                    android:text="厂商地址："
-                    android:textSize="20sp"
-                    android:textColor="@color/colorPrimaryDark"/>
-                <EditText
-                    android:id="@+id/company_addr_edit"  />
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:id="@+id/company_type"
-                    android:text="厂商类别："
-                    android:textSize="20sp"
-                    android:textColor="@color/colorPrimaryDark"/>
-                <Spinner
-                    android:id="@+id/company_type_edit"
-                    android:layout_height="20sp"/>
+                    <!--android:id="@+id/company_addr_edit"  />-->
+            <!--</TableRow>-->
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/company_type"-->
+                    <!--android:text="厂商类别："-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:textColor="@color/colorPrimaryDark"/>-->
+                <!--<Spinner-->
+                    <!--android:id="@+id/company_type_edit"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
 
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:id="@+id/goods_batch_id"
-                    android:text="产品批次码："
-                    android:textSize="20sp"
-                    android:textColor="@color/colorPrimaryDark"/>
-                <EditText
-                    android:id="@+id/goods_batch_id_edit"
-                    />
-            </TableRow>
-            <!--测试使用NFC获取数据-->
+            <!--</TableRow>-->
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/goods_batch_id"-->
+                    <!--android:text="产品批次码："-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:textColor="@color/colorPrimaryDark"/>-->
+                <!--<EditText-->
+                    <!--android:id="@+id/goods_batch_id_edit"-->
+                    <!--/>-->
+                <!--<com.rey.material.widget.Spinner-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--app:spn_label="Spinner with arrow"-->
+                    <!--app:v_styleId="@array/spinner"/>-->
+            <!--</TableRow>-->
+            <!--&lt;!&ndash;测试使用NFC获取数据&ndash;&gt;-->
 
-        </TableLayout>
+        <!--</TableLayout>-->
 
     </ScrollView>
 </LinearLayout>
