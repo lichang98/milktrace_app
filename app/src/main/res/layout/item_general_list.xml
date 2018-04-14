@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
     <!--用于主界面显示的item 布局的设计-->
     <View
         android:layout_marginTop="5dp"
@@ -16,12 +17,26 @@
         android:layout_marginTop="5dp"
         android:textSize="15dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="70dp"
+        tools:text="测试文字"
+        android:textColor="@android:color/black"/>
 
     <ImageView
         android:id="@+id/item_general_img"
+        android:layout_toEndOf="@+id/item_general_text"
+        android:layout_marginStart="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:layout_height="70dp"
+        android:scaleType="centerInside"
+        tools:src="@drawable/milk_questions"/>
+    <TextView
+        android:id="@+id/item_general_img_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_below="@+id/item_general_img"
+        tools:text="图片标题"
+        android:textColor="@android:color/black"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

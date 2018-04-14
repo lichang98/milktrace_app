@@ -3,7 +3,10 @@ package com.example.milktracesystem.MainInterface;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -15,6 +18,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -25,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -53,12 +59,24 @@ import com.tmall.ultraviewpager.UltraViewPager;
 import com.tmall.ultraviewpager.UltraViewPagerAdapter;
 import com.tmall.ultraviewpager.UltraViewPagerView;
 import com.tmall.ultraviewpager.transformer.UltraDepthScaleTransformer;
+import com.alibaba.android.vlayout.*;
+import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -170,6 +188,31 @@ public class GeneralActivity extends AppCompatActivity {
             }
         });
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //TODO 预加载头条新闻的图片与标题到主界面
+                Connection connection = Jsoup.connect("http://www.chinadairy.net/");
+                connection.header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:32.0) Gecko/    20100101 Firefox/32.0");
+
+                String imgUrl = "";
+                String title = "";
+                String contentUrl = "";
+                try {
+                    final Document document = connection.get();
+                    Elements elements = document.getElementsByClass("pic");
+                    Element ele = elements.get(0).children().select("a").get(0);
+                    imgUrl = ele.select("img").attr("src");
+                    title = ele.attr("title");
+                    contentUrl = ele.attr("href");  //新闻内容的url 链接
+                    notifyGeneralList(imgUrl,title,contentUrl);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
 //        initView();
 //        initData();
 //        addListener();
@@ -275,6 +318,67 @@ public class GeneralActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }*/
+    }
+
+
+    /**
+     * 用于在网络资源加载完成后提示界面数据显示
+     * @param imgUrl        显示新闻图片的URL
+     * @param title         显示新闻图片的标题
+     * @param contentUrl    具体的新闻内容的url
+     */
+    public void notifyGeneralList(final String imgUrl,final String title,final String contentUrl){
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<HashMap<String,Object>> list = new ArrayList<>();
+                HashMap<String,Object> map = new HashMap<>(),map1 = new HashMap<>();
+                map.put("itemText","头条新闻");
+                map.put("itemImage",imgUrl);
+                map.put("itemTitle",title);
+                map.put("itemcontentUrl",contentUrl);   //新闻内容的网址
+                map1.put("itemText","知识答题");
+                map1.put("itemImage",R.drawable.milk_questions);
+                map1.put("itemTitle","");
+                map1.put("itemcontentUrl","");
+
+                list.add(map);
+                list.add(map1);
+                RecyclerView recyclerView = (RecyclerView)findViewById(R.id.general_recyclerview);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(GeneralActivity.this);
+                recyclerView.setLayoutManager(linearLayoutManager);
+                GeneralItemAdapter generalItemAdapter = new GeneralItemAdapter(list);
+                recyclerView.setAdapter(generalItemAdapter);
+                recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+                    @Override
+                    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                        super.onDraw(c, parent, state);
+                        int childCount = parent.getChildCount();
+                        int left,top,right,bottom;
+                        View child = parent.getChildAt(0);
+                        //获取分割线的高度
+                        Drawable drawable = getResources().getDrawable(R.drawable.bg_title_bar);
+                        int drawableHeight = drawable.getIntrinsicHeight();
+                        left = parent.getLeft();
+                        right = parent.getRight();
+                        for(int i=1;i<=childCount;++i){
+                            top = child.getTop() - drawableHeight/3*2;
+                            bottom = child.getTop() - drawableHeight/3;
+                            drawable.setBounds(left,top,right,bottom);
+                            drawable.draw(c);
+                            child = parent.getChildAt(i);
+                        }
+                    }
+
+                    @Override
+                    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                        super.getItemOffsets(outRect, view, parent, state);
+                        outRect.top = 100;
+                    }
+                });
+            }
+        });
     }
 
     /**
