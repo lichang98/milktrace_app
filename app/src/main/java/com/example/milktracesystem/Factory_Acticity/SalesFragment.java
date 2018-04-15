@@ -38,11 +38,11 @@ public class SalesFragment extends android.support.v4.app.Fragment{
      */
     private void InitTransfacList(){
         sales_fac_list.clear();
-        Sales_FacItem yili = new Sales_FacItem("Walmart",R.drawable.common_google_signin_btn_icon_dark_normal);
+        Sales_FacItem yili = new Sales_FacItem("Walmart",R.drawable.google);
         sales_fac_list.add(yili);
-        Sales_FacItem monmilk = new Sales_FacItem("Lotus",R.drawable.common_google_signin_btn_icon_dark_focused);
+        Sales_FacItem monmilk = new Sales_FacItem("Lotus",R.drawable.google);
         sales_fac_list.add(monmilk);
-        Sales_FacItem weigang = new Sales_FacItem("carryfour",R.drawable.common_google_signin_btn_icon_dark_focused);
+        Sales_FacItem weigang = new Sales_FacItem("carryfour",R.drawable.google);
         sales_fac_list.add(weigang);
     }
     /**

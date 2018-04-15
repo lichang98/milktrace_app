@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/MaterialDrawer-develop/app/materialdrawer.iml" filepath="$PROJECT_DIR$/MaterialDrawer-develop/app/materialdrawer.iml" />
       <module fileurl="file://$PROJECT_DIR$/materialwelcome/materialwelcome.iml" filepath="$PROJECT_DIR$/materialwelcome/materialwelcome.iml" />
       <module fileurl="file://$PROJECT_DIR$/netease/netease.iml" filepath="$PROJECT_DIR$/netease/netease.iml" />
+      <module fileurl="file://$PROJECT_DIR$/segmentcontrol/segmentcontrol.iml" filepath="$PROJECT_DIR$/segmentcontrol/segmentcontrol.iml" />
       <module fileurl="file://$PROJECT_DIR$/welcome_material/welcome_android.iml" filepath="$PROJECT_DIR$/welcome_material/welcome_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/wkvideoplayer/wkvideoplayer.iml" filepath="$PROJECT_DIR$/wkvideoplayer/wkvideoplayer.iml" />
     </modules>

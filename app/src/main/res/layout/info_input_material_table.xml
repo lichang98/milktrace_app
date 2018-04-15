@@ -1,243 +1,348 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:stretchColumns="1">
-    <!--用于在InfoInput Activity中动态加载此布局-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/material_infoinput_volumn_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="当日出货量"
+        android:textSize="16dp"
+        android:textColor="@android:color/black"/>
+    <com.lantouzi.wheelview.WheelView
+        android:id="@+id/material_volumn_select_wheel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/material_infoinput_volumn_text"
+        android:layout_marginTop="10dp"
+        app:lwvHighlightColor="#31B1E6"
+        app:lwvAdditionalCenterMark="千克"
+        app:lwvMarkRatio="0.2"
+        app:lwvMarkTextColor="#919191"
+        android:background="@android:color/white"/>
+
+    <LinearLayout
+        android:id="@+id/infoinput_target_linear"
+        android:orientation="horizontal"
+        android:layout_below="@+id/material_volumn_select_wheel"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/info_input_material_targetcorp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/info_input_material_targetcorp_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="收货企业名称" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/info_input_material_select_imgbtn"
+            android:src="@drawable/plus"
+            android:layout_marginEnd="5dp"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Space
+        android:id="@+id/space1_infoinput"
+        android:layout_below="@+id/infoinput_target_linear"
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+    <LinearLayout
+        android:id="@+id/material_checkconclusion_linear"
+        android:orientation="horizontal"
+        android:layout_below="@+id/space1_infoinput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/material_checkconclusion_text"
+            android:textSize="16dp"
+            android:textColor="@android:color/black"
+            android:text="原料出厂检验结论(合格/不合格)"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <com.suke.widget.SwitchButton
+            android:id="@+id/switchbtn_material_checkconclusion"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+    </LinearLayout>
+    <android.support.v4.widget.Space
+        android:id="@+id/space2_infoinput"
+        android:layout_below="@+id/material_checkconclusion_linear"
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/space2_infoinput">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/outtime_textinputlayout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/material_outtime_textinput"
+                android:hint="点击按钮选择时间"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent" />
+        </android.support.design.widget.TextInputLayout>
+        <ImageButton
+            android:id="@+id/material_outtimeselect_imgbtn"
+            android:src="@drawable/calendar"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>
+<!--<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent" android:layout_height="match_parent"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:stretchColumns="1">-->
+    <!--&lt;!&ndash;用于在InfoInput Activity中动态加载此布局&ndash;&gt;-->
+    <!--&lt;!&ndash;<TableRow>&ndash;&gt;-->
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/goods_time"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="原料生产时间："&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="20sp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="@color/colorPrimaryDark"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/goods_time_edit"&ndash;&gt;-->
+            <!--&lt;!&ndash;/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</TableRow>&ndash;&gt;-->
+    <!--&lt;!&ndash;<TableRow>&ndash;&gt;-->
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/goods_cars_num"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="原料名称："&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="20sp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="@color/colorPrimary"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/goods_cars_num_edit"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</TableRow>&ndash;&gt;-->
     <!--<TableRow>-->
+
         <!--<TextView-->
-            <!--android:id="@+id/goods_time"-->
-            <!--android:text="原料生产时间："-->
+            <!--android:id="@+id/material_factory_name"-->
+            <!--android:text="企业名称："-->
             <!--android:textSize="20sp"-->
             <!--android:textColor="@color/colorPrimaryDark"/>-->
-        <!--<EditText-->
-            <!--android:id="@+id/goods_time_edit"-->
-            <!--/>-->
+        <!--<Spinner-->
+            <!--android:id="@+id/material_factory_name_select"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20sp" />-->
     <!--</TableRow>-->
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
     <!--<TableRow>-->
         <!--<TextView-->
-            <!--android:id="@+id/goods_cars_num"-->
+            <!--android:id="@+id/material_id"-->
+            <!--android:text="原料标识ID："-->
+            <!--android:textSize="20sp"-->
+            <!--android:textColor="@color/colorPrimaryDark"/>-->
+        <!--<Spinner-->
+            <!--android:id="@+id/material_id_select"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20sp" />-->
+    <!--</TableRow>-->
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
+<!--&lt;!&ndash;上下两个表格项应该保持一致&ndash;&gt;-->
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/material_name"-->
             <!--android:text="原料名称："-->
             <!--android:textSize="20sp"-->
+            <!--android:textColor="@color/colorPrimaryDark"/>-->
+        <!--<Spinner-->
+            <!--android:id="@+id/material_name_select"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20sp" />-->
+    <!--</TableRow>-->
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/material_batchid"-->
+            <!--android:text="选择原料批次码："-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_gravity="left"-->
+            <!--android:textColor="@color/colorPrimary"/>-->
+        <!--<Spinner-->
+            <!--android:id="@+id/material_batchid_select"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20sp" />-->
+
+    <!--</TableRow>-->
+
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/material_shelflife"-->
+            <!--android:text="原料保质期："-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_gravity="left"-->
+            <!--android:textColor="@color/colorPrimary"/>-->
+        <!--<Spinner-->
+            <!--android:id="@+id/material_shelflife_select"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20sp" />-->
+
+    <!--</TableRow>-->
+
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/material_shelflife_unit"-->
+            <!--android:text="保质期单位："-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_gravity="left"-->
+            <!--android:textColor="@color/colorPrimary"/>-->
+        <!--<Spinner-->
+            <!--android:id="@+id/material_shelflife_unit_select"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20sp" />-->
+
+    <!--</TableRow>-->
+
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/material_carnum"-->
+            <!--android:text="运输车辆牌照："-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_gravity="left"-->
             <!--android:textColor="@color/colorPrimary"/>-->
         <!--<EditText-->
-            <!--android:id="@+id/goods_cars_num_edit"/>-->
+            <!--android:id="@+id/material_carnum_edit"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20sp" />-->
+
     <!--</TableRow>-->
-    <TableRow>
 
-        <TextView
-            android:id="@+id/material_factory_name"
-            android:text="企业名称："
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimaryDark"/>
-        <Spinner
-            android:id="@+id/material_factory_name_select"
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
-    </TableRow>
-    <Space
-        android:layout_height="15sp"/>
-    <TableRow>
-        <TextView
-            android:id="@+id/material_id"
-            android:text="原料标识ID："
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimaryDark"/>
-        <Spinner
-            android:id="@+id/material_id_select"
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
-    </TableRow>
-    <Space
-        android:layout_height="15sp"/>
-<!--上下两个表格项应该保持一致-->
-    <TableRow>
-        <TextView
-            android:id="@+id/material_name"
-            android:text="原料名称："
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimaryDark"/>
-        <Spinner
-            android:id="@+id/material_name_select"
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
-    </TableRow>
-    <Space
-        android:layout_height="15sp"/>
-    <TableRow>
-        <TextView
-            android:id="@+id/material_batchid"
-            android:text="选择原料批次码："
-            android:textSize="20sp"
-            android:layout_gravity="left"
-            android:textColor="@color/colorPrimary"/>
-        <Spinner
-            android:id="@+id/material_batchid_select"
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/material_certificatetype"-->
+            <!--android:text="原料合格证类型："-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_gravity="left"-->
+            <!--android:textColor="@color/colorPrimary"/>-->
+        <!--<Spinner-->
+            <!--android:id="@+id/material_certificatetype_select"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20sp" />-->
 
-    </TableRow>
+    <!--</TableRow>-->
 
-    <Space
-        android:layout_height="15sp"/>
-    <TableRow>
-        <TextView
-            android:id="@+id/material_shelflife"
-            android:text="原料保质期："
-            android:textSize="20sp"
-            android:layout_gravity="left"
-            android:textColor="@color/colorPrimary"/>
-        <Spinner
-            android:id="@+id/material_shelflife_select"
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
 
-    </TableRow>
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/material_certificatecode"-->
+            <!--android:text="合格证编号："-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_gravity="left"-->
+            <!--android:textColor="@color/colorPrimary"/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/material_certificatecode_edit"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20sp" />-->
 
-    <Space
-        android:layout_height="15sp"/>
-    <TableRow>
-        <TextView
-            android:id="@+id/material_shelflife_unit"
-            android:text="保质期单位："
-            android:textSize="20sp"
-            android:layout_gravity="left"
-            android:textColor="@color/colorPrimary"/>
-        <Spinner
-            android:id="@+id/material_shelflife_unit_select"
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
+    <!--</TableRow>-->
 
-    </TableRow>
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/material_warehouse"-->
+            <!--android:text="存储的仓库及罐号："-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_gravity="left"-->
+            <!--android:textColor="@color/colorPrimary"/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/material_vat_select"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20sp" />-->
 
-    <Space
-        android:layout_height="15sp"/>
-    <TableRow>
-        <TextView
-            android:id="@+id/material_carnum"
-            android:text="运输车辆牌照："
-            android:textSize="20sp"
-            android:layout_gravity="left"
-            android:textColor="@color/colorPrimary"/>
-        <EditText
-            android:id="@+id/material_carnum_edit"
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
+    <!--</TableRow>-->
 
-    </TableRow>
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/material_infac_time"-->
+            <!--android:text="进场时间："-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_gravity="left"-->
+            <!--android:textColor="@color/colorPrimary"/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/material_infac_time_select"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20sp" />-->
 
-    <TableRow>
-        <TextView
-            android:id="@+id/material_certificatetype"
-            android:text="原料合格证类型："
-            android:textSize="20sp"
-            android:layout_gravity="left"
-            android:textColor="@color/colorPrimary"/>
-        <Spinner
-            android:id="@+id/material_certificatetype_select"
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
+    <!--</TableRow>-->
 
-    </TableRow>
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/material_contract_person"-->
+            <!--android:text="负责人："-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_gravity="left"-->
+            <!--android:textColor="@color/colorPrimary"/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/material_contract_person_edit"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20sp" />-->
 
-    <Space
-        android:layout_height="15sp"/>
+    <!--</TableRow>-->
 
-    <TableRow>
-        <TextView
-            android:id="@+id/material_certificatecode"
-            android:text="合格证编号："
-            android:textSize="20sp"
-            android:layout_gravity="left"
-            android:textColor="@color/colorPrimary"/>
-        <EditText
-            android:id="@+id/material_certificatecode_edit"
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
+    <!--<TableRow>-->
+        <!--<TextView-->
+            <!--android:id="@+id/material_contract_phone"-->
+            <!--android:text="联系电话："-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_gravity="left"-->
+            <!--android:textColor="@color/colorPrimary"/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/material_contract_phone_edit"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:inputType="phone"-->
+            <!--android:layout_height="20sp" />-->
 
-    </TableRow>
+    <!--</TableRow>-->
 
-    <Space
-        android:layout_height="15sp"/>
-    <TableRow>
-        <TextView
-            android:id="@+id/material_warehouse"
-            android:text="存储的仓库及罐号："
-            android:textSize="20sp"
-            android:layout_gravity="left"
-            android:textColor="@color/colorPrimary"/>
-        <EditText
-            android:id="@+id/material_vat_select"
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
-
-    </TableRow>
-
-    <Space
-        android:layout_height="15sp"/>
-    <TableRow>
-        <TextView
-            android:id="@+id/material_infac_time"
-            android:text="进场时间："
-            android:textSize="20sp"
-            android:layout_gravity="left"
-            android:textColor="@color/colorPrimary"/>
-        <EditText
-            android:id="@+id/material_infac_time_select"
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
-
-    </TableRow>
-
-    <Space
-        android:layout_height="15sp"/>
-    <TableRow>
-        <TextView
-            android:id="@+id/material_contract_person"
-            android:text="负责人："
-            android:textSize="20sp"
-            android:layout_gravity="left"
-            android:textColor="@color/colorPrimary"/>
-        <EditText
-            android:id="@+id/material_contract_person_edit"
-            android:layout_width="match_parent"
-            android:layout_height="20sp" />
-
-    </TableRow>
-
-    <Space
-        android:layout_height="15sp"/>
-    <TableRow>
-        <TextView
-            android:id="@+id/material_contract_phone"
-            android:text="联系电话："
-            android:textSize="20sp"
-            android:layout_gravity="left"
-            android:textColor="@color/colorPrimary"/>
-        <EditText
-            android:id="@+id/material_contract_phone_edit"
-            android:layout_width="match_parent"
-            android:inputType="phone"
-            android:layout_height="20sp" />
-
-    </TableRow>
-
-    <Space
-        android:layout_height="15sp"/>
-    <TableRow>
-        <Button
-            android:id="@+id/material_infoInput_imgupload"
-            android:background="@color/colorPrimary"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="点击上传验收表照片"/>
-    </TableRow>
-    <TableRow>
-        <ImageView
-            android:id="@+id/material_upload_img"
-            android:layout_height="150dp"
-            android:layout_width="100dp" />
-    </TableRow>
-    <Space
-        android:layout_height="15sp"/>
-</TableLayout>
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
+    <!--<TableRow>-->
+        <!--<Button-->
+            <!--android:id="@+id/material_infoInput_imgupload"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:text="点击上传验收表照片"/>-->
+    <!--</TableRow>-->
+    <!--<TableRow>-->
+        <!--<ImageView-->
+            <!--android:id="@+id/material_upload_img"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:layout_width="100dp" />-->
+    <!--</TableRow>-->
+    <!--<Space-->
+        <!--android:layout_height="15sp"/>-->
+<!--</TableLayout>-->

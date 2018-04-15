@@ -43,7 +43,7 @@ dependencies {
     compile 'com.android.support:multidex:1.0.3'
     compile 'com.android.support:appcompat-v7:26.1.0'
     testCompile 'junit:junit:4.12'
-    compile 'com.google.android.gms:play-services-appindexing:9.8.0'
+//    compile 'com.google.android.gms:play-services-appindexing:9.8.0'
     compile 'com.android.support:multidex:1.0.3'
     compile 'com.android.support:design:26.1.0'
     compile 'com.android.support:recyclerview-v7:26.1.0'
@@ -64,8 +64,15 @@ dependencies {
     compile('com.alibaba.android:ultraviewpager:1.0.7.0@aar') {
         transitive = true
     }
-    compile ('com.alibaba.android:vlayout:1.2.8@aar') {
+    compile('com.alibaba.android:vlayout:1.2.8@aar') {
         transitive = true
     }
     compile project(':netease')
+    compile 'com.contrarywind:Android-PickerView:4.1.2'
+    compile 'info.hoang8f:android-segmented:1.0.6'
+    dependencies {
+        compile 'com.lantouzi.wheelview:library:1.1.2'
+    }
+    compile 'com.github.zcweng:switch-button:0.0.3@aar'
+    compile 'cn.aigestudio.datepicker:DatePicker:2.2.0'
 }

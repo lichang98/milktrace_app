@@ -13,4 +13,7 @@
 
     <dimen name="bt_height">36dp</dimen>
 
+    <dimen name="radio_button_conner_radius">5dp</dimen>
+    <dimen name="radio_button_stroke_border">1dp</dimen>
+
 </resources>

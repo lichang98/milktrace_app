@@ -1,201 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:stretchColumns="1">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView>
+</RelativeLayout>
+<!--<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:stretchColumns="1">-->
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:stretchColumns="1">
+    <!--<ScrollView>-->
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/product_orga_code"
-                    android:text="乳制品企业代码"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorPrimary"/>
-                <EditText
-                    android:id="@+id/product_orga_code_edit"
-                    android:inputType="number"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:id="@+id/prod_name"
-                    android:text="乳制品名称"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <Spinner
-                    android:id="@+id/prod_name_select" />
+        <!--<TableLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:stretchColumns="1">-->
 
-            </TableRow>
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/product_orga_code"-->
+                    <!--android:text="乳制品企业代码"-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:textColor="@color/colorPrimary"/>-->
+                <!--<EditText-->
+                    <!--android:id="@+id/product_orga_code_edit"-->
+                    <!--android:inputType="number"/>-->
+            <!--</TableRow>-->
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/prod_name"-->
+                    <!--android:text="乳制品名称"-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<Spinner-->
+                    <!--android:id="@+id/prod_name_select" />-->
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/batch_id"
-                    android:text="批次码"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <EditText
-                    android:id="@+id/batch_id_edit" />
+            <!--</TableRow>-->
 
-            </TableRow>
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/batch_id"-->
+                    <!--android:text="批次码"-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<EditText-->
+                    <!--android:id="@+id/batch_id_edit" />-->
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/milk_type"
-                    android:text="乳制品所属大类："
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <Spinner
-                    android:id="@+id/milk_type_select">
+            <!--</TableRow>-->
 
-                </Spinner>
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/milk_type"-->
+                    <!--android:text="乳制品所属大类："-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<Spinner-->
+                    <!--android:id="@+id/milk_type_select">-->
 
-            </TableRow>
+                <!--</Spinner>-->
 
-
-            <TableRow>
-                <TextView
-                    android:id="@+id/ingre_code"
-                    android:text="使用配料单编码"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <EditText
-                    android:id="@+id/ingre_code_edit" />
-
-            </TableRow>
+            <!--</TableRow>-->
 
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/goods_code"
-                    android:text="商品编码"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <EditText
-                    android:id="@+id/goods_code_edit" />
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/ingre_code"-->
+                    <!--android:text="使用配料单编码"-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<EditText-->
+                    <!--android:id="@+id/ingre_code_edit" />-->
 
-            </TableRow>
+            <!--</TableRow>-->
 
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/create_date"
-                    android:text="生产日期"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <EditText
-                    android:id="@+id/create_date_edit"/>
-                <ImageButton
-                    android:id="@+id/date_select_bt"
-                    android:src="@drawable/date_select"/>
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/goods_code"-->
+                    <!--android:text="商品编码"-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<EditText-->
+                    <!--android:id="@+id/goods_code_edit" />-->
 
-            </TableRow>
+            <!--</TableRow>-->
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/prod_shelflife"
-                    android:text="保质期："
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <EditText
-                    android:id="@+id/prod_shelflife_edit"
-                    android:hint="单位：天"/>
 
-            </TableRow>
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/create_date"-->
+                    <!--android:text="生产日期"-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<EditText-->
+                    <!--android:id="@+id/create_date_edit"/>-->
+                <!--<ImageButton-->
+                    <!--android:id="@+id/date_select_bt"-->
+                    <!--android:src="@drawable/date_select"/>-->
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/work_shop"
-                    android:text="生产车间号"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <EditText
-                    android:id="@+id/work_shop_edit"/>
-            </TableRow>
+            <!--</TableRow>-->
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/head_person"
-                    android:text="负责人姓名："
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <EditText
-                    android:id="@+id/head_person_edit"
-                    android:inputType="textPersonName"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:id="@+id/product_licensenum"
-                    android:text="成品许可证编号："
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <EditText
-                    android:id="@+id/product_licensenum_edit"
-                    android:inputType="textPersonName"/>
-            </TableRow>
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/prod_shelflife"-->
+                    <!--android:text="保质期："-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<EditText-->
+                    <!--android:id="@+id/prod_shelflife_edit"-->
+                    <!--android:hint="单位：天"/>-->
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/product_count"
-                    android:text="生产成品数量："
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <EditText
-                    android:id="@+id/product_count_edit"
-                    android:inputType="textPersonName"/>
-            </TableRow>
+            <!--</TableRow>-->
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/product_count_unit"
-                    android:text="成品数量单位："
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <!--提供选项包，千克，吨-->
-                <Spinner
-                    android:id="@+id/product_count_unit_select">
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/work_shop"-->
+                    <!--android:text="生产车间号"-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<EditText-->
+                    <!--android:id="@+id/work_shop_edit"/>-->
+            <!--</TableRow>-->
 
-                </Spinner>
-            </TableRow>
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/head_person"-->
+                    <!--android:text="负责人姓名："-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<EditText-->
+                    <!--android:id="@+id/head_person_edit"-->
+                    <!--android:inputType="textPersonName"/>-->
+            <!--</TableRow>-->
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/product_licensenum"-->
+                    <!--android:text="成品许可证编号："-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<EditText-->
+                    <!--android:id="@+id/product_licensenum_edit"-->
+                    <!--android:inputType="textPersonName"/>-->
+            <!--</TableRow>-->
 
-            <TableRow>
-                <android.support.v4.widget.Space
-                    android:layout_width="match_parent"
-                    android:layout_height="100sp"/>
-            </TableRow>
-            <TableRow>
-            </TableRow>
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/product_count"-->
+                    <!--android:text="生产成品数量："-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<EditText-->
+                    <!--android:id="@+id/product_count_edit"-->
+                    <!--android:inputType="textPersonName"/>-->
+            <!--</TableRow>-->
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/prod_outfac_checkconclusion"
-                    android:text="产品出厂检验结论"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorPrimary"/>
-                <Spinner
-                    android:id="@+id/prod_outfac_checkconclusion_select">
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/product_count_unit"-->
+                    <!--android:text="成品数量单位："-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--&lt;!&ndash;提供选项包，千克，吨&ndash;&gt;-->
+                <!--<Spinner-->
+                    <!--android:id="@+id/product_count_unit_select">-->
 
-                </Spinner>
-            </TableRow>
+                <!--</Spinner>-->
+            <!--</TableRow>-->
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/prod_outfac_checktime"
-                    android:text="检验日期"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
-                <EditText
-                    android:id="@+id/prod_outfac_checktime_edit" />
-                <ImageButton
-                    android:id="@+id/prod_outfac_checktime_select"
-                    android:src="@drawable/date_select"/>
-            </TableRow>
-        </TableLayout>
-    </ScrollView>
+            <!--<TableRow>-->
+                <!--<android.support.v4.widget.Space-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="100sp"/>-->
+            <!--</TableRow>-->
+            <!--<TableRow>-->
+            <!--</TableRow>-->
+
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/prod_outfac_checkconclusion"-->
+                    <!--android:text="产品出厂检验结论"-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:textColor="@color/colorPrimary"/>-->
+                <!--<Spinner-->
+                    <!--android:id="@+id/prod_outfac_checkconclusion_select">-->
+
+                <!--</Spinner>-->
+            <!--</TableRow>-->
+
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/prod_outfac_checktime"-->
+                    <!--android:text="检验日期"-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<EditText-->
+                    <!--android:id="@+id/prod_outfac_checktime_edit" />-->
+                <!--<ImageButton-->
+                    <!--android:id="@+id/prod_outfac_checktime_select"-->
+                    <!--android:src="@drawable/date_select"/>-->
+            <!--</TableRow>-->
+        <!--</TableLayout>-->
+    <!--</ScrollView>-->
     <!--下方是乳制品产品出厂填写的表格-->
     <!--1.	组织机构代码		org_code		varchar()		10-->
     <!--2.	生产批次码			batchid		varchar()		20-->
@@ -217,4 +222,4 @@
     <!--9.	负责人姓名		headperson				varchar()-->
 
 
-</TableLayout>
+<!--</TableLayout>-->

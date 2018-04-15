@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,24 +17,121 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/info_input_rootlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/textview_company_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="企业名称："
-                android:textSize="20dp"
-                android:textColor="@android:color/black" />
-            <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/spinner_company_name"
+            <LinearLayout
+                android:id="@+id/fac_name_linear"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/facname_input_textlayout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/facname_input_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="企业名称"/>
+                </android.support.design.widget.TextInputLayout>
+                <ImageButton
+                    android:id="@+id/facname_input_btn"
+                    android:src="@drawable/plus"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="40dp"/>
+            </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/head_person_input_textlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/head_person_input_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="企业法人姓名"/>
+
+            </android.support.design.widget.TextInputLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/facaddr_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/facaddr_input_textlayout"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/facaddr_input_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="企业地址"/>
+                </android.support.design.widget.TextInputLayout>
+                <ImageButton
+                    android:id="@+id/facaddr_select_btn"
+                    android:src="@drawable/plus"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"/>
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:id="@+id/space1_infoinput"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@android:color/darker_gray"/>
+            <TextView
+                android:id="@+id/facTypeSelectText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="企业类型选择"
+                android:textSize="16dp"
+                android:textColor="@android:color/black"/>
+
+            <info.hoang8f.android.segmented.SegmentedGroup
+                android:id="@+id/factype_segment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/textview_company_name"
-                android:entries="@array/company_type"/>
-
-        </RelativeLayout>
+                android:layout_margin="14dp"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true"
+                segmentedgroup:sc_border_width="2dp"
+                segmentedgroup:sc_corner_radius="10dp">
+                <RadioButton
+                    android:id="@+id/facTypeBtn1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="原料企业"
+                    style="@style/RadioButton"/>
+                <RadioButton
+                    android:id="@+id/facTypeBtn2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="生产企业"
+                    style="@style/RadioButton"/>
+                <RadioButton
+                    android:id="@+id/facTypeBtn3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="物流运输企业"
+                    style="@style/RadioButton"/>
+                <RadioButton
+                    android:id="@+id/facTypeBtn4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="零售企业"
+                    style="@style/RadioButton"/>
+            </info.hoang8f.android.segmented.SegmentedGroup>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+        </LinearLayout>
         <!--&lt;!&ndash;企业填写的表单&ndash;&gt;-->
         <!--<TableLayout-->
             <!--android:id="@+id/company_fill_table"-->

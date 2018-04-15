@@ -1,7 +1,8 @@
-include ':app', ':CordovaLib', ':library', ':material', ':materialdrawer', ':welcome_android', ':materialwelcome',':netease',':wkvideoplayer'
+include ':app', ':CordovaLib', ':library', ':material', ':materialdrawer', ':welcome_android', ':materialwelcome',':netease',':wkvideoplayer',':segmentcontrol'
 project(':library').projectDir = new File('MaterialEditText-master/library')
 project(':material').projectDir = new File('material-master/material')
 project(':materialdrawer').projectDir = new File('MaterialDrawer-develop/app')
 project(':welcome_android').projectDir = new File('welcome_material')
 project(':netease').projectDir = new File('netease')
 project(':wkvideoplayer').projectDir = new File('wkvideoplayer')
+project(':segmentcontrol').projectDir = new File('segmentcontrol')

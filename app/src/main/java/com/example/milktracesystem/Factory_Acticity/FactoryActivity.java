@@ -116,10 +116,10 @@ public class FactoryActivity extends AppCompatActivity {
         Button button2 = (Button)findViewById(R.id.transport_factory);
         Button button3 = (Button)findViewById(R.id.sales_factory);
 
-        button.setTextColor(getResources().getColor(R.color.common_google_signin_btn_text_dark_focused));
-        button1.setTextColor(getResources().getColor(R.color.common_google_signin_btn_text_dark_focused));
-        button2.setTextColor(getResources().getColor(R.color.common_google_signin_btn_text_dark_focused));
-        button3.setTextColor(getResources().getColor(R.color.common_google_signin_btn_text_dark_focused));
+        button.setTextColor(getResources().getColor(R.color.material_drawer_primary_text));
+        button1.setTextColor(getResources().getColor(R.color.material_drawer_primary_text));
+        button2.setTextColor(getResources().getColor(R.color.material_drawer_primary_text));
+        button3.setTextColor(getResources().getColor(R.color.material_drawer_primary_text));
 
     }
     /////////////////////////////////////////////////////////////////////////////

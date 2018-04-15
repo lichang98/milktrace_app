@@ -3,42 +3,63 @@ package com.example.milktracesystem.Factory_Acticity.Factory_USER;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.ContentUris;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.configure.PickerOptions;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.bigkoo.pickerview.view.TimePickerView;
 import com.example.milktracesystem.MainInterface.DialogForChooseImgMethod;
 import com.example.milktracesystem.MainInterface.Register;
 import com.example.milktracesystem.R;
+import com.lantouzi.wheelview.WheelView;
 import com.rey.material.app.DatePickerDialog;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.widget.DatePicker;
+import com.suke.widget.SwitchButton;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,6 +70,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by 李畅 on 2017/9/23.
@@ -60,7 +83,7 @@ import java.util.GregorianCalendar;
  * 上传的数据包括文字描述及图片
  * 之后更新，部分数据使用NFC获取
  */
-public class InfoInput extends AppCompatActivity implements DialogForChooseImgMethod.NoticeDialogListener{
+public class InfoInput extends AppCompatActivity implements DialogForChooseImgMethod.NoticeDialogListener,View.OnClickListener,DateSelectDialog.Callback{
 //    private Spinner company_type_select;    //表单填写企业类别选择
     private View currAddedView;     //当前动态加载的布局
     private View[] tableViews;      //备选布局
@@ -72,6 +95,31 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
 
     private static final int TAKEPHOTO = 1;
     private static final int CHOOSE_PHOTO=2;
+
+    private android.support.design.widget.TextInputEditText facNameInputText;
+    private ImageButton facNameSelect;
+    private ArrayList<String> facTypeOptions;   //企业类别选择
+    private ArrayList<ArrayList<String>> facNameOptions;    //企业名称选择
+    private OptionsPickerView optionsPickerViewFac;     //企业选择picker
+
+    private android.support.design.widget.TextInputEditText headpersonInputText;    //企业法人填写
+
+    private android.support.design.widget.TextInputEditText facAddrInputText;   //企业地址填写
+    private ImageButton facAddrSelectBtn;
+    private ArrayList<String> facAddrCity;
+    private ArrayList<ArrayList<String>> facAddrZone;
+    private OptionsPickerView optionsPickerViewFacAddr; //企业地址picker
+
+    private info.hoang8f.android.segmented.SegmentedGroup segmentedGroupFacType;    //企业类型选择
+
+    //原料企业部分控件
+    com.lantouzi.wheelview.WheelView wheelViewMaterialVolumn;   //原料企业供货量选择
+    android.support.design.widget.TextInputEditText materialInfoInputTextTargetCorp;    //原料企业收货方企业名称
+    private OptionsPickerView optionsPickerViewMaterialReceiver;
+    private com.suke.widget.SwitchButton switchButtonMaterialCheckConclusion;   //原料出场检验结论
+    private android.support.design.widget.TextInputEditText textInputEditTextMaterialOutTime;   //出场时间
+    private ImageButton imageButtonOutTime; //出场时间选择按钮
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,15 +136,313 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
         //FIXME
 //        setSpinnerOnItemClickListener();        //设置spinner项目点击的监听器，用于动态改变布局
         //初始化备选的添加TableView
-        tableViews = new TableLayout[4];
+        tableViews = new RelativeLayout[4];
         tableViews[0] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_material_table,null);
         tableViews[1] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_product_table,null);
         tableViews[2] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_transport_table,null);
         tableViews[3] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_sale_table,null);
 
+        facNameInputText = (android.support.design.widget.TextInputEditText)
+                findViewById(R.id.facname_input_text);  //企业名称选择
+        facNameSelect = (ImageButton)findViewById(R.id.facname_input_btn);
+        facNameSelect.setOnClickListener(this);
+
+        headpersonInputText = (android.support.design.widget.TextInputEditText)findViewById(R.id.head_person_input_text);
+
+        facAddrInputText = (android.support.design.widget.TextInputEditText)findViewById(R.id.facaddr_input_text);
+        facAddrSelectBtn = (ImageButton)findViewById(R.id.facaddr_select_btn);
+        facAddrSelectBtn.setOnClickListener(this);
+
+        segmentedGroupFacType = (info.hoang8f.android.segmented.SegmentedGroup)findViewById(R.id.factype_segment);
+        segmentedGroupFacType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() { //企业类型选择监听器
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch(i){
+                    case R.id.facTypeBtn1:
+                        dynamicLoadView(0);
+                        Toast.makeText(InfoInput.this, "选择了原料企业", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.facTypeBtn2:
+                        dynamicLoadView(1);
+                        Toast.makeText(InfoInput.this, "选择了生产企业", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.facTypeBtn3:
+                        dynamicLoadView(2);
+                        Toast.makeText(InfoInput.this, "选择了物流企业", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.facTypeBtn4:
+                        dynamicLoadView(3);
+                        Toast.makeText(InfoInput.this, "选择了零售企业", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
 
     }
 
+    /**
+     * 用于动态加载后面不同的布局
+     * @param position  加载的布局在views 数组中的下标
+     */
+    public void dynamicLoadView(int position){
+        if(position == currPosition)
+            return;
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.info_input_rootlayout);
+
+        if(currAddedView != null)       //先删除布局
+            linearLayout.removeView(currAddedView);
+        linearLayout.addView(tableViews[position]);
+        currPosition = position;
+        currAddedView = tableViews[position];
+        initPartView(position);
+    }
+
+    /**
+     * 用于初始化动态记载后的view 控件的控制
+     * @param position
+     */
+    public void initPartView(final int position){
+        switch (position){
+            case 0:
+
+                //原料供应企业处理
+                wheelViewMaterialVolumn = (com.lantouzi.wheelview.WheelView)findViewById(R.id.material_volumn_select_wheel);
+                List<String> itemsForVolumn = new ArrayList<>();
+                for(int i=10;i<=100;++i){
+                    itemsForVolumn.add(String.valueOf(i));
+                }
+                wheelViewMaterialVolumn.setItems(itemsForVolumn);
+                wheelViewMaterialVolumn.setMaxSelectableIndex(90);
+                //设置出货量选择器的监听器
+                wheelViewMaterialVolumn.setOnWheelItemSelectedListener(new com.lantouzi.wheelview.WheelView.OnWheelItemSelectedListener(){
+                    @Override
+                    public void onWheelItemChanged(WheelView wheelView, int position) {
+
+                    }
+
+                    @Override
+                    public void onWheelItemSelected(WheelView wheelView, int position) {
+                        Toast.makeText(InfoInput.this, "选择了" + wheelView.getItems().get(position), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //初始化收货方企业选择
+                materialInfoInputTextTargetCorp = (android.support.design.widget.TextInputEditText)
+                        findViewById(R.id.info_input_material_targetcorp_text);
+
+                final ArrayList<String> optionsItems = new ArrayList<>();
+                optionsItems.add("伊利");
+                optionsItems.add("蒙牛");
+                optionsItems.add("卫岗");
+                optionsItems.add("光明");
+                optionsPickerViewMaterialReceiver = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                        Toast.makeText(InfoInput.this, "当前选择的企业名称是：" + optionsItems.get(options1), Toast.LENGTH_SHORT).show();
+                        materialInfoInputTextTargetCorp.setText(optionsItems.get(options1));
+                    }
+                }).setTitleText("选择收货方")
+                        .setTitleSize(20)
+                        .setTitleColor(Color.BLACK)
+                        .setBackgroundId(0x00000000)
+                        .isCenterLabel(false)
+                        .isDialog(true)
+                        .isRestoreItem(true)
+                        .build();
+                optionsPickerViewMaterialReceiver.setPicker(optionsItems);
+                ImageButton imageButtonMaterialInfoInputTargetSelect = (ImageButton)findViewById(R.id.info_input_material_select_imgbtn);
+                imageButtonMaterialInfoInputTargetSelect.setOnClickListener(this);
+                //初始化原料出场检验结论
+                switchButtonMaterialCheckConclusion = (com.suke.widget.SwitchButton)findViewById(R.id.switchbtn_material_checkconclusion);
+                switchButtonMaterialCheckConclusion.setChecked(true);
+                switchButtonMaterialCheckConclusion.isChecked();
+                switchButtonMaterialCheckConclusion.toggle();
+                switchButtonMaterialCheckConclusion.setShadowEffect(true);
+                switchButtonMaterialCheckConclusion.setOnCheckedChangeListener(new com.suke.widget.SwitchButton.OnCheckedChangeListener(){
+                    @Override
+                    public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                        //获取switch button 的选择的情况
+                        Toast.makeText(InfoInput.this, "当前选择：" + isChecked, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //初始化原料出场时间选择控件
+                textInputEditTextMaterialOutTime = (android.support.design.widget.TextInputEditText)
+                        findViewById(R.id.material_outtime_textinput);
+                imageButtonOutTime = (ImageButton)findViewById(R.id.material_outtimeselect_imgbtn);
+                final DateSelectDialog dateSelectDialog = new DateSelectDialog();
+                imageButtonOutTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dateSelectDialog.show(getSupportFragmentManager());
+                    }
+                });
+
+                break;
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+
+        }
+    }
+
+    /**
+     * 日期选择对话框的回调函数
+     * @param message
+     */
+    @Override
+    public void onClick(String message) {
+        Toast.makeText(this, "infoinput 获取到时间" + message, Toast.LENGTH_SHORT).show();
+        textInputEditTextMaterialOutTime.setText(message);
+    }
+
+
+    /**
+     * 监听器
+     * @param view
+     */
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        switch (id){
+            case R.id.facname_input_btn:       //企业名称选择填写
+                Toast.makeText(this, "选择企业名称", Toast.LENGTH_SHORT).show();
+                initFacSelectOptions(); //初始化企业名称选择
+                optionsPickerViewFac = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                        //获取选中的位置
+                        String select = facTypeOptions.get(options1) + " 以及 " + facNameOptions
+                                .get(options1).get(options2);
+                        Toast.makeText(InfoInput.this, "选中内容：" + select, Toast.LENGTH_SHORT).show();
+                        //将选中的文字显示在edittext 上
+                        facNameInputText.setText(facNameOptions.get(options1).get(options2));
+
+                    }
+                }).setTitleText("企业选择")
+                        .setContentTextSize(20)
+                        .setDividerColor(Color.LTGRAY)
+                        .setCancelColor(Color.BLUE)
+                        .setTextColorCenter(Color.LTGRAY)
+                        .isRestoreItem(true)
+                        .isCenterLabel(false)
+                        .setLabels("企业类型","企业名称","")
+                        .setBackgroundId(0x00000000)
+                        .isDialog(true)
+                        .build();
+                optionsPickerViewFac.setPicker(facTypeOptions,facNameOptions);
+                optionsPickerViewFac.show();
+                break;
+            case R.id.facaddr_select_btn:   //企业地址选择
+                Toast.makeText(this, "选择企业地址", Toast.LENGTH_SHORT).show();
+                initFacAddrSelectOptions();        //初始化企业地址选择
+                optionsPickerViewFacAddr = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                        //获取选中位置的内容
+                        String select = facAddrCity.get(options1) + "以及" + facAddrZone.get(options1).get(options2);
+                        Toast.makeText(InfoInput.this, "选中的地址为：" + select, Toast.LENGTH_SHORT).show();
+                        facAddrInputText.setText(facAddrCity.get(options1)+facAddrZone.get(options1).get(options2));
+                    }
+                }).setTitleText("企业地址选择")
+                        .setContentTextSize(20)
+                        .setDividerColor(Color.LTGRAY)
+                        .setCancelColor(Color.BLUE)
+                        .setTextColorCenter(Color.LTGRAY)
+                        .isRestoreItem(true)
+                        .isCenterLabel(false)
+                        .setLabels("市","区","")
+                        .setBackgroundId(0x00000000)
+                        .isDialog(true)
+                        .build();
+
+                //绑定数据
+                optionsPickerViewFacAddr.setPicker(facAddrCity,facAddrZone);
+                optionsPickerViewFacAddr.show();
+
+                break;
+            case R.id.info_input_material_select_imgbtn:
+                optionsPickerViewMaterialReceiver.show();
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    /**
+     * 用于初始化企业名称的选择
+     */
+    public void initFacSelectOptions(){
+        //初始化选项1
+        facTypeOptions = new ArrayList<>();
+        facTypeOptions.add("原料供应企业");
+        facTypeOptions.add("乳制品生产企业");
+        facTypeOptions.add("物流运输企业");
+        facTypeOptions.add("零售企业");
+
+        //初始化选项2
+        ArrayList<String> options2Item1= new ArrayList<>();
+        options2Item1.add("现代牧业");
+        options2Item1.add("原生态牧业");
+        options2Item1.add("西部牧业");
+        ArrayList<String> options2Item2 = new ArrayList<>();
+        options2Item2.add("伊利");
+        options2Item2.add("蒙牛");
+        options2Item2.add("卫岗");
+        ArrayList<String> options2Item3 = new ArrayList<>();
+        options2Item3.add("顺丰");
+        options2Item3.add("中铁快运");
+        options2Item3.add("德邦物流");
+        ArrayList<String> options2Item4 = new ArrayList<>();
+        options2Item4.add("苏果");
+        options2Item4.add("Lotus");
+        options2Item4.add("家乐福");
+        options2Item4.add("沃尔玛");
+
+        facNameOptions = new ArrayList<>();
+        facNameOptions.add(options2Item1);
+        facNameOptions.add(options2Item2);
+        facNameOptions.add(options2Item3);
+        facNameOptions.add(options2Item4);
+    }
+
+    /**
+     * 初始化企业地址选择的选项
+     */
+    public void initFacAddrSelectOptions(){
+        facAddrCity = new ArrayList<>();
+        facAddrCity.add("南京市");
+        facAddrCity.add("上海市");
+        facAddrCity.add("无锡市");
+        //初始化选项2
+        ArrayList<String> options2Item1 = new ArrayList<>();
+        options2Item1.add("玄武区");
+        options2Item1.add("秦淮区");
+        options2Item1.add("江宁区");
+        options2Item1.add("高淳区");
+        ArrayList<String> options2Item2 = new ArrayList<>();
+        options2Item2.add("崇明区");
+        options2Item2.add("奉贤区");
+        options2Item2.add("嘉定区");
+        ArrayList<String> options2Item3 = new ArrayList<>();
+        options2Item3.add("锡山区");
+        options2Item3.add("滨湖区");
+
+        facAddrZone = new ArrayList<>();
+        facAddrZone.add(options2Item1);
+        facAddrZone.add(options2Item2);
+        facAddrZone.add(options2Item3);
+
+    }
 
     @Override
     public void onDialogPositiveClick(android.app.DialogFragment dialog) {
@@ -222,89 +568,89 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
 //        });
 //
 //    }
+//
+//    /**
+//     * 针对原料企业的所涉及的字段及操作的处理
+//     */
+//    public void materialFacSolve(){
+//
+//        Button buttonMaterialImgUpload = (Button)findViewById(R.id.material_infoInput_imgupload);   //原料企业布局中的上传检验照片的按钮
+//        buttonMaterialImgUpload.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                DialogForChooseImgMethod dialogForChooseImgMethod = new DialogForChooseImgMethod();
+//                dialogForChooseImgMethod.show(getFragmentManager(),"选择照片的方式");
+//            }
+//        });
+//        //TODO
+//
+//    }
 
-    /**
-     * 针对原料企业的所涉及的字段及操作的处理
-     */
-    public void materialFacSolve(){
-
-        Button buttonMaterialImgUpload = (Button)findViewById(R.id.material_infoInput_imgupload);   //原料企业布局中的上传检验照片的按钮
-        buttonMaterialImgUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogForChooseImgMethod dialogForChooseImgMethod = new DialogForChooseImgMethod();
-                dialogForChooseImgMethod.show(getFragmentManager(),"选择照片的方式");
-            }
-        });
-        //TODO
-
-    }
-
-    /**
-     * 针对乳制品生产企业所涉及的字段的操作的处理
-     */
-    public void productFacSolve(){
-
-        ImageButton imageButtonDateSelect = (ImageButton)findViewById(R.id.date_select_bt);     //生产日期选择按钮
-        ImageButton imageButtonOutFacDateSelect = (ImageButton)findViewById(R.id.prod_outfac_checktime_select); //出厂检验时间选择
-        imageButtonDateSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Dialog.Builder builder = new DatePickerDialog.Builder(R.style.Material_App_Dialog_DatePicker_Light){
-                    @Override
-                    public void onPositiveActionClicked(DialogFragment fragment){
-
-                        DatePickerDialog datePickerDialog = (DatePickerDialog)fragment.getDialog();
-                        String date = datePickerDialog.getFormattedDate(SimpleDateFormat.getDateInstance());
-                        Toast.makeText(InfoInput.this, "Date is " + date, Toast.LENGTH_SHORT).show();
-                        super.onPositiveActionClicked(fragment);
-                    }
-
-                    @Override
-                    public void onNegativeActionClicked(DialogFragment fragment){
-                        Toast.makeText(InfoInput.this, "取消", Toast.LENGTH_SHORT).show();
-                        super.onNegativeActionClicked(fragment);
-                    }
-                };
-
-                builder.positiveAction("确定")
-                        .negativeAction("取消");
-                DialogFragment dialogFragmentMaterial = DialogFragment.newInstance(builder);
-                dialogFragmentMaterial.show(getSupportFragmentManager(),null);
-            }
-        });
-
-        //出厂检验时间选择
-        imageButtonOutFacDateSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Dialog.Builder builder = new DatePickerDialog.Builder(R.style.Material_App_Dialog_DatePicker_Light){
-                    @Override
-                    public void onPositiveActionClicked(DialogFragment fragment){
-
-                        DatePickerDialog datePickerDialog = (DatePickerDialog)fragment.getDialog();
-                        String date = datePickerDialog.getFormattedDate(SimpleDateFormat.getDateInstance());
-                        Toast.makeText(InfoInput.this, "Date is " + date, Toast.LENGTH_SHORT).show();
-                        super.onPositiveActionClicked(fragment);
-                    }
-
-                    @Override
-                    public void onNegativeActionClicked(DialogFragment fragment){
-                        Toast.makeText(InfoInput.this, "取消", Toast.LENGTH_SHORT).show();
-                        super.onNegativeActionClicked(fragment);
-                    }
-                };
-
-                builder.positiveAction("确定")
-                        .negativeAction("取消");
-                DialogFragment dialogFragmentMaterial = DialogFragment.newInstance(builder);
-                dialogFragmentMaterial.show(getSupportFragmentManager(),null);
-
-            }
-        });
-
-    }
+//    /**
+//     * 针对乳制品生产企业所涉及的字段的操作的处理
+//     */
+//    public void productFacSolve(){
+//
+//        ImageButton imageButtonDateSelect = (ImageButton)findViewById(R.id.date_select_bt);     //生产日期选择按钮
+//        ImageButton imageButtonOutFacDateSelect = (ImageButton)findViewById(R.id.prod_outfac_checktime_select); //出厂检验时间选择
+//        imageButtonDateSelect.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Dialog.Builder builder = new DatePickerDialog.Builder(R.style.Material_App_Dialog_DatePicker_Light){
+//                    @Override
+//                    public void onPositiveActionClicked(DialogFragment fragment){
+//
+//                        DatePickerDialog datePickerDialog = (DatePickerDialog)fragment.getDialog();
+//                        String date = datePickerDialog.getFormattedDate(SimpleDateFormat.getDateInstance());
+//                        Toast.makeText(InfoInput.this, "Date is " + date, Toast.LENGTH_SHORT).show();
+//                        super.onPositiveActionClicked(fragment);
+//                    }
+//
+//                    @Override
+//                    public void onNegativeActionClicked(DialogFragment fragment){
+//                        Toast.makeText(InfoInput.this, "取消", Toast.LENGTH_SHORT).show();
+//                        super.onNegativeActionClicked(fragment);
+//                    }
+//                };
+//
+//                builder.positiveAction("确定")
+//                        .negativeAction("取消");
+//                DialogFragment dialogFragmentMaterial = DialogFragment.newInstance(builder);
+//                dialogFragmentMaterial.show(getSupportFragmentManager(),null);
+//            }
+//        });
+//
+//        //出厂检验时间选择
+//        imageButtonOutFacDateSelect.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Dialog.Builder builder = new DatePickerDialog.Builder(R.style.Material_App_Dialog_DatePicker_Light){
+//                    @Override
+//                    public void onPositiveActionClicked(DialogFragment fragment){
+//
+//                        DatePickerDialog datePickerDialog = (DatePickerDialog)fragment.getDialog();
+//                        String date = datePickerDialog.getFormattedDate(SimpleDateFormat.getDateInstance());
+//                        Toast.makeText(InfoInput.this, "Date is " + date, Toast.LENGTH_SHORT).show();
+//                        super.onPositiveActionClicked(fragment);
+//                    }
+//
+//                    @Override
+//                    public void onNegativeActionClicked(DialogFragment fragment){
+//                        Toast.makeText(InfoInput.this, "取消", Toast.LENGTH_SHORT).show();
+//                        super.onNegativeActionClicked(fragment);
+//                    }
+//                };
+//
+//                builder.positiveAction("确定")
+//                        .negativeAction("取消");
+//                DialogFragment dialogFragmentMaterial = DialogFragment.newInstance(builder);
+//                dialogFragmentMaterial.show(getSupportFragmentManager(),null);
+//
+//            }
+//        });
+//
+//    }
 
 
     /**
@@ -333,44 +679,44 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
         startActivityForResult(intent,TAKEPHOTO);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode,int resultCode,Intent data){
-
-        if(materialUploadImg == null)
-            materialUploadImg = (ImageView)findViewById(R.id.material_upload_img);
-        switch(requestCode){
-            case TAKEPHOTO:
-                if(resultCode == RESULT_OK){
-                    try{
-                        Toast.makeText(this, "获取到图片的路径：" + materialUploadImgUri, Toast.LENGTH_SHORT).show();
-                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(materialUploadImgUri));
-                        //测试
-//                        com.rengwuxian.materialedittext.MaterialEditText dirresult =
-//                                (com.rengwuxian.materialedittext.MaterialEditText)findViewById(R.id.company_name_edit);
-//                        dirresult.setText(materialUploadImgUri.toString());
-
-                        materialUploadImg.setImageBitmap(bitmap);
-
-                    }catch (FileNotFoundException e){
-                        e.printStackTrace();
-                    }
-                }
-
-                break;
-
-            case CHOOSE_PHOTO:
-
-                if(resultCode == RESULT_OK){
-                    if(Build.VERSION.SDK_INT >= 19){
-                        handleImageOnKitKat(data);
-                    }
-                }
-                break;
-            default:
-                break;
-        }
-
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode,int resultCode,Intent data){
+//
+//        if(materialUploadImg == null)
+//            materialUploadImg = (ImageView)findViewById(R.id.material_upload_img);
+//        switch(requestCode){
+//            case TAKEPHOTO:
+//                if(resultCode == RESULT_OK){
+//                    try{
+//                        Toast.makeText(this, "获取到图片的路径：" + materialUploadImgUri, Toast.LENGTH_SHORT).show();
+//                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(materialUploadImgUri));
+//                        //测试
+////                        com.rengwuxian.materialedittext.MaterialEditText dirresult =
+////                                (com.rengwuxian.materialedittext.MaterialEditText)findViewById(R.id.company_name_edit);
+////                        dirresult.setText(materialUploadImgUri.toString());
+//
+//                        materialUploadImg.setImageBitmap(bitmap);
+//
+//                    }catch (FileNotFoundException e){
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                break;
+//
+//            case CHOOSE_PHOTO:
+//
+//                if(resultCode == RESULT_OK){
+//                    if(Build.VERSION.SDK_INT >= 19){
+//                        handleImageOnKitKat(data);
+//                    }
+//                }
+//                break;
+//            default:
+//                break;
+//        }
+//
+//    }
 
     /**
      * 选择照片
