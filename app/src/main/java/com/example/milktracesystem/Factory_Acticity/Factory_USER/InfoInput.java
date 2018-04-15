@@ -31,6 +31,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -59,6 +60,7 @@ import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.widget.DatePicker;
 import com.suke.widget.SwitchButton;
+import com.xw.repo.BubbleSeekBar;
 
 
 import java.io.File;
@@ -83,7 +85,7 @@ import java.util.List;
  * 上传的数据包括文字描述及图片
  * 之后更新，部分数据使用NFC获取
  */
-public class InfoInput extends AppCompatActivity implements DialogForChooseImgMethod.NoticeDialogListener,View.OnClickListener,DateSelectDialog.Callback{
+public class InfoInput extends AppCompatActivity implements DialogForChooseImgMethod.NoticeDialogListener,View.OnClickListener,DateSelectDialog.Callback,BubbleSeekBar.OnProgressChangedListener{
 //    private Spinner company_type_select;    //表单填写企业类别选择
     private View currAddedView;     //当前动态加载的布局
     private View[] tableViews;      //备选布局
@@ -119,6 +121,17 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     private com.suke.widget.SwitchButton switchButtonMaterialCheckConclusion;   //原料出场检验结论
     private android.support.design.widget.TextInputEditText textInputEditTextMaterialOutTime;   //出场时间
     private ImageButton imageButtonOutTime; //出场时间选择按钮
+
+    //乳制品生产企业部分控件
+    private com.lantouzi.wheelview.WheelView wheelViewProductMaterialUse;   //原奶使用量
+    private android.support.design.widget.TextInputEditText textInputEditTextProductTime;   //出场时间
+    private ImageButton imageButtonProductTime; //产品生产时间
+    private com.xw.repo.BubbleSeekBar bubbleSeekBarProductItem1;    //配料1
+    private com.xw.repo.BubbleSeekBar bubbleSeekBarProductItem2;    //配料2
+    private com.xw.repo.BubbleSeekBar bubbleSeekBarProductItem3;
+    private com.xw.repo.BubbleSeekBar bubbleSeekBarProductItem4;
+    private com.xw.repo.BubbleSeekBar bubbleSeekBarProductItem5;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -271,6 +284,13 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                         findViewById(R.id.material_outtime_textinput);
                 imageButtonOutTime = (ImageButton)findViewById(R.id.material_outtimeselect_imgbtn);
                 final DateSelectDialog dateSelectDialog = new DateSelectDialog();
+                DateSelectDialog.Callback callback = new DateSelectDialog.Callback() {
+                    @Override
+                    public void onClick(String message) {
+                        Toast.makeText(InfoInput.this, "当前选择的时间:" + message, Toast.LENGTH_SHORT).show();
+                        textInputEditTextMaterialOutTime.setText(message);
+                    }
+                };
                 imageButtonOutTime.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -280,6 +300,57 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
 
                 break;
             case 1:
+                //乳制品生产企业处理
+                wheelViewProductMaterialUse = (com.lantouzi.wheelview.WheelView)findViewById(R.id.product_material1use_wheel);
+                List<String> itemForProductMaterialUse = new ArrayList<>();
+                for(int i=10;i<100;++i)
+                    itemForProductMaterialUse.add(String.valueOf(i));
+                wheelViewProductMaterialUse.setItems(itemForProductMaterialUse);
+                wheelViewProductMaterialUse.setMaxSelectableIndex(90);
+                //设置原料使用选择器的监听器
+                wheelViewProductMaterialUse.setOnWheelItemSelectedListener(new com.lantouzi.wheelview.WheelView.OnWheelItemSelectedListener(){
+                    @Override
+                    public void onWheelItemChanged(WheelView wheelView, int position) {
+
+                    }
+
+                    @Override
+                    public void onWheelItemSelected(WheelView wheelView, int position) {
+                        Toast.makeText(InfoInput.this, "选择了：" + wheelViewProductMaterialUse.getItems().get(position), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //产品生产时间选择
+                textInputEditTextProductTime = (android.support.design.widget.TextInputEditText)
+                        findViewById(R.id.product_time_edittext);
+                imageButtonProductTime = (ImageButton)findViewById(R.id.product_time_imgbtn);
+                final DateSelectDialog dateSelectDialogProduct = new DateSelectDialog();
+                DateSelectDialog.Callback callback1 = new DateSelectDialog.Callback() {
+                    @Override
+                    public void onClick(String message) {
+                        Toast.makeText(InfoInput.this, "当前选择的时间是："  + message, Toast.LENGTH_SHORT).show();
+                        textInputEditTextProductTime.setText(message);
+                    }
+                };
+                imageButtonProductTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dateSelectDialogProduct.show(getSupportFragmentManager());
+                    }
+                });
+                //seekbar 设置
+                bubbleSeekBarProductItem1 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.product_materialitem1_seekbar);
+                bubbleSeekBarProductItem2 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.product_materialitem2_seekbar);
+                bubbleSeekBarProductItem3 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.product_materialitem3_seekbar);
+                bubbleSeekBarProductItem4 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.product_materialitem4_seekbar);
+                bubbleSeekBarProductItem5 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.product_materialitem5_seekbar);
+
+                bubbleSeekBarProductItem1.setOnProgressChangedListener(this);
+                bubbleSeekBarProductItem2.setOnProgressChangedListener(this);
+                bubbleSeekBarProductItem3.setOnProgressChangedListener(this);
+                bubbleSeekBarProductItem4.setOnProgressChangedListener(this);
+                bubbleSeekBarProductItem5.setOnProgressChangedListener(this);
+
+
 
                 break;
             case 2:
@@ -292,6 +363,28 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
         }
     }
 
+
+    @Override
+    public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat, boolean fromUser) {
+        bubbleSeekBarProductItem1.correctOffsetWhenContainerOnScrolling();
+        bubbleSeekBarProductItem2.correctOffsetWhenContainerOnScrolling();
+        bubbleSeekBarProductItem3.correctOffsetWhenContainerOnScrolling();
+        bubbleSeekBarProductItem4.correctOffsetWhenContainerOnScrolling();
+        bubbleSeekBarProductItem5.correctOffsetWhenContainerOnScrolling();
+        Toast.makeText(this, "onProgressChanged " + progressFloat, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getProgressOnActionUp(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
+        Toast.makeText(this, "onprogressaction up " + progress, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void getProgressOnFinally(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat, boolean fromUser) {
+        Toast.makeText(this, "当前数值：" + progressFloat, Toast.LENGTH_SHORT).show();
+    }
+
     /**
      * 日期选择对话框的回调函数
      * @param message
@@ -299,7 +392,11 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     @Override
     public void onClick(String message) {
         Toast.makeText(this, "infoinput 获取到时间" + message, Toast.LENGTH_SHORT).show();
-        textInputEditTextMaterialOutTime.setText(message);
+        if(currPosition == 0){
+            textInputEditTextMaterialOutTime.setText(message);
+        }else if(currPosition == 1){
+            textInputEditTextProductTime.setText(message);
+        }
     }
 
 
