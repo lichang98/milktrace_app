@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import com.andexert.library.RippleView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.configure.PickerOptions;
@@ -131,6 +133,15 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     private com.xw.repo.BubbleSeekBar bubbleSeekBarProductItem3;
     private com.xw.repo.BubbleSeekBar bubbleSeekBarProductItem4;
     private com.xw.repo.BubbleSeekBar bubbleSeekBarProductItem5;
+    private ImageButton imageButtonProductRoom;     //产品生产车间选择
+    private ArrayList<String> productFacRoom;
+    private ArrayList<ArrayList<String>> productWorkRoom;
+    private OptionsPickerView optionsPickerViewProductRoom; //产品生产车间选择对话框
+    private android.support.design.widget.TextInputEditText editTextProductRoom;
+    private Button buttonProductImageUpload;        //点击选择生产验证表单的按钮
+    private ImageView imageViewProductImage;        //上传的生产图片
+    private Button buttonProductFormUpload;         //表单上传按钮
+    private Uri uriProductImageUpload;      //用于存储生产企业上传图片的路径
 
 
 
@@ -349,7 +360,24 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                 bubbleSeekBarProductItem3.setOnProgressChangedListener(this);
                 bubbleSeekBarProductItem4.setOnProgressChangedListener(this);
                 bubbleSeekBarProductItem5.setOnProgressChangedListener(this);
+                //设置ripple button 点击上传图片
+                com.andexert.library.RippleView rippleViewImageUpload = (com.andexert.library.RippleView)findViewById(R.id.product_rippleview1);
+                rippleViewImageUpload.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                    @Override
+                    public void onComplete(RippleView rippleView) {
+                        Toast.makeText(InfoInput.this, "ripple complete", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //产品生产车间选择
+                imageButtonProductRoom = (ImageButton)findViewById(R.id.product_room_select_imgbtn);
+                imageButtonProductRoom.setOnClickListener(this);
+                //产品生产验证图片上传处理
+                buttonProductImageUpload = (Button)findViewById(R.id.product_photo_upload_btn); //点击上传图片的按钮
+                imageViewProductImage = (ImageView)findViewById(R.id.product_upload_image); //显示图片的imageview
+                buttonProductFormUpload = (Button)findViewById(R.id.product_form_upload_btn);   //表单上传按钮
 
+                buttonProductImageUpload.setOnClickListener(this);
+                buttonProductFormUpload.setOnClickListener(this);
 
 
                 break;
@@ -363,6 +391,53 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
         }
     }
 
+
+    /**
+     * 用于处理生产企业图片的上传
+     */
+    private void solveProductImageUpload(){
+        File outputImage = new File(getExternalCacheDir(),"product_upload_img.jpg");
+        try{
+            if(outputImage.exists()){
+                outputImage.delete();
+            }
+            outputImage.createNewFile();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        if(Build.VERSION.SDK_INT >= 24){
+            uriProductImageUpload = FileProvider.getUriForFile(InfoInput.this,
+                    "com.example.milktracesystem.fileprovider",outputImage);
+
+        }else{
+            uriProductImageUpload = Uri.fromFile(outputImage);
+        }
+        //启动相机
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,uriProductImageUpload);
+        startActivityForResult(intent,TAKEPHOTO);
+
+    }
+
+    /**
+     * 用于处理相机的返回数据
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode == TAKEPHOTO){
+            if(resultCode == RESULT_OK){
+                Bitmap bitmap = null;
+                try {
+                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uriProductImageUpload));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                imageViewProductImage.setImageBitmap(bitmap);
+            }
+        }
+
+    }
 
     @Override
     public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat, boolean fromUser) {
@@ -469,6 +544,52 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
             case R.id.info_input_material_select_imgbtn:
                 optionsPickerViewMaterialReceiver.show();
                 break;
+            case R.id.product_room_select_imgbtn:       //产品生产车间选择
+                editTextProductRoom = (android.support.design.widget.TextInputEditText)findViewById(R.id.product_room_edittext);
+                productFacRoom = new ArrayList<>();
+                productFacRoom.add("厂房1");
+                productFacRoom.add("厂房2");
+                productFacRoom.add("厂房3");
+                productWorkRoom = new ArrayList<>();
+                ArrayList<String> options2Items;
+                for(int i=1;i<=3;++i){
+                    options2Items = new ArrayList<>();
+                    for(int j=1;j<=4;++j){
+                        options2Items.add("车间" + String.valueOf(j));
+                    }
+                    productWorkRoom.add(options2Items);
+                }
+
+
+                optionsPickerViewProductRoom = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                        Toast.makeText(InfoInput.this, "选择的厂房与车间号是："+
+                                productFacRoom.get(options1)+productWorkRoom.get(options1).get(options2), Toast.LENGTH_SHORT).show();
+                        editTextProductRoom.setText(productFacRoom.get(options1)+"-"+productWorkRoom.get(options1).get(options2));
+
+                    }
+                }).setTitleText("选择生产车间")
+                        .setContentTextSize(20)
+                        .setDividerColor(Color.LTGRAY)
+                        .setCancelColor(Color.BLUE)
+                        .setTextColorCenter(Color.LTGRAY)
+                        .isRestoreItem(true)
+                        .isCenterLabel(false)
+                        .setLabels("厂房号","车间号","")
+                        .setBackgroundId(0x00000000)
+                        .isDialog(true)
+                        .build();
+                optionsPickerViewProductRoom.setPicker(productFacRoom,productWorkRoom);
+                optionsPickerViewProductRoom.show();
+                break;
+            case R.id.product_photo_upload_btn: //处理图片上传
+                solveProductImageUpload();
+                break;
+            case R.id.product_form_upload_btn:  //处理表单上传
+
+                break;
+
             default:
                 break;
         }
