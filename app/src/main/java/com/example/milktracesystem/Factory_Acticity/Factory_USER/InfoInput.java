@@ -15,6 +15,8 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -57,6 +59,7 @@ import com.example.milktracesystem.MainInterface.DialogForChooseImgMethod;
 import com.example.milktracesystem.MainInterface.Register;
 import com.example.milktracesystem.R;
 import com.lantouzi.wheelview.WheelView;
+import com.mob.MobSDK;
 import com.rey.material.app.DatePickerDialog;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
@@ -77,6 +80,11 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
+import cn.smssdk.EventHandler;
+import cn.smssdk.OnSendMessageHandler;
+import cn.smssdk.SMSSDK;
+
+
 /**
  * Created by 李畅 on 2017/9/23.
  */
@@ -92,7 +100,6 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     private View currAddedView;     //当前动态加载的布局
     private View[] tableViews;      //备选布局
     private int currPosition = -1;  //当前加载的布局
-
 
     private ImageView materialUploadImg = null;    //原料生产企业上传检验照片
     private Uri materialUploadImgUri;       //原料企业上传照片保存的路径
@@ -143,6 +150,14 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     private Button buttonProductFormUpload;         //表单上传按钮
     private Uri uriProductImageUpload;      //用于存储生产企业上传图片的路径
 
+    //物流运输企业
+    private android.support.design.widget.TextInputEditText textInputEditTextDriverPhone;   //填写手机号码的输入框
+    private android.support.design.widget.TextInputEditText textInputEditTextDriverPhoneCheck;  //填写验证码的输入框
+    private Button buttonDriverPhoneCheck; //获取验证码的按钮
+    private final String APPKEY="2565de88b7ec9";    //短信验证的应用key
+    private final String SECRETKEY="0c0017e172aaf1511f085de078f8b3da";
+    private EventHandler eventHandler;  //用于短信验证的回调处理
+    private Button buttonTransportSubmit;   //物流运输企业验证表单提交按钮
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +175,7 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
         //FIXME
 //        setSpinnerOnItemClickListener();        //设置spinner项目点击的监听器，用于动态改变布局
         //初始化备选的添加TableView
+        MobSDK.init(this,APPKEY,SECRETKEY);    //初始化短信验证接口
         tableViews = new RelativeLayout[4];
         tableViews[0] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_material_table,null);
         tableViews[1] = LayoutInflater.from(InfoInput.this).inflate(R.layout.info_input_product_table,null);
@@ -381,7 +397,15 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
 
 
                 break;
-            case 2:
+            case 2:     //物流运输企业处理
+                textInputEditTextDriverPhone = (android.support.design.widget.TextInputEditText)
+                        findViewById(R.id.driver_phone_edittext);   //司机手机号码输入框
+                textInputEditTextDriverPhoneCheck = (android.support.design.widget.TextInputEditText)
+                        findViewById(R.id.driver_phone_checkedittext);  //验证码输入框
+                buttonDriverPhoneCheck = (Button)findViewById(R.id.driver_phone_checkget_btn);  //获取验证码
+                buttonDriverPhoneCheck.setOnClickListener(this);
+                buttonTransportSubmit = (Button)findViewById(R.id.transport_submit_btn);    //物流运输企业提交按钮
+                buttonTransportSubmit.setOnClickListener(this);
 
                 break;
             case 3:
@@ -589,12 +613,67 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
             case R.id.product_form_upload_btn:  //处理表单上传
 
                 break;
+            case R.id.driver_phone_checkget_btn:    //处理手机验证
+                Log.i("短信验证","准备开始验证");
+                //短信验证发送与接收处理
+                eventHandler = new EventHandler(){
+                    @Override
+                    public void afterEvent(int event, int result, Object data) {
+                        Log.i("短信验证","data is :"+data.toString());
+                        if(result == SMSSDK.RESULT_COMPLETE){
+                            if(event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE){
+                                Log.i("短信验证","验证成功!");
+                                uiToast("短信验证成功");
+                            }else if(event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
+                                Log.i("短信验证","获取验证码成功!");
+                                Log.i("短信验证：","获取的data 的内容是：" + data.toString());
+                            }
+                        }else{
+                            //错误处理，包括验证失败的情况
+                            ((Throwable)data).printStackTrace();
+                        }
+                    }
+                };
+                SMSSDK.registerEventHandler(eventHandler);  //注册处理
+                String phonenum;   //手机号码与验证码
+                phonenum = textInputEditTextDriverPhone.getText().toString();
+                if(phonenum.trim().equals("")){
+                    Toast.makeText(this, "请先输入手机号", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                Log.i("短信验证","输入的手机号码：["+phonenum+"]");
+                SMSSDK.getVerificationCode("86",phonenum,null);
+
+                break;
+            case R.id.transport_submit_btn:         //物流运输企业表单提交按钮
+                String varificationcode;        //用于输入的验证码
+                String phonenum1 = textInputEditTextDriverPhone.getText().toString();
+                varificationcode = textInputEditTextDriverPhoneCheck.getText().toString();
+                SMSSDK.submitVerificationCode("86",phonenum1,varificationcode); //提交验证
+                break;
 
             default:
                 break;
         }
     }
 
+    /**
+     * 用于在主线程中输出toast 的方法
+     * @param msg
+     */
+    public void uiToast(final String msg){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(InfoInput.this, msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SMSSDK.unregisterEventHandler(eventHandler);    //释放处理
+    }
 
     /**
      * 用于初始化企业名称的选择

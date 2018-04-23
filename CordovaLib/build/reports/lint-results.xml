@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="4" by="lint 3.1.0">
+
+    <issue
+        id="Assert"
+        severity="Warning"
+        message="Assertions are unreliable in Dalvik and unimplemented in ART. Use `BuildConfig.DEBUG` conditional checks instead."
+        category="Correctness"
+        priority="6"
+        summary="Assertions"
+        explanation="Assertions are not checked at runtime. There are ways to request that they be used by Dalvik \&#xA;(`adb shell setprop debug.assert 1`), but note that this is not implemented in ART (the newer \&#xA;runtime), and even in Dalvik the property is ignored in many places and can not be relied upon. \&#xA;Instead, perform conditional checking inside `if (BuildConfig.DEBUG) { }` blocks. That constant \&#xA;is a static final boolean which is true in debug builds and false in release builds, and the \&#xA;Java compiler completely removes all code inside the if-body from the app.&#xA;&#xA;For example, you can replace `assert speed > 0` with `if (BuildConfig.DEBUG &amp;&amp; !(speed > 0)) { \&#xA;throw new AssertionError() }`.&#xA;&#xA;(Note: This lint check does not flag assertions purely asserting nullness or non-nullness; these \&#xA;are typically more intended for tools usage than runtime checks.)"
+        url="https://code.google.com/p/android/issues/detail?id=65183"
+        urls="https://code.google.com/p/android/issues/detail?id=65183"
+        errorLine1="        assert engine.getView() instanceof CordovaWebViewEngine.EngineView;"
+        errorLine2="        ~~~~~~">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaWebViewImpl.java"
+            line="112"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        severity="Warning"
+        message="Field requires API level 16 (current min is 14): `android.view.View#SYSTEM_UI_FLAG_LAYOUT_STABLE`"
+        category="Correctness"
+        priority="6"
+        summary="Using inlined constants on older versions"
+        explanation="This check scans through all the Android API field references in the application and flags certain constants, such as static final integers and Strings, which were introduced in later versions. These will actually be copied into the class files rather than being referenced, which means that the value is available even when running on older devices. In some cases that&apos;s fine, and in other cases it can result in a runtime crash or incorrect behavior. It depends on the context, so consider the code carefully and decide whether it&apos;s safe and can be suppressed or whether the code needs to be guarded.&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level."
+        errorLine1="            final int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaActivity.java"
+            line="327"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        severity="Warning"
+        message="Field requires API level 16 (current min is 14): `android.view.View#SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION`"
+        category="Correctness"
+        priority="6"
+        summary="Using inlined constants on older versions"
+        explanation="This check scans through all the Android API field references in the application and flags certain constants, such as static final integers and Strings, which were introduced in later versions. These will actually be copied into the class files rather than being referenced, which means that the value is available even when running on older devices. In some cases that&apos;s fine, and in other cases it can result in a runtime crash or incorrect behavior. It depends on the context, so consider the code carefully and decide whether it&apos;s safe and can be suppressed or whether the code needs to be guarded.&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level."
+        errorLine1="                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaActivity.java"
+            line="328"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        severity="Warning"
+        message="Field requires API level 16 (current min is 14): `android.view.View#SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN`"
+        category="Correctness"
+        priority="6"
+        summary="Using inlined constants on older versions"
+        explanation="This check scans through all the Android API field references in the application and flags certain constants, such as static final integers and Strings, which were introduced in later versions. These will actually be copied into the class files rather than being referenced, which means that the value is available even when running on older devices. In some cases that&apos;s fine, and in other cases it can result in a runtime crash or incorrect behavior. It depends on the context, so consider the code carefully and decide whether it&apos;s safe and can be suppressed or whether the code needs to be guarded.&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level."
+        errorLine1="                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaActivity.java"
+            line="329"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        severity="Warning"
+        message="Field requires API level 16 (current min is 14): `android.view.View#SYSTEM_UI_FLAG_FULLSCREEN`"
+        category="Correctness"
+        priority="6"
+        summary="Using inlined constants on older versions"
+        explanation="This check scans through all the Android API field references in the application and flags certain constants, such as static final integers and Strings, which were introduced in later versions. These will actually be copied into the class files rather than being referenced, which means that the value is available even when running on older devices. In some cases that&apos;s fine, and in other cases it can result in a runtime crash or incorrect behavior. It depends on the context, so consider the code carefully and decide whether it&apos;s safe and can be suppressed or whether the code needs to be guarded.&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level."
+        errorLine1="                    | View.SYSTEM_UI_FLAG_FULLSCREEN"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaActivity.java"
+            line="331"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        severity="Warning"
+        message="Field requires API level 19 (current min is 14): `android.view.View#SYSTEM_UI_FLAG_IMMERSIVE_STICKY`"
+        category="Correctness"
+        priority="6"
+        summary="Using inlined constants on older versions"
+        explanation="This check scans through all the Android API field references in the application and flags certain constants, such as static final integers and Strings, which were introduced in later versions. These will actually be copied into the class files rather than being referenced, which means that the value is available even when running on older devices. In some cases that&apos;s fine, and in other cases it can result in a runtime crash or incorrect behavior. It depends on the context, so consider the code carefully and decide whether it&apos;s safe and can be suppressed or whether the code needs to be guarded.&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level."
+        errorLine1="                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaActivity.java"
+            line="332"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        severity="Error"
+        message="Call requires API level 21 (current min is 14): android.webkit.ClientCertRequest#cancel"
+        category="Correctness"
+        priority="6"
+        summary="Calling new methods on older versions"
+        explanation="This check scans through all the Android API calls in the application and warns about any calls that are not available on **all** versions targeted by this application (according to its minimum SDK attribute in the manifest).&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level.&#xA;&#xA;If you are deliberately setting `android:` attributes in style definitions, make sure you place this in a `values-v`*NN* folder in order to avoid running into runtime conflicts on certain devices where manufacturers have added custom attributes whose ids conflict with the new ones on later platforms.&#xA;&#xA;Similarly, you can use tools:targetApi=&quot;11&quot; in an XML file to indicate that the element will only be inflated in an adequate context."
+        errorLine1="        request.cancel();"
+        errorLine2="                ~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaClientCertRequest.java"
+            line="43"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        severity="Error"
+        message="Call requires API level 21 (current min is 14): android.webkit.ClientCertRequest#getHost"
+        category="Correctness"
+        priority="6"
+        summary="Calling new methods on older versions"
+        explanation="This check scans through all the Android API calls in the application and warns about any calls that are not available on **all** versions targeted by this application (according to its minimum SDK attribute in the manifest).&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level.&#xA;&#xA;If you are deliberately setting `android:` attributes in style definitions, make sure you place this in a `values-v`*NN* folder in order to avoid running into runtime conflicts on certain devices where manufacturers have added custom attributes whose ids conflict with the new ones on later platforms.&#xA;&#xA;Similarly, you can use tools:targetApi=&quot;11&quot; in an XML file to indicate that the element will only be inflated in an adequate context."
+        errorLine1="        return request.getHost();"
+        errorLine2="                       ~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaClientCertRequest.java"
+            line="51"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        severity="Error"
+        message="Call requires API level 21 (current min is 14): android.webkit.ClientCertRequest#getKeyTypes"
+        category="Correctness"
+        priority="6"
+        summary="Calling new methods on older versions"
+        explanation="This check scans through all the Android API calls in the application and warns about any calls that are not available on **all** versions targeted by this application (according to its minimum SDK attribute in the manifest).&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level.&#xA;&#xA;If you are deliberately setting `android:` attributes in style definitions, make sure you place this in a `values-v`*NN* folder in order to avoid running into runtime conflicts on certain devices where manufacturers have added custom attributes whose ids conflict with the new ones on later platforms.&#xA;&#xA;Similarly, you can use tools:targetApi=&quot;11&quot; in an XML file to indicate that the element will only be inflated in an adequate context."
+        errorLine1="        return request.getKeyTypes();"
+        errorLine2="                       ~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaClientCertRequest.java"
+            line="59"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        severity="Error"
+        message="Call requires API level 21 (current min is 14): android.webkit.ClientCertRequest#getPort"
+        category="Correctness"
+        priority="6"
+        summary="Calling new methods on older versions"
+        explanation="This check scans through all the Android API calls in the application and warns about any calls that are not available on **all** versions targeted by this application (according to its minimum SDK attribute in the manifest).&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level.&#xA;&#xA;If you are deliberately setting `android:` attributes in style definitions, make sure you place this in a `values-v`*NN* folder in order to avoid running into runtime conflicts on certain devices where manufacturers have added custom attributes whose ids conflict with the new ones on later platforms.&#xA;&#xA;Similarly, you can use tools:targetApi=&quot;11&quot; in an XML file to indicate that the element will only be inflated in an adequate context."
+        errorLine1="        return request.getPort();"
+        errorLine2="                       ~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaClientCertRequest.java"
+            line="67"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        severity="Error"
+        message="Call requires API level 21 (current min is 14): android.webkit.ClientCertRequest#getPrincipals"
+        category="Correctness"
+        priority="6"
+        summary="Calling new methods on older versions"
+        explanation="This check scans through all the Android API calls in the application and warns about any calls that are not available on **all** versions targeted by this application (according to its minimum SDK attribute in the manifest).&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level.&#xA;&#xA;If you are deliberately setting `android:` attributes in style definitions, make sure you place this in a `values-v`*NN* folder in order to avoid running into runtime conflicts on certain devices where manufacturers have added custom attributes whose ids conflict with the new ones on later platforms.&#xA;&#xA;Similarly, you can use tools:targetApi=&quot;11&quot; in an XML file to indicate that the element will only be inflated in an adequate context."
+        errorLine1="        return request.getPrincipals();"
+        errorLine2="                       ~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaClientCertRequest.java"
+            line="75"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        severity="Error"
+        message="Call requires API level 21 (current min is 14): android.webkit.ClientCertRequest#ignore"
+        category="Correctness"
+        priority="6"
+        summary="Calling new methods on older versions"
+        explanation="This check scans through all the Android API calls in the application and warns about any calls that are not available on **all** versions targeted by this application (according to its minimum SDK attribute in the manifest).&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level.&#xA;&#xA;If you are deliberately setting `android:` attributes in style definitions, make sure you place this in a `values-v`*NN* folder in order to avoid running into runtime conflicts on certain devices where manufacturers have added custom attributes whose ids conflict with the new ones on later platforms.&#xA;&#xA;Similarly, you can use tools:targetApi=&quot;11&quot; in an XML file to indicate that the element will only be inflated in an adequate context."
+        errorLine1="        request.ignore();"
+        errorLine2="                ~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaClientCertRequest.java"
+            line="83"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        severity="Error"
+        message="Call requires API level 21 (current min is 14): android.webkit.ClientCertRequest#proceed"
+        category="Correctness"
+        priority="6"
+        summary="Calling new methods on older versions"
+        explanation="This check scans through all the Android API calls in the application and warns about any calls that are not available on **all** versions targeted by this application (according to its minimum SDK attribute in the manifest).&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level.&#xA;&#xA;If you are deliberately setting `android:` attributes in style definitions, make sure you place this in a `values-v`*NN* folder in order to avoid running into runtime conflicts on certain devices where manufacturers have added custom attributes whose ids conflict with the new ones on later platforms.&#xA;&#xA;Similarly, you can use tools:targetApi=&quot;11&quot; in an XML file to indicate that the element will only be inflated in an adequate context."
+        errorLine1="        request.proceed(privateKey, chain);"
+        errorLine2="                ~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaClientCertRequest.java"
+            line="94"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        severity="Error"
+        message="Call requires API level 23 (current min is 14): android.app.Activity#requestPermissions"
+        category="Correctness"
+        priority="6"
+        summary="Calling new methods on older versions"
+        explanation="This check scans through all the Android API calls in the application and warns about any calls that are not available on **all** versions targeted by this application (according to its minimum SDK attribute in the manifest).&#xA;&#xA;If you really want to use this API and don&apos;t need to support older devices just set the `minSdkVersion` in your `build.gradle` or `AndroidManifest.xml` files.&#xA;&#xA;If your code is **deliberately** accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the `@TargetApi` annotation specifying the local minimum SDK to apply, such as `@TargetApi(11)`, such that this check considers 11 rather than your manifest file&apos;s minimum SDK as the required API level.&#xA;&#xA;If you are deliberately setting `android:` attributes in style definitions, make sure you place this in a `values-v`*NN* folder in order to avoid running into runtime conflicts on certain devices where manufacturers have added custom attributes whose ids conflict with the new ones on later platforms.&#xA;&#xA;Similarly, you can use tools:targetApi=&quot;11&quot; in an XML file to indicate that the element will only be inflated in an adequate context."
+        errorLine1="        getActivity().requestPermissions(permissions, mappedRequestCode);"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaInterfaceImpl.java"
+            line="226"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of com.android.tools.build:gradle than 3.1.0 is available: 3.1.1"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="        classpath &apos;com.android.tools.build:gradle:3.1.0&apos;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\build.gradle"
+            line="33"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of com.android.support:support-v4 than 26.1.0 is available: 27.1.1"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation &apos;com.android.support:support-v4:26.1.0&apos;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\build.gradle"
+            line="137"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of com.android.support:appcompat-v7 than 26.1.0 is available: 27.1.1"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    implementation &apos;com.android.support:appcompat-v7:26.1.0&apos;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\build.gradle"
+            line="138"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="RestrictedApi"
+        severity="Error"
+        message="BaseFragmentActivityApi16.startActivityForResult can only be called from within the same library group (groupId=com.android.support)"
+        category="Correctness"
+        priority="4"
+        summary="Restricted API"
+        explanation="This API has been flagged with a restriction that has not been met.&#xA;&#xA;Examples of API restrictions:&#xA;* Method can only be invoked by a subclass&#xA;* Method can only be accessed from within the same library (defined by  the Gradle library group id)&#xA;.* Method can only be accessed from tests.&#xA;.&#xA;You can add your own API restrictions with the `@RestrictTo` annotation."
+        errorLine1="        super.startActivityForResult(intent, requestCode, options);"
+        errorLine2="              ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaActivity.java"
+            line="343"
+            column="15"/>
+    </issue>
+
+    <issue
+        id="AddJavascriptInterface"
+        severity="Warning"
+        message="`WebView.addJavascriptInterface` should not be called with minSdkVersion &lt; 17 for security reasons: JavaScript can use reflection to manipulate application"
+        category="Security"
+        priority="9"
+        summary="addJavascriptInterface Called"
+        explanation="For applications built for API levels below 17, `WebView#addJavascriptInterface` presents a \&#xA;security hazard as JavaScript on the target web page has the ability to use reflection to access \&#xA;the injected object&apos;s public fields and thus manipulate the host application in unintended ways."
+        url="https://labs.mwrinfosecurity.com/blog/2013/09/24/webview-addjavascriptinterface-remote-code-execution/"
+        urls="https://labs.mwrinfosecurity.com/blog/2013/09/24/webview-addjavascriptinterface-remote-code-execution/"
+        errorLine1="        webView.addJavascriptInterface(exposedJsApi, &quot;_cordovaNative&quot;);"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\engine\SystemWebViewEngine.java"
+            line="266"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="TrulyRandom"
+        severity="Warning"
+        message="Potentially insecure random numbers on Android 4.3 and older. Read https://android-developers.blogspot.com/2013/08/some-securerandom-thoughts.html for more info."
+        category="Security"
+        priority="9"
+        summary="Weak RNG"
+        explanation="Key generation, signing, encryption, and random number generation may not receive cryptographically strong values due to improper initialization of the underlying PRNG on Android 4.3 and below.&#xA;&#xA;If your application relies on cryptographically secure random number generation you should apply the workaround described in https://android-developers.blogspot.com/2013/08/some-securerandom-thoughts.html .&#xA;&#xA;This lint rule is mostly informational; it does not accurately detect whether cryptographically secure RNG is required, or whether the workaround has already been applied. After reading the blog entry and updating your code if necessary, you can disable this lint issue."
+        url="https://android-developers.blogspot.com/2013/08/some-securerandom-thoughts.html"
+        urls="https://android-developers.blogspot.com/2013/08/some-securerandom-thoughts.html"
+        errorLine1="        SecureRandom randGen = new SecureRandom();"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\CordovaBridge.java"
+            line="114"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        severity="Warning"
+        message="Unnecessary; SDK_INT is never &lt; 14"
+        category="Performance"
+        priority="6"
+        summary="Obsolete SDK_INT Version Check"
+        explanation="This check flags version checks that are not necessary, because the `minSdkVersion` (or surrounding known API level) is already at least as high as the version checked for.&#xA;&#xA;Similarly, it also looks for resources in `-vNN` folders, such as `values-v14` where the version qualifier is less than or equal to the `minSdkVersion`, where the contents should be merged into the best folder."
+        errorLine1="        if(android.os.Build.VERSION.SDK_INT == android.os.Build.VERSION_CODES.ECLAIR_MR1)"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\engine\SystemWebChromeClient.java"
+            line="159"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        severity="Warning"
+        message="Unnecessary; SDK_INT is never &lt; 14"
+        category="Performance"
+        priority="6"
+        summary="Obsolete SDK_INT Version Check"
+        explanation="This check flags version checks that are not necessary, because the `minSdkVersion` (or surrounding known API level) is already at least as high as the version checked for.&#xA;&#xA;Similarly, it also looks for resources in `-vNN` folders, such as `values-v14` where the version qualifier is less than or equal to the `minSdkVersion`, where the contents should be merged into the best folder."
+        errorLine1="            if(android.os.Build.VERSION.SDK_INT &lt; android.os.Build.VERSION_CODES.HONEYCOMB &amp;&amp;"
+        errorLine2="               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="D:\AndriodWork\MilkTraceSystemnew2.2bar\CordovaLib\src\org\apache\cordova\engine\SystemWebViewEngine.java"
+            line="162"
+            column="16"/>
+    </issue>
+
+</issues>

@@ -50,6 +50,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_6
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
+
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
