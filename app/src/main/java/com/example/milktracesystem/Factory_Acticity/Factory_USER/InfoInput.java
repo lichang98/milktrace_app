@@ -627,6 +627,7 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                             }else if(event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
                                 Log.i("短信验证","获取验证码成功!");
                                 Log.i("短信验证：","获取的data 的内容是：" + data.toString());
+                                uiToast("验证失败，请确认验证码是否正确");
                             }
                         }else{
                             //错误处理，包括验证失败的情况
