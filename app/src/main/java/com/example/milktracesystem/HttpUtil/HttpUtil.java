@@ -30,6 +30,13 @@ import okio.BufferedSink;
 
 public class HttpUtil {
 
+    //定义用于从后台获取数据的参数
+    public final static String LOGIN_INFO="logininfo";    //表示发送的是登录的信息
+    public final static String FACTORY_MATERIAL_LIST="factory_material_list";  //原料企业主界面列表
+    public final static String FACTORY_PRODUCT_LIST = "factory_product_list";   //生产企业主界面列表
+    public final static String FACTORY_TRANSPORT_LIST = "factory_transport_list";   //物流运输企业主界面列表
+    public final static String FACTORY_SALE_LIST = "factory_sale_list";     //终端零售企业主界面列表
+
     /**
      * 向服务器端发送json 格式的数据
      * @param addr      请求地址

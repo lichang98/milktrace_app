@@ -73,7 +73,7 @@ public class Login extends AppCompatActivity{
                     @Override
                     public void run() {
                         HttpUtil.sendJsonData("http://192.168.137.1:8080/android_login/login",
-                                "logininfo",gson.toJson(loginBean), new Callback() {
+                                HttpUtil.LOGIN_INFO,gson.toJson(loginBean), new Callback() {
                                     @Override
                                     public void onFailure(Call call, IOException e) {
 

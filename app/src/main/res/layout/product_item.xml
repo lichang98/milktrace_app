@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="45dp">
+    android:layout_height="80dp">
+    <!--各类企业列表页面使用的item 的格式-->
     <ImageView
         android:id="@+id/productfac_imag"
         android:layout_width="wrap_content"
@@ -10,7 +11,7 @@
         android:id="@+id/productfac_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="center_vertical|center_horizontal"
         android:layout_marginLeft="10dp"/>
 
 </LinearLayout>
