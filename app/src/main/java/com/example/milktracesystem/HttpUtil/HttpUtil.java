@@ -37,6 +37,11 @@ public class HttpUtil {
     public final static String FACTORY_TRANSPORT_LIST = "factory_transport_list";   //物流运输企业主界面列表
     public final static String FACTORY_SALE_LIST = "factory_sale_list";     //终端零售企业主界面列表
 
+    //后台处理servlet 的路径
+    public static final String URL_LOGIN="http://10.21.157.97:8080/android_login/login";
+    public static final String URL_MATERIAL_FACTORY_MAINLIST=
+            "http://10.21.157.97:8080/factory/material/mainlist"; //原料企业主列表路径
+
     /**
      * 向服务器端发送json 格式的数据
      * @param addr      请求地址
