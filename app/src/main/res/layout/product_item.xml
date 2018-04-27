@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="80dp">
+    android:layout_height="70dp">
     <!--各类企业列表页面使用的item 的格式-->
     <ImageView
         android:id="@+id/productfac_imag"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
+        android:layout_gravity="center_vertical|center_horizontal"
         tools:src="@drawable/showmilk1"/>
     <TextView
         android:id="@+id/productfac_name"
@@ -16,6 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:fontFamily="黑体"
         tools:text="测试文字"
         tools:textColor="@android:color/black"
         tools:textSize="20dp"/>

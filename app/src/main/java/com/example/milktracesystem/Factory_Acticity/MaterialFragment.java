@@ -1,6 +1,10 @@
 package com.example.milktracesystem.Factory_Acticity;
 
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,16 +43,49 @@ public class MaterialFragment extends android.support.v4.app.Fragment {
     private Callback callback;
     private MFactoryAdapter adapter;
     private RecyclerView recyclerView;
+    private RecyclerView.ItemDecoration itemDecorationRecyclerView; //recyclerview item 的装饰
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.material_fragment,container,false);
+        final View view = inflater.inflate(R.layout.material_fragment,container,false);
 //        InitMFac(); //初始化厂商数据
         recyclerView = (RecyclerView)view.findViewById(R.id.materialfactories_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new MFactoryAdapter(factoryListBeanList);
         recyclerView.setAdapter(adapter);
+        //设置并初始化recyclerview 项目的装饰
+        itemDecorationRecyclerView = new RecyclerView.ItemDecoration() {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                super.onDraw(c, parent, state);
+                int childCount = parent.getChildCount();
+                int left = parent.getPaddingLeft();
+                int right = parent.getWidth()-parent.getPaddingRight();
+
+                for(int i=0;i<childCount -1;++i){
+                    View view1 = parent.getChildAt(i);
+                    float top = view1.getBottom();
+                    float bottom = view1.getBottom()+2;
+                    Paint paint = new Paint();
+                    paint.setColor(Color.LTGRAY);
+                    c.drawRect(left,top,right,bottom,paint);
+                }
+            }
+
+            @Override
+            public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                super.onDrawOver(c, parent, state);
+            }
+
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.bottom = 2;
+            }
+        };
+        //将itemdecoration 加入到recyclerview
+        recyclerView.addItemDecoration(itemDecorationRecyclerView);
         //启动线程从后台获取数据
         //回调函数，返回结果
         callback = new Callback() {
