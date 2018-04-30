@@ -79,6 +79,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.OnSendMessageHandler;
@@ -95,7 +97,8 @@ import cn.smssdk.SMSSDK;
  * 上传的数据包括文字描述及图片
  * 之后更新，部分数据使用NFC获取
  */
-public class InfoInput extends AppCompatActivity implements DialogForChooseImgMethod.NoticeDialogListener,View.OnClickListener,DateSelectDialog.Callback,BubbleSeekBar.OnProgressChangedListener{
+public class InfoInput extends AppCompatActivity implements DialogForChooseImgMethod.NoticeDialogListener,
+        View.OnClickListener,DateSelectDialog.Callback,BubbleSeekBar.OnProgressChangedListener,com.suke.widget.SwitchButton.OnCheckedChangeListener{
 //    private Spinner company_type_select;    //表单填写企业类别选择
     private View currAddedView;     //当前动态加载的布局
     private View[] tableViews;      //备选布局
@@ -153,6 +156,10 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     //物流运输企业
     private android.support.design.widget.TextInputEditText textInputEditTextDriverPhone;   //填写手机号码的输入框
     private android.support.design.widget.TextInputEditText textInputEditTextDriverPhoneCheck;  //填写验证码的输入框
+    private Boolean isGetCertificateCode;   //判断是否已经获取到短信验证码
+    private int     DOWNTIME=60;    //倒计时
+    private Timer timer;
+    private TimerTask timerTask;
     private Button buttonDriverPhoneCheck; //获取验证码的按钮
     private final String APPKEY="258529026d387";    //短信验证的应用key
     private final String SECRETKEY="e8e691c8eb87a99e3d9c1f3ce1c16dc6";
@@ -162,10 +169,35 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     //零售企业
     private android.support.design.widget.TextInputEditText textInputEditTextSaleOrg;   //零售企业选择
     private ImageButton imageButtonSaleOrgSelect;   //零售企业选择点击按钮
+    private OptionsPickerView optionsPickerViewSaleCorp;
+
     private android.support.design.widget.TextInputEditText textInputEditTextBatchId;   //零售企业批次码选择
     private ImageButton imageButtonBatchIdSelect;   //零售企业批次码选择
+    private OptionsPickerView optionsPickerViewBatchId; //批次码选择
+    private ArrayList<String> optionsItems1;
+    private ArrayList<ArrayList<String>> optionsItems2;
+
     private android.support.design.widget.TextInputEditText textInputEditTextInProductTime;//进货时间选择
     private ImageButton imageButtonInProductTimeSelect; //进货时间选择按钮
+    private com.suke.widget.SwitchButton switchButtonProduct1;  //产品1是否进购的选择控件
+    private com.suke.widget.SwitchButton switchButtonProduct2;//产品是否进购的选择控件
+    private com.suke.widget.SwitchButton switchButtonProduct3;//产品是否进购的选择控件
+    private com.suke.widget.SwitchButton switchButtonProduct4;//产品是否进购的选择控件
+    private com.suke.widget.SwitchButton switchButtonProduct5;//产品是否进购的选择控件
+    private com.suke.widget.SwitchButton switchButtonProduct6;//产品是否进购的选择控件
+    private com.xw.repo.BubbleSeekBar bubbleSeekBarProduct1;    //产品1的进购量
+    private com.xw.repo.BubbleSeekBar bubbleSeekBarProduct2; //产品2的进购量
+    private com.xw.repo.BubbleSeekBar bubbleSeekBarProduct3; //产品3的进购量
+    private com.xw.repo.BubbleSeekBar bubbleSeekBarProduct4; //产品4的进购量
+    private com.xw.repo.BubbleSeekBar bubbleSeekBarProduct5; //产品5的进购量
+    private com.xw.repo.BubbleSeekBar bubbleSeekBarProduct6; //产品6的进购量
+
+    private android.support.design.widget.TextInputEditText textInputEditTextContactPersonName; //联系人姓名
+    private android.support.design.widget.TextInputEditText textInputEditTextContactPersonPhone;    //联系人电话
+    private android.support.design.widget.TextInputEditText textInputEditTextCertificateCode;   //验证码
+    private Button buttonGetCertificateCode;    //获取短信验证码button
+    private EventHandler eventHandlerSale;  //零售企业短信验证回调处理
+    private Button buttonSaleUpload;    //零售企业表单上传
 
 
 
@@ -379,6 +411,11 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                 bubbleSeekBarProductItem3 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.product_materialitem3_seekbar);
                 bubbleSeekBarProductItem4 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.product_materialitem4_seekbar);
                 bubbleSeekBarProductItem5 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.product_materialitem5_seekbar);
+                bubbleSeekBarProductItem1.correctOffsetWhenContainerOnScrolling();
+                bubbleSeekBarProductItem2.correctOffsetWhenContainerOnScrolling();
+                bubbleSeekBarProductItem3.correctOffsetWhenContainerOnScrolling();
+                bubbleSeekBarProductItem4.correctOffsetWhenContainerOnScrolling();
+                bubbleSeekBarProductItem5.correctOffsetWhenContainerOnScrolling();
 
                 bubbleSeekBarProductItem1.setOnProgressChangedListener(this);
                 bubbleSeekBarProductItem2.setOnProgressChangedListener(this);
@@ -417,13 +454,98 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                 buttonTransportSubmit.setOnClickListener(this);
 
                 break;
-            case 3:
+            case 3:     //零售企业处理
+                textInputEditTextSaleOrg = (android.support.design.widget.TextInputEditText)
+                        findViewById(R.id.sale_orgcode_edittext);   //零售企业选择
+                imageButtonSaleOrgSelect = (ImageButton)findViewById
+                        (R.id.sale_orgacode_select_imgbtn);     //零售企业选择按钮
+                imageButtonSaleOrgSelect.setOnClickListener(this);
 
+                textInputEditTextBatchId = (android.support.design.widget.TextInputEditText)
+                        findViewById(R.id.sale_batchid_edittext);   //零售企业进货产品批次选择
+                imageButtonBatchIdSelect = (ImageButton)findViewById
+                        (R.id.sale_batchid_imgbtn);         //零售企业进货产品批次选择按钮
+                imageButtonBatchIdSelect.setOnClickListener(this);
+
+                textInputEditTextInProductTime = (android.support.design.widget.TextInputEditText)
+                        findViewById(R.id.sale_intime_edittext);    //零售企业进货时间选择
+                imageButtonInProductTimeSelect = (ImageButton)findViewById
+                        (R.id.sale_intime_imgbtn);      //零售企业进货时间选择按钮
+                imageButtonInProductTimeSelect.setOnClickListener(this);
+
+                //switchbutton 处理
+                switchButtonProduct1 = (com.suke.widget.SwitchButton)findViewById(R.id.sale_inproduct1_switchbtn);
+                switchButtonProduct1.setChecked(false);
+                switchButtonProduct1.toggle();
+                switchButtonProduct1.setShadowEffect(true);
+                switchButtonProduct1.setOnCheckedChangeListener(this);
+                switchButtonProduct2 = (com.suke.widget.SwitchButton)findViewById(R.id.sale_inproduct2_switchbtn);
+                switchButtonProduct2.setChecked(false);
+                switchButtonProduct2.toggle();
+                switchButtonProduct2.setShadowEffect(true);
+                switchButtonProduct2.setOnCheckedChangeListener(this);
+                switchButtonProduct3 = (com.suke.widget.SwitchButton)findViewById(R.id.sale_inproduct3_switchbtn);
+                switchButtonProduct3.setChecked(false);
+                switchButtonProduct3.toggle();
+                switchButtonProduct3.setShadowEffect(true);
+                switchButtonProduct3.setOnCheckedChangeListener(this);
+                switchButtonProduct4 = (com.suke.widget.SwitchButton)findViewById(R.id.sale_inproduct4_switchbtn);
+                switchButtonProduct4.setChecked(false);
+                switchButtonProduct4.toggle();
+                switchButtonProduct4.setShadowEffect(true);
+                switchButtonProduct4.setOnCheckedChangeListener(this);
+                switchButtonProduct5 = (com.suke.widget.SwitchButton)findViewById(R.id.sale_inproduct5_switchbtn);
+                switchButtonProduct5.setChecked(false);
+                switchButtonProduct5.toggle();
+                switchButtonProduct5.setShadowEffect(true);
+                switchButtonProduct5.setOnCheckedChangeListener(this);
+                switchButtonProduct6 = (com.suke.widget.SwitchButton)findViewById(R.id.sale_inproduct6_switchbtn);
+                switchButtonProduct6.setChecked(false);
+                switchButtonProduct6.toggle();
+                switchButtonProduct6.setShadowEffect(true);
+                switchButtonProduct6.setOnCheckedChangeListener(this);
+
+                //范围选择控件处理
+                bubbleSeekBarProduct1 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.sale_inproduct1_seekbar);
+                bubbleSeekBarProduct1.setOnProgressChangedListener(this);
+                bubbleSeekBarProduct2 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.sale_inproduct2_seekbar);
+                bubbleSeekBarProduct2.setOnProgressChangedListener(this);
+                bubbleSeekBarProduct3 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.sale_inproduct3_seekbar);
+                bubbleSeekBarProduct3.setOnProgressChangedListener(this);
+                bubbleSeekBarProduct4 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.sale_inproduct4_seekbar);
+                bubbleSeekBarProduct4.setOnProgressChangedListener(this);
+                bubbleSeekBarProduct5 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.sale_inproduct5_seekbar);
+                bubbleSeekBarProduct5.setOnProgressChangedListener(this);
+                bubbleSeekBarProduct6 = (com.xw.repo.BubbleSeekBar)findViewById(R.id.sale_inproduct6_seekbar);
+                bubbleSeekBarProduct6.setOnProgressChangedListener(this);
+                bubbleSeekBarProduct1.correctOffsetWhenContainerOnScrolling();
+                bubbleSeekBarProduct2.correctOffsetWhenContainerOnScrolling();
+                bubbleSeekBarProduct3.correctOffsetWhenContainerOnScrolling();
+                bubbleSeekBarProduct4.correctOffsetWhenContainerOnScrolling();
+                bubbleSeekBarProduct5.correctOffsetWhenContainerOnScrolling();
+                bubbleSeekBarProduct6.correctOffsetWhenContainerOnScrolling();
+
+                textInputEditTextContactPersonName = (android.support.design.widget.TextInputEditText)
+                        findViewById(R.id.sale_contact_person_phone_edittext);  //联系人姓名
+                textInputEditTextContactPersonPhone = (android.support.design.widget.TextInputEditText)
+                        findViewById(R.id.sale_contact_person_phone_edittext);  //联系人电话
+                buttonGetCertificateCode = (Button)
+                        findViewById(R.id.sale_phone_getcertificatecode_btn);   //获取短信验证码的button
+                textInputEditTextCertificateCode = (android.support.design.widget.TextInputEditText)
+                        findViewById(R.id.sale_certificate_code_edittext);      //验证码输入
+                buttonGetCertificateCode.setOnClickListener(this);
+                buttonSaleUpload = (Button)findViewById(R.id.sale_upload_button);
+                buttonSaleUpload.setOnClickListener(this);
                 break;
 
         }
     }
 
+
+    @Override
+    public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+        Toast.makeText(this, "当前的选择是" + isChecked, Toast.LENGTH_SHORT).show();
+    }
 
     /**
      * 用于处理生产企业图片的上传
@@ -474,11 +596,20 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
 
     @Override
     public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat, boolean fromUser) {
-        bubbleSeekBarProductItem1.correctOffsetWhenContainerOnScrolling();
-        bubbleSeekBarProductItem2.correctOffsetWhenContainerOnScrolling();
-        bubbleSeekBarProductItem3.correctOffsetWhenContainerOnScrolling();
-        bubbleSeekBarProductItem4.correctOffsetWhenContainerOnScrolling();
-        bubbleSeekBarProductItem5.correctOffsetWhenContainerOnScrolling();
+        if(currPosition == 1){
+            bubbleSeekBarProductItem1.correctOffsetWhenContainerOnScrolling();
+            bubbleSeekBarProductItem2.correctOffsetWhenContainerOnScrolling();
+            bubbleSeekBarProductItem3.correctOffsetWhenContainerOnScrolling();
+            bubbleSeekBarProductItem4.correctOffsetWhenContainerOnScrolling();
+            bubbleSeekBarProductItem5.correctOffsetWhenContainerOnScrolling();
+        }else if(currPosition == 3){
+            bubbleSeekBarProduct1.correctOffsetWhenContainerOnScrolling();
+            bubbleSeekBarProduct2.correctOffsetWhenContainerOnScrolling();
+            bubbleSeekBarProduct3.correctOffsetWhenContainerOnScrolling();
+            bubbleSeekBarProduct4.correctOffsetWhenContainerOnScrolling();
+            bubbleSeekBarProduct5.correctOffsetWhenContainerOnScrolling();
+            bubbleSeekBarProduct6.correctOffsetWhenContainerOnScrolling();
+        }
         Toast.makeText(this, "onProgressChanged " + progressFloat, Toast.LENGTH_SHORT).show();
     }
 
@@ -504,6 +635,8 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
             textInputEditTextMaterialOutTime.setText(message);
         }else if(currPosition == 1){
             textInputEditTextProductTime.setText(message);
+        }else if(currPosition == 3){
+            textInputEditTextInProductTime.setText(message);
         }
     }
 
@@ -609,7 +742,6 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                         .setTextColorCenter(Color.LTGRAY)
                         .isRestoreItem(true)
                         .isCenterLabel(false)
-                        .setLabels("厂房号","车间号","")
                         .setBackgroundId(0x00000000)
                         .isDialog(true)
                         .build();
@@ -623,6 +755,22 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
 
                 break;
             case R.id.driver_phone_checkget_btn:    //处理手机验证
+                isGetCertificateCode = Boolean.FALSE;
+                DOWNTIME=60;
+                timer = new Timer();      //设置定时任务
+                timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                buttonDriverPhoneCheck.setText((--DOWNTIME)+"秒后重发");
+                            }
+                        });
+                    }
+                };
+                timer.schedule(timerTask,1000); //定时每隔1s
+
                 Log.i("短信验证","准备开始验证");
                 //短信验证发送与接收处理
                 eventHandler = new EventHandler(){
@@ -633,10 +781,12 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                             if(event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE){
                                 Log.i("短信验证","验证成功!");
                                 uiToast("短信验证成功");
+                                SMSSDK.unregisterEventHandler(eventHandler);
                             }else if(event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
                                 Log.i("短信验证","获取验证码成功!");
                                 Log.i("短信验证：","获取的data 的内容是：" + data.toString());
-                                uiToast("验证失败，请确认验证码是否正确");
+                                uiToast("获取验证码成功!");
+                                timer.cancel();
                             }
                         }else{
                             //错误处理，包括验证失败的情况
@@ -661,7 +811,161 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                 varificationcode = textInputEditTextDriverPhoneCheck.getText().toString();
                 SMSSDK.submitVerificationCode("86",phonenum1,varificationcode); //提交验证
                 break;
+            case R.id.sale_orgacode_select_imgbtn:  //选择零售企业
+                final ArrayList<String> optionsItems = new ArrayList<>();
+                optionsItems.add("大润发");
+                optionsItems.add("苏果");
+                optionsItems.add("家乐福");
+                optionsItems.add("沃尔玛");
+                optionsItems.add("联华");
+                optionsItems.add("永辉");
+                optionsItems.add("特易购");
+                optionsItems.add("物美");
+                optionsItems.add("农工商");
+                optionsPickerViewSaleCorp = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                        Toast.makeText(InfoInput.this, "当前选择的企业的名称是：" + optionsItems.get(options1), Toast.LENGTH_SHORT).show();
+                        textInputEditTextSaleOrg.setText(optionsItems.get(options1));
 
+                    }
+                }).setTitleText("选择零售企业")
+                        .setTitleSize(20)
+                        .setTitleColor(Color.BLACK)
+                        .setBackgroundId(0x00000000)
+                        .isCenterLabel(false)
+                        .isDialog(true)
+                        .isRestoreItem(true)
+                        .build();
+                optionsPickerViewSaleCorp.setPicker(optionsItems);
+                optionsPickerViewSaleCorp.show();
+
+                break;
+            case R.id.sale_batchid_imgbtn:      //零售企业批次选择
+                //产品批次码由行政区划与追溯码构成
+                optionsItems1 = new ArrayList<>();
+                optionsItems1.add("320102");
+                optionsItems1.add("320104");
+                optionsItems1.add("320105");
+                optionsItems1.add("320106");
+                optionsItems2 = new ArrayList<>();
+                ArrayList<String> optionsItem21 = new ArrayList<>();
+                optionsItem21.add("01213-011");
+                optionsItem21.add("01213-012");
+                optionsItem21.add("01213-013");
+                optionsItem21.add("01213-014");
+                optionsItem21.add("01213-015");
+
+                ArrayList<String> optionsItem22 = new ArrayList<>();
+                optionsItem22.add("01221-011");
+                optionsItem22.add("01221-012");
+                optionsItem22.add("01221-013");
+                optionsItem22.add("01221-014");
+                optionsItem22.add("01221-015");
+                optionsItem22.add("01221-016");
+                optionsItem22.add("01221-017");
+
+                ArrayList<String> optionsItem23 = new ArrayList<>();
+                optionsItem23.add("01222-012");
+                optionsItem23.add("01222-013");
+                optionsItem23.add("01222-014");
+                optionsItem23.add("01222-015");
+                optionsItem23.add("01222-016");
+                optionsItem23.add("01222-017");
+
+                ArrayList<String> optionsItem24 = new ArrayList<>();
+                optionsItem24.add("01237-202");
+                optionsItem24.add("01237-203");
+                optionsItem24.add("01237-204");
+                optionsItem24.add("01237-205");
+                optionsItem24.add("01237-206");
+
+                optionsItems2.add(optionsItem21);
+                optionsItems2.add(optionsItem22);
+                optionsItems2.add(optionsItem23);
+                optionsItems2.add(optionsItem24);
+
+                optionsPickerViewBatchId = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                        textInputEditTextBatchId.setText(optionsItems1.get(options1)+"-"+optionsItems2.get(options1).get(options2));
+                    }
+                }).setTitleText("选择批次")
+                        .setTitleColor(Color.BLACK)
+                        .setBackgroundId(0x00000000)
+                        .isCenterLabel(false)
+                        .isDialog(true)
+                        .isRestoreItem(true)
+                        .build();
+                optionsPickerViewBatchId.setPicker(optionsItems1,optionsItems2);
+                optionsPickerViewBatchId.show();
+
+                break;
+            case R.id.sale_intime_imgbtn:       //进货时间选择
+                DateSelectDialog dateSelectDialogSale = new DateSelectDialog();
+
+                DateSelectDialog.Callback callbackSale = new DateSelectDialog.Callback(){
+                @Override
+                public void onClick(final String message) {
+                    Toast.makeText(InfoInput.this, "当前选择的时间是：" + message, Toast.LENGTH_SHORT).show();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            textInputEditTextProductTime.setText(message);
+                        }
+                    });
+                }
+            };
+                dateSelectDialogSale.show(getSupportFragmentManager());
+
+                break;
+            case R.id.sale_phone_getcertificatecode_btn:        //获取短信验证码的button
+                isGetCertificateCode = Boolean.FALSE;
+                DOWNTIME=60;
+                timer = new Timer();
+                timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                buttonGetCertificateCode.setText((--DOWNTIME)+"秒后重发");
+                            }
+                        });
+                    }
+                };
+                timer.schedule(timerTask,1000);
+                eventHandlerSale = new EventHandler(){
+                    @Override
+                    public void afterEvent(int event, int result, Object data) {
+                        if(result == SMSSDK.RESULT_COMPLETE){
+                            if(event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE){
+                                uiToast("短信验证成功");
+                                SMSSDK.unregisterEventHandler(eventHandlerSale);
+                            }else if(event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
+                                uiToast("获取验证码");
+                                timer.cancel();
+                            }
+                        }else{
+                            ((Throwable)data).printStackTrace();
+                        }
+                    }
+                };
+                SMSSDK.registerEventHandler(eventHandlerSale);
+                String phonenumSale = textInputEditTextContactPersonPhone.getText().toString();
+                if(phonenumSale.trim().equals("")){
+                    Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                SMSSDK.getVerificationCode("86",phonenumSale,null);
+
+                break;
+            case R.id.sale_upload_button:       //零售企业表单提交按钮
+                String verificationCode;
+                String phonenumSale2 = textInputEditTextContactPersonPhone.getText().toString();
+                verificationCode = textInputEditTextCertificateCode.getText().toString();
+                SMSSDK.submitVerificationCode("86",phonenumSale2,verificationCode);
+                break;
             default:
                 break;
         }
