@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/about_us_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+    <com.github.florent37.longshadow.LongShadow
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:shadow_angle="140"
+        app:shadow_color="#53868B"
+        android:background="@android:color/darker_gray">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/about_us_imageview"
+            android:src="@drawable/software_logo"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#96CDCD"
+            android:layout_gravity="center_horizontal"/>
+    </com.github.florent37.longshadow.LongShadow>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="软件名称： 食品安全电子追溯系统"
+        android:textSize="17dp"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/black"/>
+    <TextView
+        android:text="版本号：V 2.3.1"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="版权声明: Licensed under the Apache License"
+        android:layout_marginTop="20dp"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>

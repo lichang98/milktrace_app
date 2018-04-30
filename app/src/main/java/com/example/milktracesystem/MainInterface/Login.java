@@ -31,7 +31,7 @@ import okhttp3.Response;
 public class Login extends AppCompatActivity{
 //    private Button button1;
 //    private Button buttonRegister;      //注册按钮
-    private WelcomeHelper welcomeHelper;    //欢迎界面
+//    private WelcomeHelper welcomeHelper;    //欢迎界面
     private com.rey.material.widget.TextView createAccountText;     //点击创建账户的文本
     private com.rey.material.widget.Button loginButton; //登录按钮
     @Override
@@ -39,8 +39,8 @@ public class Login extends AppCompatActivity{
         super.onCreate(savedInstanceStatue);
         setContentView(R.layout.login_layout);
         //欢迎界面
-        welcomeHelper = new WelcomeHelper(Login.this,Activity_Launch.class);
-        welcomeHelper.show(savedInstanceStatue);
+//        welcomeHelper = new WelcomeHelper(Login.this,Activity_Launch.class);
+//        welcomeHelper.show(savedInstanceStatue);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_login);
         setSupportActionBar(toolbar);
 
@@ -145,7 +145,7 @@ public class Login extends AppCompatActivity{
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        welcomeHelper.onSaveInstanceState(outState);
+//        welcomeHelper.onSaveInstanceState(outState);
     }
 
 }

@@ -36,19 +36,19 @@
             android:value="hMY7t1RdnkaGWxtOUbGEWCqzcgP4cLO8"/>
         <activity android:name=".MainInterface.Login"
             android:screenOrientation="portrait"
-            android:label="乳品追溯">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="食品安全电子追溯平台">
         </activity>
         <activity android:name=".MainInterface.Activity_Launch"
             android:theme="@style/WelcomeScreenTheme"
             android:screenOrientation="portrait"/>
         <activity android:name=".MainInterface.GeneralActivity"
-            android:label="乳品追溯"
+            android:label="食品安全电子追溯平台"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Factory_Acticity.FactoryActivity"
             android:label="产品可追溯链"
@@ -101,6 +101,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".MainInterface.Register"
             android:label="用户注册"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainInterface.AboutusActivity"
+            android:label="关于我们"
             android:screenOrientation="portrait"/>
         <activity android:name=".Factory_Acticity.Factory_Consumer_Comment.ConsumerComment"
             android:label="用户评论界面"

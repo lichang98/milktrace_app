@@ -54,6 +54,7 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.stephentuso.welcome.WelcomeHelper;
 import com.tmall.ultraviewpager.IUltraIndicatorBuilder;
 import com.tmall.ultraviewpager.UltraViewPager;
 import com.tmall.ultraviewpager.UltraViewPagerAdapter;
@@ -88,6 +89,7 @@ import java.util.TimerTask;
 public class GeneralActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;      //侧边滑出菜单栏
 //    private static ViewPager viewPager;
+    private WelcomeHelper welcomeHelper;    //欢迎界面，仅在首次打开软件时
     private UltraViewPager ultraViewPager;      //viewpager
     private RadioGroup group;
     private static int[] imageIds={R.drawable.showmilk1,R.drawable.showmilk2,R.drawable.showmilk3};
@@ -124,6 +126,9 @@ public class GeneralActivity extends AppCompatActivity {
         setContentView(R.layout.activity_general);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);  //顶部ToolBar
         setSupportActionBar(toolbar);
+        //欢迎界面初始化
+        welcomeHelper = new WelcomeHelper(GeneralActivity.this,Activity_Launch.class);
+        welcomeHelper.show(savedInstanceState);
 
         ultraViewPager = (com.tmall.ultraviewpager.UltraViewPager)findViewById(R.id.main_viewpager);
         ultraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
@@ -321,6 +326,12 @@ public class GeneralActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        welcomeHelper.onSaveInstanceState(outState);
+    }
+
     /**
      * 用于在网络资源加载完成后提示界面数据显示
      * @param imgUrl        显示新闻图片的URL
@@ -456,7 +467,10 @@ public class GeneralActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.backwards:
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+                //用户登录按钮
+                Intent intent = new Intent(GeneralActivity.this,Login.class);
+                startActivity(intent);
                 break;
             case R.id.scan:
                 Toast.makeText(this, "Scan", Toast.LENGTH_SHORT).show();
@@ -467,6 +481,8 @@ public class GeneralActivity extends AppCompatActivity {
                 break;
             case R.id.about_us:
                 Toast.makeText(this, "About us", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(GeneralActivity.this,AboutusActivity.class);
+                startActivity(intent1);
                 break;
             case android.R.id.home:         //侧边滑出栏
                 drawerLayout.openDrawer(GravityCompat.START);
