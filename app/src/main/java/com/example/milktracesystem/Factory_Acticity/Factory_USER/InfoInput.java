@@ -165,6 +165,7 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     private android.support.design.widget.TextInputEditText textInputEditTextBatchId;   //零售企业批次码选择
     private ImageButton imageButtonBatchIdSelect;   //零售企业批次码选择
     private android.support.design.widget.TextInputEditText textInputEditTextInProductTime;//进货时间选择
+    private ImageButton imageButtonInProductTimeSelect; //进货时间选择按钮
 
 
 
