@@ -154,10 +154,18 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     private android.support.design.widget.TextInputEditText textInputEditTextDriverPhone;   //填写手机号码的输入框
     private android.support.design.widget.TextInputEditText textInputEditTextDriverPhoneCheck;  //填写验证码的输入框
     private Button buttonDriverPhoneCheck; //获取验证码的按钮
-    private final String APPKEY="2565de88b7ec9";    //短信验证的应用key
-    private final String SECRETKEY="0c0017e172aaf1511f085de078f8b3da";
+    private final String APPKEY="258529026d387";    //短信验证的应用key
+    private final String SECRETKEY="e8e691c8eb87a99e3d9c1f3ce1c16dc6";
     private EventHandler eventHandler;  //用于短信验证的回调处理
     private Button buttonTransportSubmit;   //物流运输企业验证表单提交按钮
+
+    //零售企业
+    private android.support.design.widget.TextInputEditText textInputEditTextSaleOrg;   //零售企业选择
+    private ImageButton imageButtonSaleOrgSelect;   //零售企业选择点击按钮
+    private android.support.design.widget.TextInputEditText textInputEditTextBatchId;   //零售企业批次码选择
+    private ImageButton imageButtonBatchIdSelect;   //零售企业批次码选择
+    private android.support.design.widget.TextInputEditText textInputEditTextInProductTime;//进货时间选择
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -330,10 +338,10 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                 //乳制品生产企业处理
                 wheelViewProductMaterialUse = (com.lantouzi.wheelview.WheelView)findViewById(R.id.product_material1use_wheel);
                 List<String> itemForProductMaterialUse = new ArrayList<>();
-                for(int i=10;i<100;++i)
+                for(int i=100;i<1000;++i)
                     itemForProductMaterialUse.add(String.valueOf(i));
                 wheelViewProductMaterialUse.setItems(itemForProductMaterialUse);
-                wheelViewProductMaterialUse.setMaxSelectableIndex(90);
+                wheelViewProductMaterialUse.setMaxSelectableIndex(900);
                 //设置原料使用选择器的监听器
                 wheelViewProductMaterialUse.setOnWheelItemSelectedListener(new com.lantouzi.wheelview.WheelView.OnWheelItemSelectedListener(){
                     @Override
@@ -781,12 +789,12 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
             case R.id.backwards:
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.scan:
-                Toast.makeText(this, "Scan", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.more:
-                Toast.makeText(this, "More", Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.scan:
+//                Toast.makeText(this, "Scan", Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.more:
+//                Toast.makeText(this, "More", Toast.LENGTH_SHORT).show();
+//                break;
             case R.id.about_us:
                 Toast.makeText(this, "About us", Toast.LENGTH_SHORT).show();
                 break;

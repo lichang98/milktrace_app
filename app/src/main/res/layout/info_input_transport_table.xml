@@ -283,16 +283,24 @@
                     android:layout_gravity="bottom"
                     android:text="获取验证码"/>
             </LinearLayout>
-            <Button
-                android:id="@+id/transport_submit_btn"
-                android:text="提交表单"
+            <com.andexert.library.RippleView
+                android:id="@+id/material_rippleview2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/driver_phone_checklinear"
                 android:layout_marginTop="20dp"
-                android:background="@android:color/white"
-                android:textColor="@android:color/black"
-                android:textSize="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                app:rv_centered="true">
+                <Button
+                    android:id="@+id/transport_submit_btn"
+                    android:text="提交表单"
+                    android:layout_marginTop="20dp"
+                    android:background="@android:color/holo_blue_dark"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.andexert.library.RippleView>
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

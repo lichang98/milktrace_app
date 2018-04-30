@@ -115,12 +115,12 @@ public class WebShow extends CordovaActivity{
             case R.id.backwards:
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.scan:
-                Toast.makeText(this, "Scan", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.more:
-                Toast.makeText(this, "More", Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.scan:
+//                Toast.makeText(this, "Scan", Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.more:
+//                Toast.makeText(this, "More", Toast.LENGTH_SHORT).show();
+//                break;
             case R.id.about_us:
                 Toast.makeText(this, "About us", Toast.LENGTH_SHORT).show();
                 break;

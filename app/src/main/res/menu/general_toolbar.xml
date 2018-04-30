@@ -6,16 +6,16 @@
         android:icon="@drawable/login_person"
         android:title="退出"
         app:showAsAction="always"/>
-    <item
-        android:id="@+id/scan"
-        android:icon="@drawable/scan2"
-        android:title="扫一扫"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/more"
-        android:icon="@drawable/more"
-        android:title="更多"
-        app:showAsAction="never"/>
+    <!--<item-->
+        <!--android:id="@+id/scan"-->
+        <!--android:icon="@drawable/scan2"-->
+        <!--android:title="扫一扫"-->
+        <!--app:showAsAction="never"/>-->
+    <!--<item-->
+        <!--android:id="@+id/more"-->
+        <!--android:icon="@drawable/more"-->
+        <!--android:title="更多"-->
+        <!--app:showAsAction="never"/>-->
     <item
         android:id="@+id/about_us"
         android:icon="@drawable/info"

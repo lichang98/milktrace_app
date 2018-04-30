@@ -3,139 +3,165 @@
     android:layout_height="match_parent" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/material_infoinput_volumn_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="当日出货量"
-        android:textSize="16dp"
-        android:textColor="@android:color/black"/>
-    <com.lantouzi.wheelview.WheelView
-        android:id="@+id/material_volumn_select_wheel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/material_infoinput_volumn_text"
-        android:layout_marginTop="10dp"
-        app:lwvHighlightColor="#31B1E6"
-        app:lwvAdditionalCenterMark="千克"
-        app:lwvMarkRatio="0.2"
-        app:lwvMarkTextColor="#919191"
-        android:background="@android:color/white"/>
-
-    <LinearLayout
-        android:id="@+id/infoinput_target_linear"
-        android:orientation="horizontal"
-        android:layout_below="@+id/material_volumn_select_wheel"
-        android:layout_marginTop="20dp"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/info_input_material_targetcorp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/info_input_material_targetcorp_text"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/material_infoinput_volumn_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="收货企业名称" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <ImageButton
-            android:id="@+id/info_input_material_select_imgbtn"
-            android:src="@drawable/plus"
-            android:layout_marginEnd="5dp"
-            android:background="@android:color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <Space
-        android:id="@+id/space1_infoinput"
-        android:layout_below="@+id/infoinput_target_linear"
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-    <LinearLayout
-        android:id="@+id/material_checkconclusion_linear"
-        android:orientation="horizontal"
-        android:layout_below="@+id/space1_infoinput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/material_checkconclusion_text"
-            android:textSize="16dp"
-            android:textColor="@android:color/black"
-            android:text="原料出厂检验结论(合格/不合格)"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-        <com.suke.widget.SwitchButton
-            android:id="@+id/switchbtn_material_checkconclusion"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"/>
-    </LinearLayout>
-    <android.support.v4.widget.Space
-        android:id="@+id/space3_material"
-        android:layout_below="@+id/material_checkconclusion_linear"
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/material_checkperson_name_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/space3_material">
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="检验员姓名"/>
-    </android.support.design.widget.TextInputLayout>
-    <android.support.v4.widget.Space
-        android:id="@+id/space4_material"
-        android:layout_below="@+id/material_checkperson_name_text"
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/material_input_checkperson_phone_textlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/space4_material">
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/material_input_checkperson_name_textinput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="联系电话"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.v4.widget.Space
-        android:id="@+id/space2_infoinput"
-        android:layout_below="@+id/material_input_checkperson_phone_textlayout"
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/space2_infoinput">
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/outtime_textinputlayout"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/material_outtime_textinput"
-                android:hint="点击按钮选择出货时间"
+                android:text="当日出货量"
+                android:textSize="16dp"
+                android:textColor="@android:color/black"/>
+            <com.lantouzi.wheelview.WheelView
+                android:id="@+id/material_volumn_select_wheel"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent" />
-        </android.support.design.widget.TextInputLayout>
-        <ImageButton
-            android:id="@+id/material_outtimeselect_imgbtn"
-            android:src="@drawable/calendar"
-            android:background="@android:color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+                android:layout_below="@+id/material_infoinput_volumn_text"
+                android:layout_marginTop="10dp"
+                app:lwvHighlightColor="#31B1E6"
+                app:lwvAdditionalCenterMark="千克"
+                app:lwvMarkRatio="0.2"
+                app:lwvMarkTextColor="#919191"
+                android:background="@android:color/white"/>
+
+            <LinearLayout
+                android:id="@+id/infoinput_target_linear"
+                android:orientation="horizontal"
+                android:layout_below="@+id/material_volumn_select_wheel"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/info_input_material_targetcorp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/info_input_material_targetcorp_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="收货企业名称" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/info_input_material_select_imgbtn"
+                    android:src="@drawable/plus"
+                    android:layout_marginEnd="5dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <Space
+                android:id="@+id/space1_infoinput"
+                android:layout_below="@+id/infoinput_target_linear"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+            <LinearLayout
+                android:id="@+id/material_checkconclusion_linear"
+                android:orientation="horizontal"
+                android:layout_below="@+id/space1_infoinput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/material_checkconclusion_text"
+                    android:textSize="16dp"
+                    android:textColor="@android:color/black"
+                    android:text="原料出厂检验结论(合格/不合格)"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <com.suke.widget.SwitchButton
+                    android:id="@+id/switchbtn_material_checkconclusion"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+            </LinearLayout>
+            <android.support.v4.widget.Space
+                android:id="@+id/space3_material"
+                android:layout_below="@+id/material_checkconclusion_linear"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/material_checkperson_name_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/space3_material">
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="检验员姓名"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.v4.widget.Space
+                android:id="@+id/space4_material"
+                android:layout_below="@+id/material_checkperson_name_text"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/material_input_checkperson_phone_textlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/space4_material">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/material_input_checkperson_name_textinput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="联系电话"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.v4.widget.Space
+                android:id="@+id/space2_infoinput"
+                android:layout_below="@+id/material_input_checkperson_phone_textlayout"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+            <LinearLayout
+                android:id="@+id/out_cargo_time_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/space2_infoinput">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/outtime_textinputlayout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/material_outtime_textinput"
+                        android:hint="点击按钮选择出货时间"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent" />
+                </android.support.design.widget.TextInputLayout>
+                <ImageButton
+                    android:id="@+id/material_outtimeselect_imgbtn"
+                    android:src="@drawable/calendar"
+                    android:background="@android:color/transparent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <com.andexert.library.RippleView
+                android:id="@+id/material_rippleview2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/out_cargo_time_linear"
+                android:layout_marginTop="20dp"
+                app:rv_centered="true">
+                <Button
+                    android:id="@+id/material_upload_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:text="提交表单"
+                    android:textSize="17dp"
+                    android:background="@android:color/holo_blue_dark"/>
+            </com.andexert.library.RippleView>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
 <!--<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
     <!--android:layout_width="match_parent" android:layout_height="match_parent"-->

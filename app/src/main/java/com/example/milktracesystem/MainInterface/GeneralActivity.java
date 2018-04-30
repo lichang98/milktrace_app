@@ -472,13 +472,13 @@ public class GeneralActivity extends AppCompatActivity {
                 Intent intent = new Intent(GeneralActivity.this,Login.class);
                 startActivity(intent);
                 break;
-            case R.id.scan:
-                Toast.makeText(this, "Scan", Toast.LENGTH_SHORT).show();
-                new IntentIntegrator(GeneralActivity.this).initiateScan();  //启动扫描
-                break;
-            case R.id.more:
-                Toast.makeText(this, "More", Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.scan:
+//                Toast.makeText(this, "Scan", Toast.LENGTH_SHORT).show();
+//                new IntentIntegrator(GeneralActivity.this).initiateScan();  //启动扫描
+//                break;
+//            case R.id.more:
+//                Toast.makeText(this, "More", Toast.LENGTH_SHORT).show();
+//                break;
             case R.id.about_us:
                 Toast.makeText(this, "About us", Toast.LENGTH_SHORT).show();
                 Intent intent1 = new Intent(GeneralActivity.this,AboutusActivity.class);
