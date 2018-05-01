@@ -84,6 +84,9 @@ public class FeedBackActivity extends AppCompatActivity implements DialogForChoo
     private ArrayList<HashMap<String,Object>> imageItem;
     private SimpleAdapter simpleAdapter;        //适配器
 
+    //界面修改后控件
+    private EditText editTextFeedBackName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -251,6 +254,10 @@ public class FeedBackActivity extends AppCompatActivity implements DialogForChoo
                 picture.setDrawingCacheEnabled(false); //关闭drawing cache
             }
         });
+
+
+
+
     }
 
 
