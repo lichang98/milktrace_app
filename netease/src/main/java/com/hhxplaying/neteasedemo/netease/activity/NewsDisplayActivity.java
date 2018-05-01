@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -24,6 +25,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Space;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -146,6 +148,13 @@ public class NewsDisplayActivity extends AppCompatActivity {
     public void getWebNewsContent() throws IOException {
         //FIXME 获取新闻的具体内容的URL 地址，显示新闻内容,使用JAVA 根据内容动态编写界面
         Intent intent = getIntent();
+        String type = intent.getStringExtra("type");
+        //判断需要显示的内容是否是乳制品百科
+        if(type.equals("baike")){
+            getBaikeNewsContent(intent.getStringExtra("NEWS_CONTENT_URL"));
+            return;
+        }
+
         final String newsContentUrl = intent.getStringExtra("NEWS_CONTENT_URL");      //需要打开的新闻界面
         scrollView = (ScrollView)findViewById(R.id.news_content_root_scv);   //新闻界面scrollview作为rootparent
         final LinearLayout linearLayout = new LinearLayout(this);
@@ -261,6 +270,91 @@ public class NewsDisplayActivity extends AppCompatActivity {
 //                        scrollView.addView(imageView);
 //                    }
                 }
+            }
+        });
+    }
+
+    /**
+     * 乳制品百科具体内容的网址
+     * @param contentUrl
+     */
+    public void getBaikeNewsContent(String contentUrl) throws IOException {
+        scrollView = (ScrollView)findViewById(R.id.news_content_root_scv);  //乳制品百科界面
+        final LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT) );
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        scrollView.addView(linearLayout);
+        Connection connection = Jsoup.connect(contentUrl);      //连接具体信息的网址
+        connection.header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:32.0) Gecko/    20100101 Firefox/32.0");
+        Document document = connection.get();
+
+        Elements titleElement = document.getElementsByTag("h1"); //获取标题、来源等信息
+        final String title = titleElement.get(1).text();
+        Log.i("乳制品百科" , "获取到的标题为：" + title);
+        String contentInfo = document.getElementsByClass("newsTime01").get(0).text();   //文章的其他属性信息，如:时间
+        Log.i("乳制品百科","获取的文章的其他信息：" + contentInfo);
+        final String contentTime = contentInfo.substring(0,contentInfo.indexOf("阅")); //发表时间
+        final String source = contentInfo.substring(contentInfo.indexOf("来源："),contentInfo.indexOf("- 豆乳"));
+
+        final Elements mainContentEle = document.getElementsByClass("div_text").get(0).children();  //新闻的主内容
+        Log.i("乳制品百科","获取到的文章的主要内容：" + mainContentEle.html());
+
+        //构建界面
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView textView = new TextView(NewsDisplayActivity.this);
+                textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                textView.setTextSize(30);
+                textView.setTextColor(Color.BLACK);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                linearLayout.addView(textView);
+                textView.setText(title);    //插入标题
+
+                TextView textViewInfo = new TextView(NewsDisplayActivity.this);
+                textViewInfo.setTextSize(14);
+                textViewInfo.setTextColor(Color.BLACK);
+                textViewInfo.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                textViewInfo.setBackgroundDrawable(NewsDisplayActivity.this.getResources().getDrawable(R.drawable.actionbar_item));
+                textViewInfo.setText("发表时间:" + contentTime + "   " + source);
+                linearLayout.addView(textViewInfo);
+                //添加space 分割
+                Space space = new Space(NewsDisplayActivity.this);
+                space.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,20));
+                linearLayout.addView(space);
+                //依次添加所有的可能的内容
+                for(Element element : mainContentEle){
+                    Log.i("乳制品百科","当前标签{" + element.tagName());
+                    Log.i("乳制品百科","标签中的内容{" + element.html());
+                    if(element.html().contains("<img src=")){
+                        Log.i("乳制品百科","图片连接地址：[" + element.select("img").attr("src"));
+                        ImageView imageView = new ImageView(NewsDisplayActivity.this);
+                        imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT));
+                        linearLayout.addView(imageView);
+                        String imgPath = element.select("img").attr("src");
+                        if(!imgPath.trim().equals("")){
+                            Glide.with(NewsDisplayActivity.this).load(imgPath).into(imageView);
+
+                        }
+                    }else{      //显示文字
+                        TextView textView1 = new TextView(NewsDisplayActivity.this);
+                        textView1.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT));
+                        linearLayout.addView(textView1);
+                        textView1.setTextSize(18);
+                        if(element.html().contains("b")){
+                            textView1.setTextSize(20);
+                            textView1.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                        }
+                        textView1.setTextColor(Color.BLACK);
+                        textView1.setText(element.text()+"\n");
+                    }
+                }
+
+
             }
         });
     }

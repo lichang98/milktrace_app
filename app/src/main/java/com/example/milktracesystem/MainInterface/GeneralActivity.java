@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -120,6 +121,7 @@ public class GeneralActivity extends AppCompatActivity {
     private android.support.v7.widget.CardView cardViewProductSearch;
     private android.support.v7.widget.CardView cardViewFeedback;
     private android.support.v7.widget.CardView cardViewNewsPolicy;
+    private android.support.v7.widget.CardView cardViewFacBrowse;   //企业信息浏览
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -164,6 +166,11 @@ public class GeneralActivity extends AppCompatActivity {
         cardViewNewsPolicy.setBackgroundColor(getResources().getColor(R.color.colorSwitchThumbNormal));
         cardViewNewsPolicy.setCardElevation(30);
         cardViewNewsPolicy.setRadius(10);
+        cardViewFacBrowse = (android.support.v7.widget.CardView)findViewById(R.id.cardview_general_browse);
+        cardViewFacBrowse.setCardBackgroundColor(getResources().getColor(R.color.colorSwitchThumbNormal));
+        cardViewFacBrowse.setCardElevation(30);
+        cardViewFacBrowse.setRadius(10);
+
         //数据采集
         cardViewDataAccu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,6 +199,13 @@ public class GeneralActivity extends AppCompatActivity {
                 startActivity(new Intent(GeneralActivity.this,com.hhxplaying.neteasedemo.netease.activity.MainActivity.class));
             }
         });
+        //企业信息浏览
+        cardViewFacBrowse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GeneralActivity.this,FactoryActivity.class));
+            }
+        });
 
         new Thread(new Runnable() {
             @Override
@@ -200,9 +214,13 @@ public class GeneralActivity extends AppCompatActivity {
                 Connection connection = Jsoup.connect("http://www.chinadairy.net/");
                 connection.header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:32.0) Gecko/    20100101 Firefox/32.0");
 
-                String imgUrl = "";
+                String imgUrl="";
                 String title = "";
                 String contentUrl = "";
+                String imgurl2 = "";
+                String title2="";
+                String contentUrl2="";
+
                 try {
                     final Document document = connection.get();
                     Elements elements = document.getElementsByClass("pic");
@@ -210,7 +228,40 @@ public class GeneralActivity extends AppCompatActivity {
                     imgUrl = ele.select("img").attr("src");
                     title = ele.attr("title");
                     contentUrl = ele.attr("href");  //新闻内容的url 链接
-                    notifyGeneralList(imgUrl,title,contentUrl);
+
+                    connection = null;
+                    connection = Jsoup.connect("http://www.6678.tv/baike/naizhipin/");
+                    connection.header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:32.0) Gecko/    20100101 Firefox/32.0");
+                    final String urlPrefix="http://www.6678.tv";
+
+
+                    //乳制品百科数据的获取
+                    Document document2 = connection.get();
+                    Elements elements2 = document2.getElementsByClass("news_zpic1");
+                    imgurl2 = elements2.get(0).select("img").get(0).attr("src");
+                    elements2 = document2.getElementsByClass("news_zcon1");
+                    title2 = elements2.get(0).select("span").get(0).select("a").attr("title");
+                    contentUrl2 = elements2.get(0).select("span").get(0).select("a").attr("href");
+                    Log.i("百科网页信息获取","获取到的图片链接:[" + urlPrefix+imgurl2);
+                    Log.i("百科网页信息获取","获取到的新闻标题：[" + title2);
+                    Log.i("百科网页信息获取","获取到的内容链接:[" + urlPrefix+contentUrl2);
+
+                    imgurl2 = urlPrefix+imgurl2;
+                    contentUrl2 = urlPrefix+contentUrl2;
+
+
+                    ArrayList<String> imgUrls = new ArrayList<>();
+                    imgUrls.add(imgUrl);
+                    imgUrls.add(imgurl2);
+                    ArrayList<String> titles = new ArrayList<>();
+                    titles.add(title);
+                    titles.add(title2);
+                    ArrayList<String> contentUrls = new ArrayList<>();
+                    contentUrls.add(contentUrl);
+                    contentUrls.add(contentUrl2);
+
+
+                    notifyGeneralList(imgUrls,titles,contentUrls);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -325,7 +376,6 @@ public class GeneralActivity extends AppCompatActivity {
         }*/
     }
 
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -334,11 +384,11 @@ public class GeneralActivity extends AppCompatActivity {
 
     /**
      * 用于在网络资源加载完成后提示界面数据显示
-     * @param imgUrl        显示新闻图片的URL
-     * @param title         显示新闻图片的标题
-     * @param contentUrl    具体的新闻内容的url
+     * @param imgUrls        显示新闻图片的URL
+     * @param titles        显示新闻图片的标题
+     * @param contentUrls   具体的新闻内容的url
      */
-    public void notifyGeneralList(final String imgUrl,final String title,final String contentUrl){
+    public void notifyGeneralList(final ArrayList<String> imgUrls,final ArrayList<String> titles,final ArrayList<String> contentUrls){
 
         runOnUiThread(new Runnable() {
             @Override
@@ -346,17 +396,20 @@ public class GeneralActivity extends AppCompatActivity {
                 ArrayList<HashMap<String,Object>> list = new ArrayList<>();
                 HashMap<String,Object> map = new HashMap<>(),map1 = new HashMap<>();
                 map.put("itemText","头条新闻");
-                map.put("itemImage",imgUrl);
-                map.put("itemTitle",title);
-                map.put("itemcontentUrl",contentUrl);   //新闻内容的网址
-                map1.put("itemText","知识答题");
-                map1.put("itemImage",R.drawable.milk_questions);
-                map1.put("itemTitle","");
-                map1.put("itemcontentUrl","");
+                map.put("itemImage", imgUrls.get(0));
+                map.put("itemTitle",titles.get(0));
+                map.put("itemcontentUrl", contentUrls.get(0));   //新闻内容的网址
+                map1.put("itemText","乳品百科");
+                map1.put("itemImage",imgUrls.get(1));
+                map1.put("itemTitle",titles.get(1));
+                map1.put("itemcontentUrl",contentUrls.get(1));
+
+                Log.i("主界面列表","准备更新百科以及新闻界面..................");
 
                 list.add(map);
                 list.add(map1);
                 RecyclerView recyclerView = (RecyclerView)findViewById(R.id.general_recyclerview);
+                recyclerView.setVerticalScrollBarEnabled(true);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(GeneralActivity.this);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 GeneralItemAdapter generalItemAdapter = new GeneralItemAdapter(list);

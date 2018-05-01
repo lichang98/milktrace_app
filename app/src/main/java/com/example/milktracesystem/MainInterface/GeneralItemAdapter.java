@@ -3,6 +3,7 @@ package com.example.milktracesystem.MainInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,9 +42,14 @@ public class GeneralItemAdapter extends RecyclerView.Adapter<GeneralItemAdapter.
                     case 0:
                         Intent intent = new Intent(parent.getContext(), NewsDisplayActivity.class);
                         intent.putExtra("NEWS_CONTENT_URL",(String) list.get(0).get("itemcontentUrl"));
+                        intent.putExtra("type","news"); //区别于乳制品百科
                         parent.getContext().startActivity(intent);
                         break;
                     case 1:
+                        Intent intent1 = new Intent(parent.getContext(),NewsDisplayActivity.class);
+                        intent1.putExtra("NEWS_CONTENT_URL",(String)list.get(1).get("itemcontentUrl"));
+                        intent1.putExtra("type","baike");
+                        parent.getContext().startActivity(intent1);
 
                         break;
                     default:
@@ -57,6 +63,7 @@ public class GeneralItemAdapter extends RecyclerView.Adapter<GeneralItemAdapter.
 
     @Override
     public void onBindViewHolder(GeneralItemViewHolder holder, int position) {
+        Log.i("主界面列表","绑定视图，position = " + position);
         holder.textView.setText((String)list.get(position).get("itemText"));
         if(!(list.get(position).get("itemImage") instanceof String))
             holder.imageView.setImageResource((Integer)list.get(position).get("itemImage"));
