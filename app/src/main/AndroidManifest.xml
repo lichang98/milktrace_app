@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -36,13 +38,13 @@
             android:value="hMY7t1RdnkaGWxtOUbGEWCqzcgP4cLO8"/>
         <activity android:name=".MainInterface.Login"
             android:screenOrientation="portrait"
-            android:label="食品安全电子追溯平台">
+            android:label="食安电子追溯平台">
         </activity>
         <activity android:name=".MainInterface.Activity_Launch"
             android:theme="@style/WelcomeScreenTheme"
             android:screenOrientation="portrait"/>
         <activity android:name=".MainInterface.GeneralActivity"
-            android:label="食品安全电子追溯平台"
+            android:label="食安电子追溯平台"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

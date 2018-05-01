@@ -995,8 +995,8 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     public void initFacSelectOptions(){
         //初始化选项1
         facTypeOptions = new ArrayList<>();
-        facTypeOptions.add("原料供应企业");
-        facTypeOptions.add("乳制品生产企业");
+        facTypeOptions.add("养殖企业");
+        facTypeOptions.add("生产企业");
         facTypeOptions.add("物流运输企业");
         facTypeOptions.add("零售企业");
 

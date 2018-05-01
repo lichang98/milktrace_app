@@ -11,14 +11,251 @@
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/search_card_list"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".Search_Activity.SearchActivity"/>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/search_card_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context=".Search_Activity.SearchActivity"/>
+            <!--添加折叠控件，分别用于手动输入条形码、追溯码等-->
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+            <com.ramotion.foldingcell.FoldingCell
+                android:id="@+id/search_batchid_foldingview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+                <LinearLayout
+                    android:id="@+id/search_goodid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/search_input_goodid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="输入商品码"/>
+
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/search_input_batchid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="输入产品批次码"/>
+
+                    </android.support.design.widget.TextInputLayout>
+                    <com.andexert.library.RippleView
+                        android:id="@+id/search_ripplevew1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        app:rv_centered="true">
+                        <Button
+                            android:id="@+id/search_good_batchid_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="点击查询"
+                            android:textSize="16dp"
+                            android:textAlignment="center"
+                            android:background="@android:color/holo_blue_dark"/>
+                    </com.andexert.library.RippleView>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/search_batchid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@android:color/white"
+                        app:cardBackgroundColor="@android:color/darker_gray"
+                        app:cardElevation="10dp"
+                        app:cardCornerRadius="10dp"
+                        android:fadingEdgeLength="10dp">
+                        <TextView
+                            android:text="点击输入商品码+批次码查询"
+                            android:textSize="17dp"
+                            android:textAlignment="center"
+                            android:layout_width="match_parent"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_height="40dp" />
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+            </com.ramotion.foldingcell.FoldingCell>
+
+            <com.ramotion.foldingcell.FoldingCell
+                android:id="@+id/search_serial_foldingview"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+                <LinearLayout
+                    android:id="@+id/search_serial_id_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/search_input_serial"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="输入条码"/>
+
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/search_input_serialid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="输入产品序列号"/>
+
+                    </android.support.design.widget.TextInputLayout>
+                    <com.andexert.library.RippleView
+                        android:id="@+id/search_ripplevew2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        app:rv_centered="true">
+                        <Button
+                            android:id="@+id/search_good_serialid_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="点击查询"
+                            android:textSize="16dp"
+                            android:textAlignment="center"
+                            android:background="@android:color/holo_blue_dark"/>
+                    </com.andexert.library.RippleView>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/search_searial_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@android:color/white"
+                        app:cardBackgroundColor="@android:color/darker_gray"
+                        app:cardElevation="10dp"
+                        app:cardCornerRadius="10dp"
+                        android:fadingEdgeLength="10dp">
+                        <TextView
+                            android:text="点击输入条码+序列号查询"
+                            android:textSize="17dp"
+                            android:textAlignment="center"
+                            android:layout_width="match_parent"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_height="40dp" />
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+            </com.ramotion.foldingcell.FoldingCell>
 
 
+            <com.ramotion.foldingcell.FoldingCell
+                android:id="@+id/search_trace_foldingview"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+                <LinearLayout
+                    android:id="@+id/search_trace_id_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/search_input_trace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="输入追溯码"/>
+
+                    </android.support.design.widget.TextInputLayout>
+                    <com.andexert.library.RippleView
+                        android:id="@+id/search_ripplevew3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        app:rv_centered="true">
+                        <Button
+                            android:id="@+id/search_traceid_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="点击查询"
+                            android:textSize="16dp"
+                            android:textAlignment="center"
+                            android:background="@android:color/holo_blue_dark"/>
+                    </com.andexert.library.RippleView>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/search_trace_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@android:color/white"
+                        app:cardBackgroundColor="@android:color/darker_gray"
+                        app:cardElevation="10dp"
+                        app:cardCornerRadius="10dp"
+                        android:fadingEdgeLength="10dp">
+                        <TextView
+                            android:text="点击输入追溯码查询"
+                            android:textSize="17dp"
+                            android:textAlignment="center"
+                            android:layout_width="match_parent"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_height="40dp" />
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+            </com.ramotion.foldingcell.FoldingCell>
+        </LinearLayout>
+    </ScrollView>
     <!--<ImageButton-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->

@@ -2,9 +2,11 @@ package com.example.milktracesystem.MainInterface;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +45,11 @@ public class Login extends AppCompatActivity{
 //        welcomeHelper.show(savedInstanceStatue);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_login);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.backup);
+        }
 
         final android.support.design.widget.TextInputEditText userNameEdit = (android.support.design.widget.TextInputEditText)
                 findViewById(R.id.username);    //用户名edittext
@@ -148,6 +155,12 @@ public class Login extends AppCompatActivity{
 //        welcomeHelper.onSaveInstanceState(outState);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home)
+            Login.this.finish();
+        return true;
+    }
 }
 
 

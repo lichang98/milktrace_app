@@ -1,9 +1,16 @@
 package com.example.milktracesystem.Search_Activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -56,6 +63,7 @@ public class SearchActivityCardAdapter extends RecyclerView.Adapter<SearchActivi
         }
     }
 
+
     @Override
     public SearchCardViewItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -89,17 +97,67 @@ public class SearchActivityCardAdapter extends RecyclerView.Adapter<SearchActivi
                         integrator.setCaptureActivity(SmallCaptureActivity.class);
                         integrator.initiateScan();
                         break;
-                    case 1:
-                        Toast.makeText(context, "点击搜索", Toast.LENGTH_SHORT).show();
-                        //跳转至FactoryActivity ，浏览企业信息
-                        Intent intent = new Intent((Activity)context, FactoryActivity.class);
-                        ((Activity)context).startActivity(intent);
+                    case 1:         //处理短信查询
+                        android.support.v7.app.AlertDialog.Builder builder =
+                                new android.support.v7.app.AlertDialog.Builder(context);
+                        final android.support.v7.app.AlertDialog alertDialog = builder
+                                .setTitle("提示")
+                                .setMessage("是否发送短信?")
+                                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Uri uri = Uri.parse("smsto:"+12315);
+                                        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                                        context.startActivity(intent);
+                                    }
+                                })
+                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Toast.makeText(context, "取消", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                })
+                                .create();
+                        alertDialog.show();
+
                         break;
-                    case 2:     //连接蓝牙BLE 模块获取数据
-                        Toast.makeText(context, "点击连接BLE 蓝牙模块", Toast.LENGTH_SHORT).show();
-                        Intent intent1 = new Intent((Activity)context,BleModuleLink.class);
-                        ((Activity)context).startActivity(intent1);
+                    case 2:     //处理电话查询
+                        android.support.v7.app.AlertDialog.Builder builder1 =
+                                new android.support.v7.app.AlertDialog.Builder(context);
+                        android.support.v7.app.AlertDialog alertDialog1 = builder1
+                                .setTitle("提示")
+                                .setMessage("是否拨打查询电话")
+                                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Uri uri = Uri.parse("tel:"+12315);
+                                        Intent intent  = new Intent(Intent.ACTION_DIAL,uri);
+                                        context.startActivity(intent);
+                                    }
+                                })
+                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                })
+                                .create();
+                        alertDialog1.show();
                         break;
+
+                        //FIXME 将企业信息展示移动到主界面中
+//                    case 1:
+//                        Toast.makeText(context, "点击搜索", Toast.LENGTH_SHORT).show();
+//                        //跳转至FactoryActivity ，浏览企业信息
+//                        Intent intent = new Intent((Activity)context, FactoryActivity.class);
+//                        ((Activity)context).startActivity(intent);
+//                        break;
+//                    case 2:     //连接蓝牙BLE 模块获取数据
+//                        Toast.makeText(context, "点击连接BLE 蓝牙模块", Toast.LENGTH_SHORT).show();
+//                        Intent intent1 = new Intent((Activity)context,BleModuleLink.class);
+//                        ((Activity)context).startActivity(intent1);
+//                        break;
                     default:
                         break;
                 }

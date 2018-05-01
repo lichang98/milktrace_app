@@ -59,6 +59,10 @@ public class SearchActivity extends AppCompatActivity  {
     private List<SearchActivityCardItem> cardItemList;
     private SearchActivityCardAdapter cardAdapter;
 
+    private com.ramotion.foldingcell.FoldingCell foldingCellBatchId;    //商品批次码输入折叠
+    private com.ramotion.foldingcell.FoldingCell foldingCellSerialId;   //条码加序列号输入折叠
+    private com.ramotion.foldingcell.FoldingCell foldingCellTraceId;    //质素吗输入折叠
+
 
 
     @Override
@@ -115,14 +119,45 @@ public class SearchActivity extends AppCompatActivity  {
 
         cardItemList = new ArrayList<>();
         cardItemList.add(new SearchActivityCardItem("扫描产品二维码",R.drawable.scan2));
-        cardItemList.add(new SearchActivityCardItem("浏览企业信息",R.drawable.view_facs));
-        cardItemList.add(new SearchActivityCardItem("连接RFID",R.drawable.rfid_find));    //连接蓝牙BLE模块
+        cardItemList.add(new SearchActivityCardItem("短信查询",R.drawable.search_short_msg));
+        cardItemList.add(new SearchActivityCardItem("电话查询",R.drawable.search_phone));
+
+//        cardItemList.add(new SearchActivityCardItem("浏览企业信息",R.drawable.view_facs));
+//        cardItemList.add(new SearchActivityCardItem("连接RFID",R.drawable.rfid_find));    //连接蓝牙BLE模块
 
         recyclerView = (RecyclerView)findViewById(R.id.search_card_list);
         cardAdapter = new SearchActivityCardAdapter(cardItemList,this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cardAdapter);
+
+        foldingCellBatchId = (com.ramotion.foldingcell.FoldingCell)
+                findViewById(R.id.search_batchid_foldingview);
+        foldingCellBatchId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                foldingCellBatchId.toggle(false);
+            }
+        });
+        //产品条码+序列号查询
+        foldingCellSerialId = (com.ramotion.foldingcell.FoldingCell)
+                findViewById(R.id.search_serial_foldingview);
+        foldingCellSerialId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                foldingCellSerialId.toggle(false);
+            }
+        });
+
+        //使用追溯码查询
+        foldingCellTraceId = (com.ramotion.foldingcell.FoldingCell)
+                findViewById(R.id.search_trace_foldingview);
+        foldingCellTraceId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                foldingCellTraceId.toggle(false);
+            }
+        });
 
     }//onCreate
 
