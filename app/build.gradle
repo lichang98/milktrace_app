@@ -92,5 +92,5 @@ dependencies {
     compile 'com.github.florent37:longshadow:1.0.1'
     compile 'com.jpardogo.materialtabstrip:library:1.1.1'
     compile 'com.ramotion.foldingcell:folding-cell:1.2.2'
-    implementation 'com.jjoe64:graphview:4.2.2'
+    implementation 'com.jjoe64:graphview:4.2.1'
 }
