@@ -94,4 +94,5 @@ dependencies {
     compile 'com.ramotion.foldingcell:folding-cell:1.2.2'
     implementation 'com.jjoe64:graphview:4.2.1'
     compile 'me.zhanghai.android.materialratingbar:library:1.2.0'
+    compile 'com.gavin.com.library:stickyDecoration:1.4.2'
 }

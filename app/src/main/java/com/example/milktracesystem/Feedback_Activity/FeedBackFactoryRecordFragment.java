@@ -9,13 +9,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.tedcoder.wkvideoplayer.util.DensityUtil;
 import com.example.milktracesystem.R;
+import com.gavin.com.library.StickyDecoration;
+import com.gavin.com.library.listener.GroupListener;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -35,6 +39,8 @@ public class FeedBackFactoryRecordFragment extends Fragment {
     private RecyclerView recyclerView;  //投诉反馈界面的设计由recycler view构成
     private FeedBackFactoryAdapter feedBackFactoryAdapter;  //用于反馈界面显示企业信息的adapter
     private List<FeedBackFactoryBean> feedBackFactoryBeanList;
+    private GroupListener groupListener;
+    private StickyDecoration stickyDecoration;
 //    private GraphView graphView;
 
     @Nullable
@@ -46,10 +52,23 @@ public class FeedBackFactoryRecordFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         //向列表中添加数据
         initListData();
+        groupListener = new GroupListener() {
+            @Override
+            public String getGroupName(int position) {
+                return feedBackFactoryBeanList.get(position).title;
+            }
+        };
+        stickyDecoration = StickyDecoration.Builder.init(groupListener)
+                .setGroupBackground(Color.parseColor("#48BDFF"))
+                .setGroupTextColor(Color.BLACK)
+                .setDivideColor(Color.parseColor("#CCCCCC"))
+                .setTextSideMargin(DensityUtil.dip2px(getContext(),1))
+                .build();
         feedBackFactoryAdapter = new FeedBackFactoryAdapter(feedBackFactoryBeanList);
         //为recyclerview 添加decoration 以及adapter
         recyclerView.setAdapter(feedBackFactoryAdapter);
         recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.addItemDecoration(stickyDecoration);
 //        graphView = (GraphView)view.findViewById(R.id.feed_back_factory_graph1);
 //        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
 //                new DataPoint(0,1),
@@ -82,6 +101,7 @@ public class FeedBackFactoryRecordFragment extends Fragment {
         feedBackFactoryBeanList = new ArrayList<>();
 
        FeedBackFactoryBean feedBackFactoryBean1 = new FeedBackFactoryBean();
+       feedBackFactoryBean1.title="原料企业";
        feedBackFactoryBean1.corpName="测试企业名称";
        feedBackFactoryBean1.rate=3.5f;
        feedBackFactoryBean1.series = new LineGraphSeries<>(new DataPoint[]{
@@ -92,12 +112,37 @@ public class FeedBackFactoryRecordFragment extends Fragment {
        feedBackFactoryBeanList.add(feedBackFactoryBean1);
 
        feedBackFactoryBean1 = new FeedBackFactoryBean();
+       feedBackFactoryBean1.title="原料企业";
        feedBackFactoryBean1.corpName="测试企业名称2";
        feedBackFactoryBean1.rate=5.0f;
        feedBackFactoryBean1.series= new LineGraphSeries<>(new DataPoint[]{
                new DataPoint(1,5),new DataPoint(2,0),
                new DataPoint(3,0),new DataPoint(4,1),
                new DataPoint(5,0),new DataPoint(6,1)
+       });
+
+       feedBackFactoryBeanList.add(feedBackFactoryBean1);
+
+       feedBackFactoryBean1 = new FeedBackFactoryBean();
+       feedBackFactoryBean1.title="生产企业";
+       feedBackFactoryBean1.corpName="测试企业名称3";
+       feedBackFactoryBean1.rate=1.3f;
+       feedBackFactoryBean1.series = new LineGraphSeries<>(new DataPoint[]{
+               new DataPoint(1,6),new DataPoint(2,4),
+               new DataPoint(3,4),new DataPoint(4,4),
+               new DataPoint(5,2)
+       });
+
+       feedBackFactoryBeanList.add(feedBackFactoryBean1);
+
+       feedBackFactoryBean1 = new FeedBackFactoryBean();
+       feedBackFactoryBean1.title="生产企业";
+       feedBackFactoryBean1.corpName="测试企业名称4";
+       feedBackFactoryBean1.rate=4.8f;
+       feedBackFactoryBean1.series = new LineGraphSeries<>(new DataPoint[]{
+               new DataPoint(1,0),new DataPoint(2,1),
+               new DataPoint(3,1),new DataPoint(4,1),
+               new DataPoint(5,0)
        });
 
        feedBackFactoryBeanList.add(feedBackFactoryBean1);

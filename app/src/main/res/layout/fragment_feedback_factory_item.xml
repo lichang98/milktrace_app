@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             tools:text="测试文字"
-            tools:textSize="20dp"
+            tools:textSize="25dp"
             tools:textColor="@android:color/black" />
         <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/feedback_factory_listitem_ratingbar"
