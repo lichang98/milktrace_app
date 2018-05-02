@@ -2,9 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/feed_back_factory_graph1"
+    <!--<com.jjoe64.graphview.GraphView-->
+        <!--android:id="@+id/feed_back_factory_graph1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="200dp"/>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/feedback_factory_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
