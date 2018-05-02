@@ -93,4 +93,5 @@ dependencies {
     compile 'com.jpardogo.materialtabstrip:library:1.1.1'
     compile 'com.ramotion.foldingcell:folding-cell:1.2.2'
     implementation 'com.jjoe64:graphview:4.2.1'
+    compile 'me.zhanghai.android.materialratingbar:library:1.2.0'
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.milktracesystem.R;
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.DataPointInterface;
@@ -35,32 +36,20 @@ public class FeedBackFactoryRecordFragment extends Fragment {
                 new DataPoint(3,2),
                 new DataPoint(4,6)
         });
-        graphView.addSeries(series);
-        PointsGraphSeries<DataPointInterface> series1 = new PointsGraphSeries<>(new DataPointInterface[]{
-                new DataPointInterface() {
-                    @Override
-                    public double getX() {
-                        return 1.5;
-                    }
-
-                    @Override
-                    public double getY() {
-                        return 4.5;
-                    }
-                },
-                new DataPointInterface() {
-                    @Override
-                    public double getX() {
-                        return 2;
-                    }
-
-                    @Override
-                    public double getY() {
-                        return 4;
-                    }
+        //重新设置坐标轴的标签
+        graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+            @Override
+            public String formatLabel(double value, boolean isValueX) {
+                if(isValueX){
+                    return super.formatLabel(value,isValueX) + "月";
+                }else{
+                    return super.formatLabel(value,isValueX) + "次";
                 }
+
+            }
+
         });
-        graphView.addSeries(series1);
+        graphView.addSeries(series);
         return view;
     }
 }
