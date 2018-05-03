@@ -48,6 +48,9 @@ public class HttpUtil {
     public static final String URL_SALES_FACTORY_MAINLIST=
             "http://192.168.137.1:8080/factory/sales/mainlist";  //销售企业主列表路径
 
+    public static final String URL_FEEDBACK_FACTORY_CHARTDATA=
+            "http://192.168.137.1:8080/feedback/factory/chartdata";     //反馈界面企业图表列表的数据获取地址
+
     /**
      * 向服务器端发送json 格式的数据
      * @param addr      请求地址
