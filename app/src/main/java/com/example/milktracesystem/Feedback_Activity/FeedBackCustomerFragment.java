@@ -25,6 +25,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +65,7 @@ import static android.app.Activity.RESULT_OK;
  *
  */
 
-public class FeedBackCustomerFragment extends Fragment  implements DialogForChooseImgMethod.NoticeDialogListener,View.OnClickListener{
+public class FeedBackCustomerFragment extends Fragment  implements View.OnClickListener{
     private Context context;
 
     public static final int TAKE_PHOTO=1;
@@ -271,6 +272,19 @@ public class FeedBackCustomerFragment extends Fragment  implements DialogForChoo
 //                picture.setDrawingCacheEnabled(false); //关闭drawing cache
 //            }
 //        });
+
+        //customer feedback上传图片或者是拍照选择对话框
+        DialogForChooseImgMethod.noticeDialogListener= new DialogForChooseImgMethod.NoticeDialogListener() {
+            @Override
+            public void onDialogPositiveClick(DialogFragment dialog) {
+                onMyDialogPositiveClick(dialog);  //调用本地的方法
+            }
+
+            @Override
+            public void onDialogNegativeClick(DialogFragment dialog) {
+                onMyDialogNegativeClick(dialog);
+            }
+        };
 
         editTextFeedBackName = (EditText)view.findViewById(R.id.feedback_name_edit);
         editTextFeedBackPhone = (EditText)view.findViewById(R.id.feedback_phone_edit);
@@ -485,18 +499,19 @@ public class FeedBackCustomerFragment extends Fragment  implements DialogForChoo
         }
     }
 
+
+
     /**
      * 用于选择照片方式的对话框的接口方法
      * @param dialog
      */
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
 
+    public void onMyDialogPositiveClick(DialogFragment dialog) {
         Date date = new Date();
         String time = date.getMonth()+"_"+date.getDay()+"_"+date.getHours();
 
-        imgTakePhotoPath = new String(getActivity().getExternalCacheDir()+"/"+"material_check_upload"+time+".jpg");
-        File outputImage = new File(getActivity().getExternalCacheDir(),"material_check_upload"+time+".jpg");
+        imgTakePhotoPath = new String(context.getExternalCacheDir()+"/"+"material_check_upload"+time+".jpg");
+        File outputImage = new File(context.getExternalCacheDir(),"material_check_upload"+time+".jpg");
         try{
             if(outputImage.exists()){
                 outputImage.delete();
@@ -521,8 +536,7 @@ public class FeedBackCustomerFragment extends Fragment  implements DialogForChoo
      * 打开相册选择图片
      * @param dialog
      */
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
+    public void onMyDialogNegativeClick(DialogFragment dialog) {
 
         Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent,IMAGE_OPEN);

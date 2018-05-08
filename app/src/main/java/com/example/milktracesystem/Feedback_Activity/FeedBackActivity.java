@@ -75,6 +75,14 @@ public class FeedBackActivity extends AppCompatActivity{
     private ArrayList<Fragment> fragmentArrayList;  //fragment 数组
     private PagerSlidingTabStrip pagerSlidingTabStrip;  //顶部tab
     private ArrayList<String> fragmentTitles;   //fragment 标题
+    private String imgTakePhotoPath;    //拍照时存储图片的路径
+    private ImageView picture;          //显示拍照后的照片
+    private Uri imageUri;
+    private Uri imgTakePhotoUri;        //拍照时存储图片的uri
+    public static final int TAKE_PHOTO=1;
+    public static final int CROP_PHOTO=2;
+    public static final int CHOOSE_PHOTO=3;
+    private final int IMAGE_OPEN=4; //打开图片标记
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -234,7 +242,6 @@ public class FeedBackActivity extends AppCompatActivity{
             }
         }
     }
-
 
 
     @Override

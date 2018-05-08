@@ -3,8 +3,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.mob.sdk'
 
 MobSDK {
-    appKey "258529026d387"
-    appSecret "e8e691c8eb87a99e3d9c1f3ce1c16dc6"
+    appKey "25a7fab0d14c9"
+    appSecret "801db392b70c9bc037923702ca9779bb"
 
     SMSSDK {}
 }

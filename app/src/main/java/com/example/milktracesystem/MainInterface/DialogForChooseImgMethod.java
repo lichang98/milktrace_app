@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -42,15 +43,18 @@ public class DialogForChooseImgMethod extends DialogFragment {
         public void onDialogNegativeClick(DialogFragment dialog);
     }
 
-    NoticeDialogListener noticeDialogListener;
+    public static NoticeDialogListener noticeDialogListener;
 
-    @Override
-    public void onAttach(Activity activity){
-        super.onAttach(activity);
-        try{
-            noticeDialogListener = (NoticeDialogListener)activity;
-        }catch (ClassCastException e){
-            e.printStackTrace();
-        }
-    }
+    //    @Override
+//    public void onAttach(Activity activity){
+//        super.onAttach(activity);
+//        try{
+//            Log.i("feedback debug","---------------dialog listener on attach");
+//            Log.i("feedback debug","当前attach 的activity :" + activity.toString());
+//            noticeDialogListener = (NoticeDialogListener)activity;
+//            Log.i("feedback debug","listener 是否为null ?" + (noticeDialogListener == null));
+//        }catch (ClassCastException e){
+//            e.printStackTrace();
+//        }
+//    }
 }

@@ -161,8 +161,8 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
     private Timer timer;
     private TimerTask timerTask;
     private Button buttonDriverPhoneCheck; //获取验证码的按钮
-    private final String APPKEY="258529026d387";    //短信验证的应用key
-    private final String SECRETKEY="e8e691c8eb87a99e3d9c1f3ce1c16dc6";
+    private final String APPKEY="25a7fab0d14c9";    //短信验证的应用key
+    private final String SECRETKEY="801db392b70c9bc037923702ca9779bb";
     private EventHandler eventHandler;  //用于短信验证的回调处理
     private Button buttonTransportSubmit;   //物流运输企业验证表单提交按钮
 
@@ -764,12 +764,12 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                buttonDriverPhoneCheck.setText((--DOWNTIME)+"秒后重发");
+                                    buttonDriverPhoneCheck.setText((--DOWNTIME)+"秒后重发");
                             }
                         });
                     }
                 };
-                timer.schedule(timerTask,1000); //定时每隔1s
+                timer.schedule(timerTask,1); //定时每隔1s
 
                 Log.i("短信验证","准备开始验证");
                 //短信验证发送与接收处理
