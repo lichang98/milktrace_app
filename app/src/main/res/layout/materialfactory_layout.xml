@@ -26,80 +26,80 @@
         android:layout_weight="1">
 
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--<TableLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-            <TableRow>
+            <!--<TableRow>-->
 
-                <TextView android:text="厂商名称：" />
+                <!--<TextView android:text="厂商名称：" />-->
 
-                <EditText
-                    android:id="@+id/editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="输入原料厂商名称"
-                    android:inputType="text" />
-            </TableRow>
+                <!--<EditText-->
+                    <!--android:id="@+id/editText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="输入原料厂商名称"-->
+                    <!--android:inputType="text" />-->
+            <!--</TableRow>-->
 
-            <TableRow>
+            <!--<TableRow>-->
 
-                <TextView android:text="厂商地址：" />
+                <!--<TextView android:text="厂商地址：" />-->
 
-                <EditText
-                    android:id="@+id/editText2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
-            </TableRow>
+                <!--<EditText-->
+                    <!--android:id="@+id/editText2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:inputType="text" />-->
+            <!--</TableRow>-->
 
-            <TableRow>
+            <!--<TableRow>-->
 
-                <TextView android:text="原料名称" />
+                <!--<TextView android:text="原料名称" />-->
 
-                <EditText
-                    android:id="@+id/editText3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
-            </TableRow>
+                <!--<EditText-->
+                    <!--android:id="@+id/editText3"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:inputType="text" />-->
+            <!--</TableRow>-->
 
-            <TableRow>
+            <!--<TableRow>-->
 
-                <TextView android:text="供应数量：" />
+                <!--<TextView android:text="供应数量：" />-->
 
-                <EditText
-                    android:id="@+id/editText4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="吨"
-                    android:inputType="number" />
-            </TableRow>
+                <!--<EditText-->
+                    <!--android:id="@+id/editText4"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="吨"-->
+                    <!--android:inputType="number" />-->
+            <!--</TableRow>-->
 
-            <TableRow>
+            <!--<TableRow>-->
 
-                <TextView android:text="供应时间：" />
+                <!--<TextView android:text="供应时间：" />-->
 
-                <EditText
-                    android:id="@+id/editText5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="yyyy-mm-dd hh:mm"
-                    android:inputType="datetime" />
-            </TableRow>
+                <!--<EditText-->
+                    <!--android:id="@+id/editText5"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="yyyy-mm-dd hh:mm"-->
+                    <!--android:inputType="datetime" />-->
+            <!--</TableRow>-->
 
-            <TableRow>
+            <!--<TableRow>-->
 
-                <TextView android:text="联系电话：" />
+                <!--<TextView android:text="联系电话：" />-->
 
-                <EditText
-                    android:id="@+id/editText6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone" />
-            </TableRow>
+                <!--<EditText-->
+                    <!--android:id="@+id/editText6"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:inputType="phone" />-->
+            <!--</TableRow>-->
 
-        </TableLayout>
+        <!--</TableLayout>-->
         <!--显示地图-->
     <ScrollView
         android:layout_width="match_parent"
@@ -110,30 +110,154 @@
             android:orientation="vertical"
             android:minHeight="200dp"
             android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/position"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/material_factory_name_textview"
+                    android:text="企业名称:"
+                    android:textSize="20dp"
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/material_factory_name_v_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:text="@string/corp_name"
+                    android:textSize="20dp"
+                    android:textColor="@android:color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/material_factory_type_textview"
+                    android:text="企业类别:"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/material_factory_type_v_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:text="@string/corp_type"
+                    android:textSize="20dp"
+                    android:textColor="@android:color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/material_factory_addr_textview"
+                    android:text="企业地址:"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/material_factory_addr_v_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:text="@string/corp_address"
+                    android:textSize="20dp"
+                    android:textColor="@android:color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/material_factory_faxnum_textview"
+                    android:text="传真号码:"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/material_factory_faxnum_v_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:text="@string/corp_email"
+                    android:textSize="20dp"
+                    android:textColor="@android:color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/material_factory_desc_textview"
+                    android:text="企业简介:"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ScrollView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"
+                    android:fadingEdge="vertical">
+                    <TextView
+                        android:id="@+id/material_factory_desc_v_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_weight="1"
+                        android:text="@string/corp_desc"
+                        android:textSize="20dp"
+                        android:textColor="@android:color/black"/>
+                </ScrollView>
+            </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/position"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:visibility="visible"/>-->
             <com.baidu.mapapi.map.MapView
                 android:id="@+id/bmapView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:minHeight="180dp"
+                android:minHeight="300dp"
                 android:clickable="true"/>
 
         </LinearLayout>
 
     </ScrollView>
-        <ImageView
-            android:id="@+id/cow_img"
-            android:layout_width="match_parent"
-            android:layout_height="100dp" />
-        <Button
-            android:text="提交"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button" />
+        <!--<ImageView-->
+            <!--android:id="@+id/cow_img"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="100dp" />-->
+        <!--<Button-->
+            <!--android:text="提交"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/button" />-->
     </LinearLayout>
     </ScrollView>
 

@@ -4,6 +4,14 @@
     <string name="zxing_button_ok">OK</string>
     <string name="zxing_msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.</string>
     <string name="zxing_msg_default_status">Place a barcode inside the viewfinder rectangle to scan it.</string>
+    
+    <!--企业信息展示界面字符串-->
+    <string name="corp_name"><u>高原之宝</u></string>
+    <string name="corp_type"><u>原料企业</u></string>
+    <string name="corp_address"><u>四川省阿坝州若尔盖县达扎寺镇红光路3号</u></string>
+    <string name="corp_email"><u> 010-84837962</u></string>
+    <string name="corp_desc"><u>西藏高原之宝牦牛乳业股份有限公司成立于2000年5月，注册资本为1.5亿元，总投资规模达8亿元。公司是目前全国规模最大、最具现代化水平的牦牛乳制品加工企业，国家级农业产业化重点龙头企业，也是西藏唯一一家生产牦牛乳制品的企业。目前高原之宝已通过了ISO9001质量管理体系认证和ISO14001环境管理体系认证、危害分析与关键控制点（HACCP）体系认证、诚信管理体系认证、良好生产规范（GMP）认证、中国有机产品认证、美国有机食品认证及欧盟有机牧场认证。公司牵头制定了中国国家牦牛奶行业标准，现正申请中国暨世界牦牛奶生产加工标准，以推动国际国内牦牛奶产业健康、有序发展。</u></string>
+
 
     <string name="news_content">
         原装进口牛奶及乳制品全面开启满足13亿中国人味蕾的征程。

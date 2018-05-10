@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,23 +69,26 @@ public class MaterialFactoryActivity extends AppCompatActivity {
     private String user = "root";
     private String password="mysql";*/
     public LocationClient locationClient;     //位置
-    private TextView position;      //显示位置
+//    private TextView position;      //显示位置
     private StringBuilder current_position;
     private MapView mapView;        //地图显示
-    private ImageView cow_img;      //奶牛图片
+//    private ImageView cow_img;      //奶牛图片
 
     private BaiduMap baiduMap;
     private boolean isFirstLocate = true;
 
+    //重新修改的界面设计
+    private TextView textViewMaterialFactoryName;
+    private TextView textViewMaterialFactoryDesc;
 
 
-    private String factory_name;
-    private String address;
-    private String material;
-    private int amount;
-    private String time;
-    private String phone;
-    private CreateTable createTable;        //创建工厂信息表
+//    private String factory_name;
+//    private String address;
+//    private String material;
+//    private int amount;
+//    private String time;
+//    private String phone;
+//    private CreateTable createTable;        //创建工厂信息表
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -102,18 +106,18 @@ public class MaterialFactoryActivity extends AppCompatActivity {
         baiduMap.setMyLocationConfiguration(new MyLocationConfiguration(MyLocationConfiguration.LocationMode.COMPASS,
                 true,null));
 
-        cow_img = (ImageView)findViewById(R.id.cow_img);    //获取cowimg 实例
+//        cow_img = (ImageView)findViewById(R.id.cow_img);    //获取cowimg 实例
         Intent intent = getIntent();
-        factory_name = intent.getStringExtra("factory_name");
-        EditText factory_name_text = (EditText)findViewById(R.id.editText);
-        factory_name_text.setText(factory_name);
-        final EditText editText1 = (EditText)findViewById(R.id.editText);     //获取文本输入组件
-        final EditText editText2 = (EditText)findViewById(R.id.editText2);
-        final EditText editText3 = (EditText)findViewById(R.id.editText3);
-        final EditText editText4 = (EditText)findViewById(R.id.editText4);
-        final EditText editText5 = (EditText)findViewById(R.id.editText5);
-        final EditText editText6 = (EditText)findViewById(R.id.editText6);
-        editText1.setFocusable(false);          //不可编辑状态
+//        factory_name = intent.getStringExtra("factory_name");
+//        EditText factory_name_text = (EditText)findViewById(R.id.editText);
+//        factory_name_text.setText(factory_name);
+//        final EditText editText1 = (EditText)findViewById(R.id.editText);     //获取文本输入组件
+//        final EditText editText2 = (EditText)findViewById(R.id.editText2);
+//        final EditText editText3 = (EditText)findViewById(R.id.editText3);
+//        final EditText editText4 = (EditText)findViewById(R.id.editText4);
+//        final EditText editText5 = (EditText)findViewById(R.id.editText5);
+//        final EditText editText6 = (EditText)findViewById(R.id.editText6);
+//        editText1.setFocusable(false);          //不可编辑状态
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_fac);  //标题栏
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -121,44 +125,44 @@ public class MaterialFactoryActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.backup);
         }
-
-        //创建提交按钮点击事件
-        Button button = (Button)findViewById(R.id.button);  //提交按钮
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //获取输入的值
-                try {
-                    factory_name = editText1.getText().toString();
-                    address = editText2.getText().toString();
-                    material = editText3.getText().toString();
-                    byte[] facname=factory_name.getBytes("ISO-8859-1");
-                    byte[] add = address.getBytes("ISO-8859-1");
-                    byte[] mater=material.getBytes("ISO-8859-1");
-                    factory_name = new String(facname,"UTF-8");
-                    address = new String (add,"UTF-8");
-                    material=new String (mater,"UTF-8");
-                }catch (UnsupportedEncodingException e){
-                    e.printStackTrace();
-                }
-                amount=Integer.parseInt(editText4.getText().toString());    //整数
-                time=editText5.getText().toString();
-                phone=editText6.getText().toString();
-                //创建表
-                createTable = new CreateTable(MaterialFactoryActivity.this,"Factory_info.db",null,1);
-                SQLiteDatabase db = createTable.getWritableDatabase();  //创建
-                ContentValues values = new ContentValues();
-                //数据入表
-                values.put("factoryname",factory_name);
-                values.put("address",address);
-                values.put("material",material);
-                values.put("amount",amount);
-                values.put("time",time);
-                values.put("phone",phone);
-                db.insert("factory_info",null,values);  //插入数据*/
-                Toast.makeText(MaterialFactoryActivity.this,"Save data succeed",Toast.LENGTH_SHORT).show();
-            }
-        });
+//
+//        //创建提交按钮点击事件
+//        Button button = (Button)findViewById(R.id.button);  //提交按钮
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //获取输入的值
+//                try {
+////                    factory_name = editText1.getText().toString();
+////                    address = editText2.getText().toString();
+////                    material = editText3.getText().toString();
+//                    byte[] facname=factory_name.getBytes("ISO-8859-1");
+//                    byte[] add = address.getBytes("ISO-8859-1");
+//                    byte[] mater=material.getBytes("ISO-8859-1");
+//                    factory_name = new String(facname,"UTF-8");
+//                    address = new String (add,"UTF-8");
+//                    material=new String (mater,"UTF-8");
+//                }catch (UnsupportedEncodingException e){
+//                    e.printStackTrace();
+//                }
+////                amount=Integer.parseInt(editText4.getText().toString());    //整数
+////                time=editText5.getText().toString();
+////                phone=editText6.getText().toString();
+//                //创建表
+//                createTable = new CreateTable(MaterialFactoryActivity.this,"Factory_info.db",null,1);
+//                SQLiteDatabase db = createTable.getWritableDatabase();  //创建
+//                ContentValues values = new ContentValues();
+//                //数据入表
+//                values.put("factoryname",factory_name);
+//                values.put("address",address);
+//                values.put("material",material);
+//                values.put("amount",amount);
+//                values.put("time",time);
+//                values.put("phone",phone);
+//                db.insert("factory_info",null,values);  //插入数据*/
+//                Toast.makeText(MaterialFactoryActivity.this,"Save data succeed",Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         //获取位置信息
 
@@ -258,6 +262,10 @@ public class MaterialFactoryActivity extends AppCompatActivity {
         //主按钮
         promotedActionsLibrary.addMainItem(getResources().getDrawable(R.drawable.open));
 
+        //新修改的界面的初始化
+        textViewMaterialFactoryName = (TextView)findViewById(R.id.material_factory_name_v_textview);
+        textViewMaterialFactoryDesc = (TextView)findViewById(R.id.material_factory_desc_v_textview);
+
     }
 
     /**
@@ -292,10 +300,13 @@ public class MaterialFactoryActivity extends AppCompatActivity {
             baiduMap.animateMapStatus(update);              //移动至指定的位置
             isFirstLocate = false;
         }
+//        102.976026,33.586014
         MyLocationData.Builder locationBuilder = new MyLocationData.Builder();
         locationBuilder.direction(location.getDirection());
-        locationBuilder.latitude(location.getLatitude());
-        locationBuilder.longitude(location.getLongitude());
+//        locationBuilder.latitude(location.getLatitude());
+//        locationBuilder.longitude(location.getLongitude());
+        locationBuilder.latitude(33.586014);
+        locationBuilder.longitude(102.976026);
         MyLocationData locationData = locationBuilder.build();
         baiduMap.setMyLocationData(locationData);   //将数据显示在地图上
     }
@@ -382,8 +393,8 @@ public class MaterialFactoryActivity extends AppCompatActivity {
             MaterialFactoryActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    position = (TextView)findViewById(R.id.position);
-                    position.setText(current_position);
+//                    position = (TextView)findViewById(R.id.position);
+//                    position.setText(current_position);
                 }
             });
             //地图显示方式

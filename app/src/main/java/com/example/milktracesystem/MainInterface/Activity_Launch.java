@@ -38,6 +38,10 @@ public class Activity_Launch extends WelcomeActivity{
                         background(com.stephentuso.welcome.R.color.wel_default_background_color))
                 .page(new BasicPage(R.drawable.welcome3,"便捷的反馈途径","可以方便投诉问题产品并获得反馈").
                         background(com.stephentuso.welcome.R.color.wel_default_background_color))
+                .page(new BasicPage(R.drawable.welcome5,"最新的乳制品新闻","浏览最新的乳制品新闻资讯").
+                        background(com.stephentuso.welcome.R.color.wel_default_background_color))
+                .page(new BasicPage(R.drawable.welcome6,"便捷的数据采集","方便的录入简单的数据").
+                        background(com.stephentuso.welcome.R.color.wel_default_background_color))
                 .page(new BasicPage(R.drawable.welcome4,"开始使用吧！","").
                         background(com.stephentuso.welcome.R.color.wel_default_background_color))
                 .swipeToDismiss(true)
