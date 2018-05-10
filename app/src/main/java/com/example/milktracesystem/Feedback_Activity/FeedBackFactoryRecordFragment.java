@@ -35,6 +35,8 @@ import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import okhttp3.Call;
@@ -80,7 +82,13 @@ public class FeedBackFactoryRecordFragment extends Fragment {
                 List<FactoryRateInfoBean> factoryRateInfoBeanList = new Gson().fromJson(data,new TypeToken<List<FactoryRateInfoBean>>(){}.getType());
                 //将获取到的数据的对应的字段复制到当前使用的list中
                 feedBackFactoryBeanList = new ArrayList<>();
-                for(FactoryRateInfoBean factoryRateInfoBean: factoryRateInfoBeanList){
+                for(final FactoryRateInfoBean factoryRateInfoBean: factoryRateInfoBeanList){
+                    Collections.sort(factoryRateInfoBean.getChartBeanList(), new Comparator<FactoryRateInfoChartBean>() {
+                        @Override
+                        public int compare(FactoryRateInfoChartBean factoryRateInfoChartBean, FactoryRateInfoChartBean t1) {
+                            return factoryRateInfoChartBean.getMonth()-t1.getMonth();
+                        }
+                    });
                     FeedBackFactoryBean tmp = new FeedBackFactoryBean();
                     tmp.title = factoryRateInfoBean.getFacType();
                     tmp.rate = factoryRateInfoBean.getCorpRate();

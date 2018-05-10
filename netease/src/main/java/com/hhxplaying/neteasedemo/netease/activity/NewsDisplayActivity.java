@@ -150,7 +150,7 @@ public class NewsDisplayActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String type = intent.getStringExtra("type");
         //判断需要显示的内容是否是乳制品百科
-        if(type.equals("baike")){
+        if(type != null && type.equals("baike")){
             getBaikeNewsContent(intent.getStringExtra("NEWS_CONTENT_URL"));
             return;
         }
