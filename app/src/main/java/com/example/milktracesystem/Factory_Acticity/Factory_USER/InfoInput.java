@@ -802,7 +802,7 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                     break;
                 }
                 Log.i("短信验证","输入的手机号码：["+phonenum+"]");
-                SMSSDK.getVerificationCode("86",phonenum,null);
+//                SMSSDK.getVerificationCode("86",phonenum,null);
 
                 break;
             case R.id.transport_submit_btn:         //物流运输企业表单提交按钮
@@ -957,7 +957,7 @@ public class InfoInput extends AppCompatActivity implements DialogForChooseImgMe
                     Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                SMSSDK.getVerificationCode("86",phonenumSale,null);
+//                SMSSDK.getVerificationCode("86",phonenumSale,null);
 
                 break;
             case R.id.sale_upload_button:       //零售企业表单提交按钮

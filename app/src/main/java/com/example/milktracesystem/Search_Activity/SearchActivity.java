@@ -72,7 +72,7 @@ public class SearchActivity extends AppCompatActivity  {
             if(result.getContents() == null){
                 Toast.makeText(this,"取消",Toast.LENGTH_LONG).show();
             }else{
-//                Toast.makeText(this, "扫描结果："+result.getContents(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "扫描结果："+result.getContents(), Toast.LENGTH_LONG).show();
                 if(result.getContents().equals("milk_trace")){
                     //产品信息在webshow 中显示
                     Intent intent = new Intent(SearchActivity.this,WebShow.class);

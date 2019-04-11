@@ -325,7 +325,7 @@ public class FeedBackCustomerFragment extends Fragment  implements View.OnClickL
                     Toast.makeText(context, "请先输入手机号码", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                SMSSDK.getVerificationCode("86",phoneNum,null); //获取短信验证码
+                //SMSSDK.getVerificationCode("86",phoneNum,null); //获取短信验证码
 
 
                 break;
