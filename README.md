@@ -40,3 +40,5 @@
 ![乳制品百科](https://github.com/lichang98/milktrace_app/blob/master/images/产品追溯2.PNG)
 9. 用户注册\
 ![用户注册](https://github.com/lichang98/milktrace_app/blob/master/images/用户注册.PNG)
+---
+## 在此对该项目中使用的开源项目表示特别感谢！
